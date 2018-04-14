@@ -14,8 +14,8 @@ using Microsoft.Xna.Framework;
 namespace TemplateMod.Items
 {
 	// 保证类名跟文件名一致，这样也方便查找
-    public class DXTBlade : ModItem
-    {
+	public class DXTBlade : ModItem
+	{
 		// 设置物品名字，描述的地方
 		public override void SetStaticDefaults()
 		{
@@ -34,7 +34,7 @@ namespace TemplateMod.Items
 		{
 			// 伤害！想都不要想，后面这个值随便改吧，但是不要超过2147483647
 			// 不然…… 你试试就知道了
-			item.damage = 50;
+			item.damage = 1;
 
 			// 击退，你懂的，但是这个击退有个上限就是20，超过20击退效果跟20没什么区别
 			// 后面的 'f' 表示这是个小数，8.25
@@ -44,14 +44,14 @@ namespace TemplateMod.Items
 			item.crit = 10;
 
 			// 物品的稀有度，由-1到13越来越高，具体参考维基百科或者我的博客
-			item.rare = 7;
+			item.rare = 1;
 
 			// 攻击速度和攻击动画持续时间！
 			// 这个数值越低越快，因为TR游戏速度每秒是60帧，这里的30就是
 			// 30.0 / 60.0 = 0.5 秒挥动一次！也就是一秒两次
 			// 一般来说我们要把这两个值设成一样，但也有例外的时候，我们以后会讲
-			item.useTime = 5;
-			item.useAnimation = 5;
+			item.useTime = 30;
+			item.useAnimation = 30;
 
 			// 使用方式，这个值决定了武器使用时到底是按什么样的动画播放
 			// 1 代表挥动，也就是剑类武器！
@@ -59,11 +59,11 @@ namespace TemplateMod.Items
 			// 3 代表像同志短剑一样刺x 出去
 			// 4 唔，这个一般不是用在武器上的，想象一下生命水晶使用的时候的动作
 			// 5 手持，枪、弓、法杖类武器的动作，用途最广
-			item.useStyle = 3;
+			item.useStyle = 1;
 
 			// 决定了这个武器鼠标按住不放能不能一直攻击， true代表可以, false代表不行
 			// （鼠标别按废了
-			item.autoReuse = true;
+			item.autoReuse = false;
 
 			// 决定了这个武器的伤害属性，
 			// melee 代表近战
@@ -90,19 +90,19 @@ namespace TemplateMod.Items
 			item.height = 44;
 
 			// 最大堆叠数量，唔，对于武器来说，即使你堆了99个，使用的时候还是只有一个的效果
-            item.maxStack = 1;
+			item.maxStack = 1;
 
 
 			// 这就是一个基本的剑类MOD武器所需要的属性，后面有别的武器的时候还会有更多属性，不要着急
 			// 可以尝试改一改这些数据，在游戏中看看效果
-        }
+		}
 
 
 		// 物品合成表的设置部分
-        public override void AddRecipes()
-        {
+		public override void AddRecipes()
+		{
 			// 一定要写的
-            ModRecipe recipe1 = new ModRecipe(mod);
+			ModRecipe recipe1 = new ModRecipe(mod);
 
 			// 这里我设置了这把剑要1个木块就能制作
 			recipe1.AddIngredient(ItemID.Wood, 1);
@@ -112,7 +112,7 @@ namespace TemplateMod.Items
 
 			// 这两个函数确保合成表被加进游戏中了
 			recipe1.SetResult(this);
-            recipe1.AddRecipe();
-        }
-    }
+			recipe1.AddRecipe();
+		}
+	}
 }
