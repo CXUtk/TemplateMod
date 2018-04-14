@@ -15,8 +15,8 @@ using Microsoft.Xna.Framework;
 namespace TemplateMod.Items
 {
 	// 保证类名跟文件名一致，这样也方便查找
-    public class TemplateGun : ModItem
-    {
+	public class TemplateGun : ModItem
+	{
 		// 设置物品名字，描述的地方
 		public override void SetStaticDefaults()
 		{
@@ -87,7 +87,7 @@ namespace TemplateMod.Items
 			item.height = 30;
 
 			// 最大堆叠数量，唔，对于一般武器来说，即使你堆了99个，使用的时候还是只有一个的效果
-            item.maxStack = 1;
+			item.maxStack = 1;
 
 			//-------------------------------------------------------------------------
 			// 接下来就是枪械武器独特的属性
@@ -115,10 +115,10 @@ namespace TemplateMod.Items
 
 		// 物品合成表的设置部分
 		// 因为我懒，所以设置的跟那把剑一样，emmm
-        public override void AddRecipes()
-        {
+		public override void AddRecipes()
+		{
 			// 一定要写的
-            ModRecipe recipe1 = new ModRecipe(mod);
+			ModRecipe recipe1 = new ModRecipe(mod);
 
 			// 这里我设置了这把剑要1个铁块就能制作
 			recipe1.AddIngredient(ItemID.Wood, 1);
@@ -128,7 +128,7 @@ namespace TemplateMod.Items
 
 			// 这两个函数确保合成表被加进游戏中了
 			recipe1.SetResult(this);
-            recipe1.AddRecipe();
-        }
-    }
+			recipe1.AddRecipe();
+		}
+	}
 }
