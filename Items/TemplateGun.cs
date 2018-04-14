@@ -99,14 +99,14 @@ namespace TemplateMod.Items
 
 			// 决定枪射出点什么和射出的速度的量
 			// 这里我让枪射出子弹，并且以 （7像素 / 帧） 的速度射出去 
-			item.shoot = ProjectileID.Bullet;
+			item.shoot = ProjectileID.RocketIII;
 			item.shootSpeed = 7f;
 
 			// 选择这个枪射出（的时候消耗什么作为弹药，这里选择子弹
 			// 你也可以删（或者注释）掉这一句，这样枪就什么都不消耗了
 			//【重要】如果设置了消耗什么弹药，那么之前shoot设置的值就会被弹药物品的属性所覆盖
 			// 也就是说，你到底射出的是什么就由弹药决定了！
-			item.useAmmo = AmmoID.Bullet;
+			//item.useAmmo = AmmoID.Bullet;
 
 			// 好了，到这里差不多就是一个普通的枪需要填写的属性了
 			// 至于更高级的枪怎么制作，嘿嘿，往后看吧。
@@ -120,7 +120,7 @@ namespace TemplateMod.Items
 			// 一定要写的
 			ModRecipe recipe1 = new ModRecipe(mod);
 
-			// 这里我设置了这把剑要1个铁块就能制作
+			// 这里我设置了这把剑要1个木头就能制作
 			recipe1.AddIngredient(ItemID.Wood, 1);
 
 			// 我设置了这把剑要在铁砧旁边合成
