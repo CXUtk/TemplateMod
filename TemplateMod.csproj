@@ -63,6 +63,7 @@
     <Content Include="description.txt" />
     <Content Include="icon.png" />
     <Content Include="Items\DXTBlade.png" />
+    <Content Include="Items\PoisonousPotion.png" />
     <Content Include="Items\TemplateGun.png" />
     <Content Include="Libraries\Microsoft.Xna.Framework.dll" />
     <Content Include="Libraries\Microsoft.Xna.Framework.Game.dll" />
@@ -71,6 +72,7 @@
     <Content Include="Libraries\Terraria.exe" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Items\PoisonousPotion.cs" />
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
     <Compile Include="TemplateMod.cs" />
