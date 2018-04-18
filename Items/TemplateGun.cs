@@ -1,7 +1,7 @@
 ﻿/*
  * 这是一个基本枪械类武器的例子
  */
- 
+
 using System;
 using System.Collections.Generic;
 using Terraria;
