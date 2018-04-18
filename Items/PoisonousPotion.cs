@@ -97,7 +97,11 @@ namespace TemplateMod.Items
 
 			// 嘿嘿
 			// player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " 喝农药被毒死了"), 9999, 0);
-			return true;
+
+			// 这个函数有一个布尔类型返回值（还记得是啥吗
+			// 返回true就说明使用成功了（其实没啥用，顶多用来判定），false是默认值
+			// 但是你不写返回值就会报错
+			return false;
 		}
 	}
 }
