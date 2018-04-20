@@ -50,8 +50,8 @@ namespace TemplateMod.Items
 			// 这个数值越低越快，因为TR游戏速度每秒是60帧，这里的30就是
 			// 30.0 / 60.0 = 0.5 秒挥动一次！也就是一秒两次
 			// 一般来说我们要把这两个值设成一样，但也有例外的时候，我们以后会讲
-			item.useTime = 30;
-			item.useAnimation = 30;
+			item.useTime = 20;
+			item.useAnimation = 20;
 
 			// 使用方式，这个值决定了武器使用时到底是按什么样的动画播放
 			// 1 代表挥动，也就是剑类武器！
@@ -63,7 +63,8 @@ namespace TemplateMod.Items
 
 			// 决定了这个武器鼠标按住不放能不能一直攻击， true代表可以, false代表不行
 			// （鼠标别按废了
-			item.autoReuse = false;
+			item.autoReuse = true;
+			item.useTurn = true;
 
 			// 决定了这个武器的伤害属性，
 			// melee 代表近战
@@ -95,6 +96,9 @@ namespace TemplateMod.Items
 
 			// 这就是一个基本的剑类MOD武器所需要的属性，后面有别的武器的时候还会有更多属性，不要着急
 			// 可以尝试改一改这些数据，在游戏中看看效果
+
+			item.shoot = ProjectileID.TerraBeam;
+			item.shootSpeed = 10f;
 		}
 
 
@@ -105,6 +109,9 @@ namespace TemplateMod.Items
 			ModRecipe recipe1 = new ModRecipe(mod);
 
 			// 这里我设置了这把剑要1个木块就能制作
+
+
+
 			recipe1.AddIngredient(ItemID.Wood, 1);
 
 			// 我设置了这把剑要在工作台旁边合成
@@ -113,6 +120,15 @@ namespace TemplateMod.Items
 			// 这两个函数确保合成表被加进游戏中了
 			recipe1.SetResult(this);
 			recipe1.AddRecipe();
+		}
+		//public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		//{
+		//	player.DirectionTo(Main.MouseWorld);
+		//	return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
+		//}
+		public override void MeleeEffects(Player player, Rectangle hitbox)
+		{
+			Dust.NewDust(hitbox.TopLeft(), hitbox.Width, hitbox.Height, , 0, 0, 100, Color.White, 1.0f);
 		}
 	}
 }

@@ -76,6 +76,7 @@
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
     <Compile Include="TemplateMod.cs" />
+    <Compile Include="Utils\MyDustID.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

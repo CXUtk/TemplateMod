@@ -17,33 +17,25 @@ namespace TemplateMod.Items
 			DisplayName.SetDefault("有毒药水");
 
 			// 物品描述
-			Tooltip.SetDefault("不要问是什么效果，喝了就知道了");
+			Tooltip.SetDefault("不要问是什么效果，喝了就知道了\n" +
+				"依稀可见\"百草枯\"三个字");
 		}
 
 		// 最最最重要的物品基本属性部分
 		public override void SetDefaults()
 		{
-			// 同样的设置贴图大小
+
+			// 下面这些你们应该懂得
 			item.width = 14;
 			item.height = 24;
-
-			// 同样的设置喝药水的动作持续时间
 			item.useAnimation = 17;
 			item.useTime = 17;
-
-			// 物品的堆叠上限
 			item.maxStack = 30;
 
 			// 物品的使用方式，还记得2是什么吗
 			item.useStyle = 2;
-
-			// 喝药水的声音
 			item.UseSound = SoundID.Item3;
-
-			// 稀有度
 			item.rare = 5;
-
-			// 价值
 			item.value = Item.sellPrice(0, 0, 50, 0);
 
 			// *新增-决定这个物品使用以后会不会减少，true就是使用后物品会少一个，默认为false
@@ -53,17 +45,18 @@ namespace TemplateMod.Items
 			item.useTurn = true;
 
 			// *新增-告诉TR内部系统，这个物品是一个生命药水物品，用于TR系统的特殊目的（比如一键喝药水），默认为false
-			// item.potion = false;
+			item.potion = true;
 
 			// *新增-这个药水能给玩家加多少血，跟potion一起使用喝完药就会有抗药性debuff
-			// item.healLife = 50;
+			item.healLife = 500;
 
 			// *新增-加buff的方法1：设置物品的buffType为buff的ID
 			// 这里我设置了着火debuff（2333
-			item.buffType = BuffID.OnFire;
+			item.buffType = BuffID.Ironskin;
 
 			// *新增-用于在物品描述上显示buff持续时间
-			item.buffTime = 60000;
+			item.buffTime = 216000;
+
 		}
 
 		// 给物品加合成表
@@ -72,7 +65,7 @@ namespace TemplateMod.Items
 			ModRecipe recipe = new ModRecipe(mod);
 
 			// 原料：一瓶水
-			recipe.AddIngredient(ItemID.BottledWater, 1);
+			recipe.AddIngredient(ItemID.Sunflower, 1);
 
 			// 在炼金工作台（也就是做药水的工作台）合成
 			recipe.AddTile(TileID.AlchemyTable);
@@ -90,7 +83,7 @@ namespace TemplateMod.Items
 			// 给玩家加buff的第二个方式（推荐）
 			// 给玩家加上中毒buff，持续 60000 / 60 = 1000秒
 			// 第一个填buff的ID，第二个填持续时间
-			player.AddBuff(BuffID.Poisoned, 60000);
+			player.AddBuff(BuffID.AmmoBox, 216000);
 
 			// 给玩家加上猛毒buff，持续 60000 / 60 = 1000秒 
 			player.AddBuff(BuffID.Venom, 60000);
@@ -101,7 +94,7 @@ namespace TemplateMod.Items
 			// 这个函数有一个布尔类型返回值（还记得是啥吗
 			// 返回true就说明使用成功了（其实没啥用，顶多用来判定），false是默认值
 			// 但是你不写返回值就会报错
-			return false;
+			return true;
 		}
 	}
 }
