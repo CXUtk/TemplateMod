@@ -21,6 +21,8 @@ using Terraria.ModLoader;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TemplateMod.UICollection;
+using TemplateMod.UI;
 
 // 用两个斜杠开头的句子都是注释QAQ，对程序运行没有任何影响，读我就行了，不用删
 
@@ -32,6 +34,14 @@ namespace TemplateMod
 	// MOD的主类名字，需要与文件名、MOD名完全一致，并且继承Mod类
 	public class TemplateMod : Mod
 	{
+		public static bool ShowDustTestUI = false;
+
+		public static TemplateMod Instance;
+
+		public static ModHotKey DustTestKey;
+
+		private static List<ConditionalInterface> _userInterfaces;
+
 		public TemplateMod()
 		{
 			// MOD的初始化函数，用来设置一些属性
@@ -53,7 +63,45 @@ namespace TemplateMod
 
 			// 以上这些了解一下就行了，每个mod都要有这个
 		}
+
+		public override void Load()
+		{
+			Instance = this;
+			DustTestKey = RegisterHotKey("呼出Dust测试界面", "K");
+			_userInterfaces = new List<ConditionalInterface>();
+			AddUI(new DustTestUI());
+		}
+
+		private static void AddUI(UIState state)
+		{
+			ConditionalInterface tmpUI = new ConditionalInterface(() => ShowDustTestUI);
+			tmpUI.SetState(state);
+			_userInterfaces.Add(tmpUI);
+		}
+
+		public override void PostDrawInterface(SpriteBatch spriteBatch)
+		{
+			foreach (var ui in _userInterfaces)
+			{
+				if (ui.CanShow())
+				{
+					ui.Draw(spriteBatch, Main._drawInterfaceGameTime);
+				}
+			}
+		}
+
+
+		public override void UpdateUI(GameTime gameTime)
+		{
+			foreach (var ui in _userInterfaces)
+			{
+				if (ui.CanShow())
+				{
+					ui.Update(gameTime);
+				}
+			}
+		}
+
 	}
 
 }
-

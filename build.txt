@@ -1,9 +1,10 @@
 ﻿displayName = MOD模板（教学用）
 author = DXTsT
-version = 1.0
+version = 2.0
 hideResources = false
 hideCode = false
 includeSource = true
 includePDB = true
+languageVersion = 6
 homepage = http://www.fs49.org/
 buildIgnore = *.csproj, *.sln, obj\*, bin\*, *.suo, *.user, .git\*, .vs\*, Libraries\*

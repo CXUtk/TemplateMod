@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
+using TemplateMod.Utils;
 
 // 注意这里命名空间变了，多了个.Items
 // 因为这个文件在Items文件夹，而读取图片的时候是根据命名空间读取的，如果写错了可能图片就读不到了
@@ -111,8 +112,7 @@ namespace TemplateMod.Items
 			// 这里我设置了这把剑要1个木块就能制作
 
 
-
-			recipe1.AddIngredient(ItemID.Wood, 1);
+			recipe1.AddIngredient(ItemID.Bottle, 1);
 
 			// 我设置了这把剑要在工作台旁边合成
 			recipe1.AddTile(TileID.WorkBenches);
@@ -121,14 +121,24 @@ namespace TemplateMod.Items
 			recipe1.SetResult(this);
 			recipe1.AddRecipe();
 		}
-		//public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
-		//{
-		//	player.DirectionTo(Main.MouseWorld);
-		//	return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
-		//}
+		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		{
+			for(float theta = 0.0f; theta < MathHelper.TwoPi; theta += 0.1f)
+			{
+				Vector2 org = Vector2.UnitY;
+				//(float)Math.Cos(2 * theta) + 1.0f;
+				float r = 1;//2 * (float)Math.Sin(1 + Math.Sin(3 * theta) * Math.Pow(2.0, Math.Sin(3 * theta)));
+				Projectile.NewProjectile(player.position, org.RotatedBy(theta - 1.57f) * r, ProjectileID.Bullet, 100, 1, player.whoAmI);
+			}
+			return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
+		}
 		public override void MeleeEffects(Player player, Rectangle hitbox)
 		{
-			Dust.NewDust(hitbox.TopLeft(), hitbox.Width, hitbox.Height, , 0, 0, 100, Color.White, 1.0f);
+			Dust.NewDust(hitbox.TopLeft(), hitbox.Width, hitbox.Height, MyDustId.RedTorch, 0, 0, 100, Color.White, 1.0f);
+		}
+		public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+		{
+			target.AddBuff(mod.BuffType("GreenLight"), 200000);
 		}
 	}
 }

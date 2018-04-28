@@ -24,7 +24,6 @@ namespace TemplateMod.Items
 		// 最最最重要的物品基本属性部分
 		public override void SetDefaults()
 		{
-
 			// 下面这些你们应该懂得
 			item.width = 14;
 			item.height = 24;
@@ -45,10 +44,10 @@ namespace TemplateMod.Items
 			item.useTurn = true;
 
 			// *新增-告诉TR内部系统，这个物品是一个生命药水物品，用于TR系统的特殊目的（比如一键喝药水），默认为false
-			item.potion = true;
+			//item.potion = true;
 
 			// *新增-这个药水能给玩家加多少血，跟potion一起使用喝完药就会有抗药性debuff
-			item.healLife = 500;
+			//item.healLife = 500;
 
 			// *新增-加buff的方法1：设置物品的buffType为buff的ID
 			// 这里我设置了着火debuff（2333
@@ -83,10 +82,13 @@ namespace TemplateMod.Items
 			// 给玩家加buff的第二个方式（推荐）
 			// 给玩家加上中毒buff，持续 60000 / 60 = 1000秒
 			// 第一个填buff的ID，第二个填持续时间
-			player.AddBuff(BuffID.AmmoBox, 216000);
+
+			// 注意，引号里面的文字一定要跟Buff的文件名字（类名）完全一致
+			// 时间设置的太久，600 = 10秒够看到效果了
+			player.AddBuff(mod.BuffType("GreenLight"), 600);
 
 			// 给玩家加上猛毒buff，持续 60000 / 60 = 1000秒 
-			player.AddBuff(BuffID.Venom, 60000);
+			//player.AddBuff(BuffID.Venom, 60000);
 
 			// 嘿嘿
 			// player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " 喝农药被毒死了"), 9999, 0);

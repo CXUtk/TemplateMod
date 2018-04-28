@@ -7,7 +7,7 @@ using System.Text;
 /// 命名空间自己改，这个文件是四十九落星内部源码的一部分
 /// 使用的时候需要 using FallenStar49;
 /// </summary>
-namespace FallenStar49
+namespace TemplateMod.Utils
 {
     /// <summary>
     /// DXTsT自制的粒子ID表
@@ -47,7 +47,7 @@ namespace FallenStar49
         /// <summary>
         /// (!)orange fire, emits orange light !WARNING
         /// </summary>
-        public const int  Fire = 6;
+        public const int Fire = 6;
         /// <summary>
         /// brown wood
         /// </summary>

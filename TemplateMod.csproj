@@ -59,12 +59,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Buffs\GreenLight.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
     <Content Include="icon.png" />
+    <Content Include="Images\Bar.png" />
+    <Content Include="Images\Box.png" />
+    <Content Include="Images\Box2.png" />
+    <Content Include="Images\CloseButton.png" />
     <Content Include="Items\DXTBlade.png" />
     <Content Include="Items\PoisonousPotion.png" />
+    <Content Include="Items\PurpleStone.png" />
     <Content Include="Items\TemplateGun.png" />
+    <Content Include="Items\ThunderPickaxe.png" />
     <Content Include="Libraries\Microsoft.Xna.Framework.dll" />
     <Content Include="Libraries\Microsoft.Xna.Framework.Game.dll" />
     <Content Include="Libraries\Microsoft.Xna.Framework.Graphics.dll" />
@@ -72,12 +79,27 @@
     <Content Include="Libraries\Terraria.exe" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffs\GreenLight.cs" />
     <Compile Include="Items\PoisonousPotion.cs" />
+    <Compile Include="Items\PurpleStone.cs" />
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
+    <Compile Include="Items\ThunderPickaxe.cs" />
     <Compile Include="TemplateMod.cs" />
+    <Compile Include="TemplatePlayer.cs" />
+    <Compile Include="UICollection\DustTestUI.cs" />
+    <Compile Include="UI\ConditionalInterface.cs" />
+    <Compile Include="UI\UITextButton.cs" />
+    <Compile Include="UI\UIValueChanger.cs" />
+    <Compile Include="UI\UISlider.cs" />
+    <Compile Include="Utils\Drawing.cs" />
     <Compile Include="Utils\MyDustID.cs" />
+    <Compile Include="UI\UIAdvPanel.cs" />
+    <Compile Include="UI\UIButton.cs" />
+    <Compile Include="UI\UISlot.cs" />
+    <Compile Include="UI\WindowUIState.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
