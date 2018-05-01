@@ -1,918 +1,937 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 /// <summary>
-/// å‘½åç©ºé—´è‡ªå·±æ”¹ï¼Œè¿™ä¸ªæ–‡ä»¶æ˜¯å››åä¹è½æ˜Ÿå†…éƒ¨æºç çš„ä¸€éƒ¨åˆ†
-/// ä½¿ç”¨çš„æ—¶å€™éœ€è¦ using FallenStar49;
+/// ÃüÃû¿Õ¼ä×Ô¼º¸Ä£¬Õâ¸öÎÄ¼şÊÇËÄÊ®¾ÅÂäĞÇÄÚ²¿Ô´ÂëµÄÒ»²¿·Ö
+/// Ê¹ÓÃµÄÊ±ºòĞèÒª using FallenStar49;
 /// </summary>
 namespace TemplateMod.Utils
 {
-    /// <summary>
-    /// DXTsTè‡ªåˆ¶çš„ç²’å­IDè¡¨
-    /// åˆ¶ä½œæ—¶é—´ï¼š2017/1/31
-	/// ç‰ˆæƒæ‰€æœ‰ï¼šDXTsT & å››åä¹è½æ˜Ÿåˆ¶ä½œç»„
+	/// <summary>
+	/// DXTsT×ÔÖÆµÄÁ£×ÓID±í
+	/// ÖÆ×÷Ê±¼ä£º2017/1/31
+	/// °æÈ¨ËùÓĞ£ºDXTsT & ËÄÊ®¾ÅÂäĞÇÖÆ×÷×é
 	/// 
-	/// è¯´æ˜ï¼šä»¥ä¸‹å­—æ®µå¸¦æœ‰ï¼ˆï¼ï¼‰æ ‡è¯†ç¬¦çš„è¯´æ˜æ­¤ç²’å­æ•ˆæœä¼šåœ¨é»‘æš—ä¸­è‡ªå‘å…‰
-	/// å¸¦æœ‰ï¼ˆ.ï¼‰æ ‡è¯†ç¬¦è¯´æ˜æ­¤ç²’å­æ•ˆæœä¼šé«˜äº®æ˜¾ç¤ºä½†æ˜¯ä¸ä¼šå‘å…‰
-	/// å…¶ä½™Dustå…¨éƒ¨éƒ½ä¸ä¼šå‘å…‰ï¼
-    /// </summary>
-    public static class MyDustId
-    {
-        /// <summary>
-        /// brown dirt
-        /// </summary>
-        public const int BrownDirt = 0;
-        /// <summary>
-        /// grey stone
-        /// </summary>
-        public const int GreyStone = 1;
-        /// <summary>
-        /// thick green grass
-        /// </summary>
-        public const int GreenGrass = 2;
-        /// <summary>
-        /// thin green grass
-        /// </summary>
-        public const int ThinGreenGrass = 3;
-        /// <summary>
-        /// grey pebbles
-        /// </summary>
-        public const int GreyPebble = 4;
-        /// <summary>
-        /// red blood
-        /// </summary>
-        public const int RedBlood = 5;
-        /// <summary>
-        /// (!)orange fire, emits orange light !WARNING
-        /// </summary>
-        public const int Fire = 6;
-        /// <summary>
-        /// brown wood
-        /// </summary>
-        public const int Wood = 7;
-        /// <summary>
-        /// purple gems
-        /// </summary>
-        public const int PurpleGems = 8;
-        /// <summary>
-        /// orange gems
-        /// </summary>
-        public const int OrangeGems = 9;
-        /// <summary>
-        /// yellow gems
-        /// </summary>
-        public const int YellowGems = 10;
-        /// <summary>
-        /// white gems
-        /// </summary>
-        public const int WhiteGems = 11;
-        /// <summary>
-        /// red gems
-        /// </summary>
-        public const int RedGems = 12;
-        /// <summary>
-        /// cyan gems
-        /// </summary>
-        public const int CyanGems = 13;
-        /// <summary>
-        /// purple corruption particle with no gravity
-        /// </summary>
-        public const int CorruptionParticle = 14;
-        /// <summary>
-        /// (!)white amd blue magic fx, emits pale blue light
-        /// </summary>
-        public const int BlueMagic = 15;
-        /// <summary>
-        /// bluish white clouds like hermes boots
-        /// </summary>
-        public const int WhiteClouds = 16;
-        /// <summary>
-        /// thin grey material
-        /// </summary>
-        public const int ThinGrey = 17;
-        /// <summary>
-        /// thin sickly green material
-        /// </summary>
-        public const int SicklyGreen = 18;
-        /// <summary>
-        /// thin yellow material
-        /// </summary>
-        public const int ThinYellow = 19;
-        /// <summary>
-        /// (!)white lingering, emits cyan light
-        /// </summary>
-        public const int WhiteLingering = 20;
-        /// <summary>
-        /// (!)purple lingering, emits purple light
-        /// </summary>
-        public const int PurpleLingering = 21;
-        /// <summary>
-        /// brown material
-        /// </summary>
-        public const int Brown = 22;
-        /// <summary>
-        /// orange material
-        /// </summary>
-        public const int orange = 23;
-        /// <summary>
-        /// thin brown material
-        /// </summary>
-        public const int ThinBrown = 24;
-        /// <summary>
-        /// copper
-        /// </summary>
-        public const int Copper = 25;
-        /// <summary>
-        /// iron
-        /// </summary>
-        public const int iron = 26;
-        /// <summary>
-        /// (!)purple fx, emits bright purple light
-        /// </summary>
-        public const int  PurpleLight = 27;
-        /// <summary>
-        /// dull copper
-        /// </summary>
-        public const int DullCopper = 28;
-        /// <summary>
-        /// (!)dark blue, emits pale pink light !WARNING
-        /// </summary>
-        public const int DarkBluePinkLight = 29;
-        /// <summary>
-        /// silver material
-        /// </summary>
-        public const int Silver = 30;
-        /// <summary>
-        /// yellowish white cloud material
-        /// </summary>
-        public const int Smoke = 31;
-        /// <summary>
-        /// yellow sand
-        /// </summary>
-        public const int Sand = 32;
-        /// <summary>
-        /// water, highly transparent
-        /// </summary>
-        public const int Water = 33;
-        /// <summary>
-        /// (!)red fx, emits red light !WARNING
-        /// </summary>
-        public const int RedLight  = 35;
-        /// <summary>
-        /// muddy pale material
-        /// </summary>
-        public const int MuddyPale = 36;
-        /// <summary>
-        /// dark grey material
-        /// </summary>
-        public const int DarkGrey = 37;
-        /// <summary>
-        /// muddy brown material
-        /// </summary>
-        public const int MuddyBrown = 38;
-        /// <summary>
-        /// bright green jungle grass
-        /// </summary>
-        public const int JungleGrass = 39;
-        /// <summary>
-        /// bright green thin grass
-        /// </summary>
-        public const int ThinGrass = 40;
-        /// <summary>
-        /// (!)dark blue wandering circles, emits bright cyan light !WARNING
-        /// </summary>
-        public const int BlueCircle = 41;
-        /// <summary>
-        /// thin teal material
-        /// </summary>
-        public const int ThinTeal = 42;
-        /// <summary>
-        /// (!)bright green spores that lingers for a while, emits light green light
-        /// </summary>
-        public const int GreenSpores = 44;
-        /// <summary>
-        /// (!)light blue circles, emits purple light
-        /// </summary>
-        public const int LightBlueCircle = 45;
-        /// <summary>
-        /// green material with no gravity
-        /// </summary>
-        public const int GreenMaterial = 46;
-        /// <summary>
-        /// thin cyan grass
-        /// </summary>
-        public const int CyanGrass = 47;
-        /// <summary>
-        /// pink water, highly transparent
-        /// </summary>
-        public const int PinkWater = 52;
-        /// <summary>
-        /// grey material
-        /// </summary>
-        public const int GreyMaterial = 53;
-        /// <summary>
-        /// black material
-        /// </summary>
-        public const int BlackMaterial = 54;
-        /// <summary>
-        /// (!)bright orange thick fx, emits yellow light
-        /// </summary>
-        public const int OrangeFx = 55;
-        /// <summary>
-        /// (!)cyan fx, emits pale blue light
-        /// </summary>
-        public const int CyanFx = 56;
-        /// <summary>
-        /// (!)small yellow hallowed fx, emis yellow light
-        /// </summary>
-        public const int YellowHallowFx = 57;
-        /// <summary>
-        /// (!)hot and pale pink magic fx, emits pink light
-        /// </summary>
-        public const int PinkMagic = 58;
-        /// <summary>
-        /// (!)blue torch, emits pure blue light !WARNING
-        /// </summary>
-        public const int BlueTorch = 59;
-        /// <summary>
-        /// (!)red torch, emits pure red light !WARNING
-        /// </summary>
-        public const int  RedTorch = 60;
-        /// <summary>
-        /// (!)green torch, emits pure green light !WARNING
-        /// </summary>
-        public const int  GreenTorch = 61;
-        /// <summary>
-        /// (!)purple torch, emits purple light !WARNING
-        /// </summary>
-        public const int  PurpleTorch = 62;
-        /// <summary>
-        /// (!)white torch, emits bright white light !WARNING
-        /// </summary>
-        public const int  WhiteTorch = 63;
-        /// <summary>
-        /// (!)yellow torch, emits deep yellow light !WARNING
-        /// </summary>
-        public const int YellowTorch = 64;
-        /// <summary>
-        /// (!)demon torch, emits pulsating pink/purple light !WARNING
-        /// </summary>
-        public const int  DemonTorch = 65;
-        /// <summary>
-        /// (!)White transparent !WARNING
-        /// </summary>
-        public const int  WhiteTransparent = 66;
-        /// <summary>
-        /// (!)cyan ice crystals, emits cyan light
-        /// </summary>
-        public const int CyanIce = 67;
-        /// <summary>
-        /// (.)dark cyan ice crystals, emits very faint blue light, glows in disabled gravity
-        /// </summary>
-        public const int DarkCyanIce = 68;
-        /// <summary>
-        /// thin pink material
-        /// </summary>
-        public const int ThinPink = 69;
-        /// <summary>
-        /// (.)thin transparent purple material, emits faint purple light, glows in disabled gravity
-        /// </summary>
-        public const int TransparentPurple = 70;
-        /// <summary>
-        /// (!)transparent pink fx, emits faint pink light
-        /// </summary>
-        public const int TransparentPinkFx = 71;
-        /// <summary>
-        /// (!)solid pink fx, emits faint pink light
-        /// </summary>
-        public const int  SolidPinkFx = 72;
-        /// <summary>
-        /// (!)solid bright pink fx, emits pink light
-        /// </summary>
-        public const int  BrightPinkFx = 73;
-        /// <summary>
-        /// (!)solid bright green fx, emits green light
-        /// </summary>
-        public const int  BrightGreenFx = 74;
-        /// <summary>
-        /// (!)green cursed torch !WARNING
-        /// </summary>
-        public const int  CursedFire = 75;
-        /// <summary>
-        /// snowfall, lasts a long time
-        /// </summary>
-        public const int Snow = 76;
-
-        /// <summary>
-        /// thin grey material
-        /// </summary>
-        public const int ThinGrey1 = 77;
-        /// <summary>
-        /// thin copper material
-        /// </summary>
-        public const int ThinCopper = 78;
-        /// <summary>
-        /// thin yellow material
-        /// </summary>
-        public const int ThinYellow1 = 79;
-        /// <summary>
-        /// ice block material
-        /// </summary>
-        public const int IceBlock = 80;
-        /// <summary>
-        /// iron material
-        /// </summary>
-        public const int Iron = 81;
-        /// <summary>
-        /// silty material
-        /// </summary>
-        public const int Silty = 82;
-        /// <summary>
-        /// sickly green material
-        /// </summary>
-        public const int SicklyGreen1 = 83;
-        /// <summary>
-        /// bluish grey material
-        /// </summary>
-        public const int BluishGrey = 84;
-        /// <summary>
-        /// thin sandy materiial
-        /// </summary>
-        public const int ThinSandy = 85;
-        /// <summary>
-        /// (!)transparent pink material, emits pink light
-        /// </summary>
-        public const int PinkTrans = 86;
-        /// <summary>
-        /// (!)transparent yellow material, emits yellow light
-        /// </summary>
-        public const int YellowTrans = 87;
-        /// <summary>
-        /// (!)transparent blue material, emits blue light
-        /// </summary>
-        public const int BlueTrans = 88;
-        /// <summary>
-        /// (!)transparent green material, emits green light
-        /// </summary>
-        public const int GreenTrans = 89;
-        /// <summary>
-        /// (!)transparent red material, emits red light
-        /// </summary>
-        public const int RedTrans = 90;
-        /// <summary>
-        /// (!)transparent white material, emits white light
-        /// </summary>
-        public const int WhiteTrans = 91;
-        /// <summary>
-        /// (!)transparent cyan material, emits cyan light
-        /// </summary>
-        public const int CyanTrans = 92;
-        /// <summary>
-        /// thin dark green grass
-        /// </summary>
-        public const int DarkGrass = 93;
-        /// <summary>
-        /// thin pale dark green grass
-        /// </summary>
-        public const int PaleDarkGrass = 94;
-        /// <summary>
-        /// thin dark red grass
-        /// </summary>
-        public const int DarkRedGrass = 95;
-        /// <summary>
-        /// thin blackish green grass
-        /// </summary>
-        public const int BlackGreenGrass = 96;
-        /// <summary>
-        /// thin dark red grass
-        /// </summary>
-        public const int DarkRedGrass1 = 97;
-        /// <summary>
-        /// purple water, highly transparent
-        /// </summary>
-        public const int PurpleWater = 98;
-        /// <summary>
-        /// cyan water, highly transparent
-        /// </summary>
-        public const int CyanWater = 99;
-        /// <summary>
-        /// pink water, highly transparent
-        /// </summary>
-        public const int PinkWater1 = 100;
-        /// <summary>
-        /// cyan water, highly transparent
-        /// </summary>
-        public const int CyanWater1 = 101;
-        /// <summary>
-        /// orange water, highly transparent
-        /// </summary>
-        public const int OrangeWater = 102;
-        /// <summary>
-        /// dark blue water, highly transparent
-        /// </summary>
-        public const int DarkBlueWater = 103;
-        /// <summary>
-        /// hot pink water, highly transparent
-        /// </summary>
-        public const int HotPinkWater = 104;
-        /// <summary>
-        /// red water, highly transparent
-        /// </summary>
-        public const int RedWater = 105;
-        /// <summary>
-        /// (.)transparent red/green/blue material, glows in the dark
-        /// </summary>
-        public const int RgbMaterial = 106;
-        /// <summary>
-        /// (!)short green powder, emits green light
-        /// </summary>
-        public const int GreenFXPowder = 107;
-        /// <summary>
-        /// light pale purple round material
-        /// </summary>
-        public const int PurpleRound = 108;
-        /// <summary>
-        /// black material
-        /// </summary>
-        public const int BlackMaterial1 = 109;
-        /// <summary>
-        /// (.)bright green bubbles, emits very faint green light
-        /// </summary>
-        public const int  GreenBubble = 110;
-        /// <summary>
-        /// (.)bright cyan bubbles, emits very faint cyan light
-        /// </summary>
-        public const int CyanBubble = 111;
-        /// <summary>
-        /// (.)bright pink bubbles, emits very faint pink light
-        /// </summary>
-        public const int PinkBubble = 112;
-        /// <summary>
-        /// (.)blue ice crystals, glows in the dark
-        /// </summary>
-        public const int BlueIce = 113;
-        /// <summary>
-        /// (.)bright pink/yellow bubbles, emits very faint pink light
-        /// </summary>
-        public const int PinkYellowBubble = 114;
-        /// <summary>
-        /// red grass
-        /// </summary>
-        public const int RedGrass = 115;
-        /// <summary>
-        /// blueish green grass
-        /// </summary>
-        public const int BlueGreenGrass = 116;
-        /// <summary>
-        /// red grass
-        /// </summary>
-        public const int RedGrass1 = 117;
-        /// <summary>
-        /// purple gems
-        /// </summary>
-        public const int PurpleGems1 = 118;
-        /// <summary>
-        /// pink gems
-        /// </summary>
-        public const int PinkGems = 119;
-        /// <summary>
-        /// pale pink gems
-        /// </summary>
-        public const int PalePinkGems = 120;
-        /// <summary>
-        /// thin grey material
-        /// </summary>
-        public const int ThinGrey2 = 121;
-        /// <summary>
-        /// thin iron material
-        /// </summary>
-        public const int ThinIron = 122;
-        /// <summary>
-        /// hot pink bubble material
-        /// </summary>
-        public const int HotPinkBubble = 123;
-        /// <summary>
-        /// yellowish white bubbles
-        /// </summary>
-        public const int YellowWhiteBubble = 124;
-        /// <summary>
-        /// thin red material
-        /// </summary>
-        public const int ThinRed = 125;
-        /// <summary>
-        /// thin grey material
-        /// </summary>
-        public const int ThinGrey3 = 126;
-        /// <summary>
-        /// (!)reddish orange fire, emits orange light
-        /// </summary>
-        public const int OrangeFire = 127;
-        /// <summary>
-        /// green gems
-        /// </summary>
-        public const int GreenGems = 128;
-        /// <summary>
-        /// thin brown material
-        /// </summary>
-        public const int ThinBrown1 = 129;
-        /// <summary>
-        /// (!)trailing red falling fireworks, emits red light
-        /// </summary>
-        public const int  TrailingRed = 130;
-        /// <summary>
-        /// (!)trailing green rising fireworks, emits green light
-        /// </summary>
-        public const int  TrailingGreen = 131;
-        /// <summary>
-        /// (!)trailing cyan falling fireworks, emits cyan light
-        /// </summary>
-        public const int TrailingCyan = 132;
-        /// <summary>
-        /// (!)trailing yellow falling fireworks, emits cyan light
-        /// </summary>
-        public const int TrailingYellow = 133;
-        /// <summary>
-        /// trailing pink falling fireworks
-        /// </summary>
-        public const int TrailingPink = 134;
-        /// <summary>
-        /// (!)cyan ice torch, emits cyan light !WARNING
-        /// </summary>
-        public const int IceTorch = 135;
-        /// <summary>
-        /// red material
-        /// </summary>
-        public const int Red = 136;
-        /// <summary>
-        /// bright blue/cyan material
-        /// </summary>
-        public const int BrightCyan = 137;
-        /// <summary>
-        /// bright orange/brown material
-        /// </summary>
-        public const int BrightOrange = 138;
-        /// <summary>
-        /// cyan confetti
-        /// </summary>
-        public const int CyanConfetti = 139;
-        /// <summary>
-        /// green confetti
-        /// </summary>
-        public const int GreenConfetti = 140;
-        /// <summary>
-        /// pink confetti
-        /// </summary>
-        public const int PinkConfetti = 141;
-        /// <summary>
-        /// yellow confetti
-        /// </summary>
-        public const int YellowConfetti = 142;
-        /// <summary>
-        /// light grey stone
-        /// </summary>
-        public const int LightGreyStone = 143;
-        /// <summary>
-        /// vivid copper stone
-        /// </summary>
-        public const int CopperStone = 144;
-        /// <summary>
-        /// pink stone
-        /// </summary>
-        public const int PinkStone = 145;
-        /// <summary>
-        /// green/brown material mix
-        /// </summary>
-        public const int GreenBrown = 146;
-        /// <summary>
-        /// orange material
-        /// </summary>
-        public const int Orange = 147;
-        /// <summary>
-        /// desaturated red material
-        /// </summary>
-        public const int RedDesaturated = 148;
-        /// <summary>
-        /// white material
-        /// </summary>
-        public const int White = 149;
-        /// <summary>
-        /// black/yellow/bluishwhite material
-        /// </summary>
-        public const int BlackYellowBluishwhite = 150;
-        /// <summary>
-        /// thin white material
-        /// </summary>
-        public const int ThinWhite = 151;
-        /// <summary>
-        /// (!)bright orange bubbles !WARNING
-        /// </summary>
-        public const int OrangeBubble = 152;
-        /// <summary>
-        /// bright orange bubble material
-        /// </summary>
-        public const int OrangeBubbleMaterial = 153;
-        /// <summary>
-        /// pale blue thin material
-        /// </summary>
-        public const int BlueThin = 154;
-        /// <summary>
-        /// thin dark brown material
-        /// </summary>
-        public const int DarkBrown = 155;
-        /// <summary>
-        /// (!)bright blue/white bubble material, emits pale blue light
-        /// </summary>
-        public const int BlueWhiteBubble = 156;
-        /// <summary>
-        /// (.)thin green fx, glows in the dark
-        /// </summary>
-        public const int GreenFx = 157;
-        /// <summary>
-        /// (!)orange fire, emits orange light !WARNING
-        /// </summary>
-        public const int OrangeFire1 = 158;
-        /// <summary>
-        /// (!)flickering yellow fx, emits yellow light !WARNING
-        /// </summary>
-        public const int YellowFx = 159;
-        /// <summary>
-        /// (!)shortlived cyan fx, emits bright cyan light
-        /// </summary>
-        public const int CyanShortFx = 160;
-        /// <summary>
-        /// cyan material
-        /// </summary>
-        public const int CyanMaterial = 161;
-        /// <summary>
-        /// (!)shortlived orange fx, emits bright orange light
-        /// </summary>
-        public const int  OrangeShortFx = 162;
-        /// <summary>
-        /// (.)bright green thin material, glows in the dark
-        /// </summary>
-        public const int  BrightGreen = 163;
-        /// <summary>
-        /// (!)flickering pink fx, emits hot pink light !WARNING
-        /// </summary>
-        public const int PinkFx = 164;
-        /// <summary>
-        /// white/blue bubble material
-        /// </summary>
-        public const int WhiteBlueBubble = 165;
-        /// <summary>
-        /// thin bright pink material
-        /// </summary>
-        public const int PinkThinBright = 166;
-        /// <summary>
-        /// thin green material
-        /// </summary>
-        public const int ThinGreen = 167;
-        /// <summary>
-        /// !bright pink bubbles !WARNING
-        /// </summary>
-        public const int PinkBrightBubble = 168;
-        /// <summary>
-        /// (!)yellow fx, emits deep yellow light !WARNING
-        /// </summary>
-        public const int YellowFx1 = 169;
-        /// <summary>
-        /// (.)thin orange fx, emits faint white light
-        /// </summary>
-        public const int Ichor = 170;
-        /// <summary>
-        /// bright purple bubble material
-        /// </summary>
-        public const int PurpleBubble = 171;
-        /// <summary>
-        /// (.)light blue particles, emits faint blue light
-        /// </summary>
-        public const int BlueParticle = 172;
-        /// <summary>
-        /// (!)shortlived purple fx, emits bright purple light
-        /// </summary>
-        public const int PurpleShortFx = 173;
-        /// <summary>
-        /// (!)bright orange bubble material, emits reddish orange light
-        /// </summary>
-        public const int OrangeFire2 = 174;
-        /// <summary>
-        /// (.)shortlived white fx, glows in the dark
-        /// </summary>
-        public const int WhiteShortFx = 175;
-        /// <summary>
-        /// light blue particles
-        /// </summary>
-        public const int LightBlueParticle = 176;
-        /// <summary>
-        /// light pink particles
-        /// </summary>
-        public const int LightPinkParticle = 177;
-        /// <summary>
-        /// light green particles
-        /// </summary>
-        public const int LightGreenParticle = 178;
-        /// <summary>
-        /// light purple particles
-        /// </summary>
-        public const int LightPurpleParticle = 179;
-        /// <summary>
-        /// (!)light cyan particles, glows in the dark
-        /// </summary>
-        public const int LightCyanParticle = 180;
-        /// <summary>
-        /// (.)light cyan/pink bubble material, glows in the dark
-        /// </summary>
-        public const int CyanPinkBubble = 181;
-        /// <summary>
-        /// (.)light red bubble material, barely emits red light
-        /// </summary>
-        public const int RedBubble = 182;
-        /// <summary>
-        /// (.)transparent red bubble material, glows in the dark
-        /// </summary>
-        public const int RedTransBubble = 183;
-        /// <summary>
-        /// sickly pale greenish grey particles that stay in place
-        /// </summary>
-        public const int GreenishGreyParticle = 184;
-        /// <summary>
-        /// (!)light cyan crystal material, emits cyan light
-        /// </summary>
-        public const int CyanCrystal = 185;
-        /// <summary>
-        /// pale dark blue smoke
-        /// </summary>
-        public const int DarkBlueSmoke = 186;
-        /// <summary>
-        /// (!)light cyan particles, emits cyan light
-        /// </summary>
-        public const int LightCyanParticle1 = 187;
-        /// <summary>
-        /// bright green bubbles
-        /// </summary>
-        public const int GreenBubble1 = 188;
-        /// <summary>
-        /// thin orange material
-        /// </summary>
-        public const int OrangeMaterial = 189;
-        /// <summary>
-        /// thin gold material
-        /// </summary>
-        public const int GoldMaterial = 190;
-        /// <summary>
-        /// black flakes
-        /// </summary>
-        public const int BlackFlakes = 191;
-        /// <summary>
-        /// snow material
-        /// </summary>
-        public const int SnowMaterial = 192;
-        /// <summary>
-        /// green material
-        /// </summary>
-        public const int GreenMaterial1 = 193;
-        /// <summary>
-        /// thin brown material
-        /// </summary>
-        public const int BrownMaterial = 194;
-        /// <summary>
-        /// thin black material
-        /// </summary>
-        public const int BlackMaterial2 = 195;
-        /// <summary>
-        /// thin green material
-        /// </summary>
-        public const int ThinGreen1 = 196;
-        /// <summary>
-        /// (.)thin bright cyan material, glows in the dark
-        /// </summary>
-        public const int BrightCyanMaterial = 197;
-        /// <summary>
-        /// black/white particles
-        /// </summary>
-        public const int BlackWhiteParticle = 198;
-        /// <summary>
-        /// pale purple/black/grey particles
-        /// </summary>
-        public const int PurpleBlackGrey = 199;
-        /// <summary>
-        /// pink particles
-        /// </summary>
-        public const int PinkParticle = 200;
-        /// <summary>
-        /// light pink particles
-        /// </summary>
-        public const int LightPinkParticle1 = 201;
-        /// <summary>
-        /// light cyan particles
-        /// </summary>
-        public const int LightCyanParticle2 = 202;
-        /// <summary>
-        /// grey particles
-        /// </summary>
-        public const int GreyParticle = 203;
-        /// <summary>
-        /// (.)white particles, glows in the dark
-        /// </summary>
-        public const int WhiteParticle = 204;
-        /// <summary>
-        /// (.)thin pink material, barely emits pink light
-        /// </summary>
-        public const int ThinPinkMaterial = 205;
-        /// <summary>
-        /// (!)shortlived cyan fx, emits bright blue light
-        /// </summary>
-        public const int CyanShortFx1 = 206;
-        /// <summary>
-        /// thin brown material
-        /// </summary>
-        public const int BrownMaterial1 = 207;
-        /// <summary>
-        /// orange stone
-        /// </summary>
-        public const int OrangeStone = 208;
-        /// <summary>
-        /// pale green stone
-        /// </summary>
-        public const int PaleGreenStone = 209;
-        /// <summary>
-        /// off white material
-        /// </summary>
-        public const int OffWhite = 210;
-        /// <summary>
-        /// bright blue particles
-        /// </summary>
-        public const int BrightBlueParticle = 211;
-        /// <summary>
-        /// white particles
-        /// </summary>
-        public const int WhiteParticle1 = 212;
-        /// <summary>
-        /// (.)shortlived tiny white fx, barely emits white light
-        /// </summary>
-        public const int WhiteShortFx1 = 213;
-        /// <summary>
-        /// thin pale brown material
-        /// </summary>
-        public const int Thin = 214;
-        /// <summary>
-        /// thin khaki material
-        /// </summary>
-        public const int ThinKhaki = 215;
-        /// <summary>
-        /// pale pink material
-        /// </summary>
-        public const int Pale = 216;
-        /// <summary>
-        /// cyan particles
-        /// </summary>
-        public const int Cyan = 217;
-        /// <summary>
-        /// hot pink particles
-        /// </summary>
-        public const int Hot = 218;
-        /// <summary>
-        /// (!)trailing red flying fireworks, emits orange light
-        /// </summary>
-        public const int  TrailingRed1 = 219;
-        /// <summary>
-        /// (!)trailing green flying fireworks, emits green light
-        /// </summary>
-        public const int  TrailingGreen1 = 220;
-        /// <summary>
-        /// (!)trailing blue flying fireworks, emits pale blue light
-        /// </summary>
-        public const int TrailingBlue = 221;
-        /// <summary>
-        /// (!)trailing yellow flying fireworks, emits yellow light
-        /// </summary>
-        public const int TrailingYellow1 = 222;
-        /// <summary>
-        /// (.)trailing red flying fireworks, glows in the dark
-        /// </summary>
-        public const int TrailingRed2 = 223;
-        /// <summary>
-        /// thin blue material
-        /// </summary>
-        public const int ThinBlue = 224;
-        /// <summary>
-        /// orange material
-        /// </summary>
-        public const int OrangeMaterial1 = 225;
-        /// <summary>
-        /// 
-        /// </summary>
-        public const int ElectricCyan = 226;
-
-        /// <summary>
-        /// (!)Lunar fire!!!
-        /// </summary>
-        public const int CyanLunarFire = 229;
+	/// ËµÃ÷£ºÒÔÏÂ×Ö¶Î´øÓĞ£¨£¡£©±êÊ¶·ûµÄËµÃ÷´ËÁ£×ÓĞ§¹û»áÔÚºÚ°µÖĞ×Ô·¢¹â
+	/// ´øÓĞ£¨.£©±êÊ¶·ûËµÃ÷´ËÁ£×ÓĞ§¹û»á¸ßÁÁÏÔÊ¾µ«ÊÇ²»»á·¢¹â
+	/// ÆäÓàDustÈ«²¿¶¼²»»á·¢¹â£¡
+	/// </summary>
+	public static class MyDustId
+	{
 		/// <summary>
-        /// (!)flickering Purple fx, emits Purple light !WARNING
-        /// </summary>
-        public const int PurpleFx = 230;
-    }
+		/// ÍÁÈÀÁ£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BrownDirt = 0;
+		/// <summary>
+		/// ÑÒÊ¯Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreyStone = 1;
+		/// <summary>
+		/// Ç³ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreenGrass = 2;
+		/// <summary>
+		/// ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinGreenGrass = 3;
+		/// <summary>
+		/// »ÒÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreyPebble = 4;
+		/// <summary>
+		/// ÉîºìÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedBlood = 5;
+		/// <summary>
+		/// (!)éÙ»ÆÉ«»ğÑæÁ£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Fire = 6;
+		/// <summary>
+		/// ÉîÍÁÈÀÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Wood = 7;
+		/// <summary>
+		/// Ìú¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PurpleGems = 8;
+		/// <summary>
+		/// Í­¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int OrangeGems = 9;
+		/// <summary>
+		/// ½ğ¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int YellowGems = 10;
+		/// <summary>
+		/// Òø¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int WhiteGems = 11;
+		/// <summary>
+		/// ¾«½ğ¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedGems = 12;
+		/// <summary>
+		/// îÜÀ¶¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CyanGems = 13;
+		/// <summary>
+		/// Ä§¾§¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CorruptionParticle = 14;
+		/// <summary>
+		/// £¨!£©±ù¾§É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§´ó£¬²»ÊÜÖØÁ¦Ó°ÏìÇÒÔÚÖØÁ¦ÏÂ³ÖĞøÊ±¼ä±ä³¤¡£
+		/// </summary>
+		public const int BlueMagic = 15;
+		/// <summary>
+		/// £¨.£©Ç³À¶ÔÆÉ«Á£×Ó£¬²»·¢¹â£¬²»ÊÜÖØÁ¦Ó°ÏìÇÒÔÚÖØÁ¦ÏÂ³ÖĞøÊ±¼ä±ä³¤¡£
+		/// </summary>
+		public const int WhiteClouds = 16;
+		/// <summary>
+		/// À¶ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinGrey = 17;
+		/// <summary>
+		/// Ò¶ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int SicklyGreen = 18;
+		/// <summary>
+		/// ½ğÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinYellow = 19;
+		/// <summary>
+		/// £¨!£©´¿°×É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬²»ÊÜÖØÁ¦Ó°ÏìÇÒÔÚÖØÁ¦ÏÂ³ÖĞøÊ±¼ä±ä³¤¡£
+		/// </summary>
+		public const int WhiteLingering = 20;
+		/// <summary>
+		/// £¨!£©ÁÁ·ÛÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§Ğ¡£¬²»ÊÜÖØÁ¦Ó°ÏìÇÒÔÚÖØÁ¦ÏÂ³ÖĞøÊ±¼ä±ä³¤¡£
+		/// </summary>
+		public const int PurpleLingering = 21;
+		/// <summary>
+		/// ÉîÍÁÈÀÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Brown = 22;
+		/// <summary>
+		/// Î¢·ÛÍÁÈÀÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Orange = 23;
+		/// <summary>
+		/// Î¢×ÏÍÁÈÀÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinBrown = 24;
+		/// <summary>
+		/// ÓüÑÒÊ¯É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Copper = 25;
+		/// <summary>
+		/// ¿İ²İÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Iron = 26;
+		/// <summary>
+		/// £¨!£©À¶×Ï·ÛÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬²»ÊÜÖØÁ¦Ó°ÏìÇÒÔÚÖØÁ¦ÏÂ³ÖĞøÊ±¼ä±ä³¤¡£
+		/// </summary>
+		public const int PurpleLight = 27;
+		/// <summary>
+		/// ÉîÍ­É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DullCopper = 28;
+		/// <summary>
+		/// £¨!£©ÉîÀ¶É«Á£×Ó£¬×Ô·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DarkBluePinkLight = 29;
+		/// <summary>
+		/// Òø°×É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Silver = 30;
+		/// <summary>
+		/// °×ÔÆÉ«Á£×Ó£¬²»·¢¹â£¬²»ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Smoke = 31;
+		/// <summary>
+		/// Éî»ÆÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Sand = 32;
+		/// <summary>
+		/// Ë®À¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int Water = 33;
+		/// <summary>
+		/// ½ğ»Æ»ğÑæÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÔÚÖØÁ¦ÏÂ²»ÏÔÏÖ£¬ÔÚÎŞÖØÁ¦ÏÂÏÔÏÖ¡£
+		/// </summary>
+		public const int RedLight = 35;
+		/// <summary>
+		/// Ç³ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int MuddyPale = 36;
+		/// <summary>
+		/// ÉîÀ¶ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DarkGrey = 37;
+		/// <summary>
+		/// ÉîÍÁÈÀÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int MuddyBrown = 38;
+		/// <summary>
+		/// ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int JungleGrass = 39;
+		/// <summary>
+		/// ÉîÒ¶ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinGrass = 40;
+		/// <summary>
+		/// £¨!£©ÁÁË®À¶É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§´ó£¬ÔÚÖØÁ¦ÏÂÍ£ÁôÀ©É¢ÇÒÊ±¼ä½Ï³¤£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int BlueCircle = 41;
+		/// <summary>
+		/// ÉîîÜÀ¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinTeal = 42;
+		/// <summary>
+		/// £¨!£©ÁÁ¹âÉ«Á£×Ó£¬²»ÎÈ¶¨·¢¹â£¬¹âÔ´²»´©Í¸£¬¹âÕÕ·¶Î§Óë´óĞ¡³ÉÕı±È£¬²»ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int WhiteLight = 43;
+		/// <summary>
+		/// £¨!£©»ÆÂÌÉ«Á£×Ó£¬·¢°×¹â£¬·¶Î§ºÜ´ó£¬ÔÚÖØÁ¦ÏÂÍ£ÁôÀ©É¢ÇÒÊ±¼ä½Ï³¤£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int GreenSpores = 44;
+		/// <summary>
+		/// £¨!£©ÉîË®À¶É«Á£×Ó£¬×Ô·¢¹â£¬ÔÚÖØÁ¦ÏÂÍ£ÁôÀ©É¢ÇÒÊ±¼ä½Ï³¤£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int LightBlueCircle = 45;
+		/// <summary>
+		/// ÉîÂÌÉ«Á£×Ó£¬²»·¢¹â£¬²»ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreenMaterial = 46;
+		/// <summary>
+		/// XÉîÀ¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CyanGrass = 47;
+		/// <summary>
+		/// XÄ¢¹½¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlueMushroom = 48;
+		/// <summary>
+		/// XÀ¶Æ«ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlueDrakParticle = 49;
+		/// <summary>
+		/// XÉî¾«½ğ¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedParticle = 50;
+		/// <summary>
+		/// °×ÍÁÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PearlStone = 51;
+		/// <summary>
+		/// ·ÛÉ«Ë® ²»·¢Ç³·ÛÉ« ÊÜÖØÁ¦ ¸ß¶ÈÍ¸Ã÷
+		/// </summary>
+		public const int PinkWater = 52;
+		/// <summary>
+		/// »ÒÉ«²ÄÖÊ ²»·¢Ç³Éî»ÒÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì  
+		/// </summary>
+		public const int GreyMaterial = 53;
+		/// <summary>
+		/// ºÚÉ«²ÄÖÊ ²»·¢Ç³ºÚÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì  
+		/// </summary>
+		public const int BlackMaterial = 54;
+		/// <summary>
+		/// £¨!£©ÁÁ½ğ»ğÑæÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§½Ï´ó£¬ÊÜÖØÁ¦Ê±Ğı×ªÀ©É¢ 
+		/// </summary>
+		public const int OrangeFx = 55;
+		/// <summary>
+		/// £¨!£©ÌìÀ¶É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÔÚÖØÁ¦ÏÂÀ©É¢£¬ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int CyanFx = 56;
+		/// <summary>
+		/// £¨!£©Ğ¡ĞÍ»ÆÉ«ÉñÊ¥ÌØĞ§£¬·¢»ÆÇ³Ç³»ÆÉ«¡¢½ğÉ«£¬ÊÜÖØÁ¦Ê±Ğı×ªÀ©É¢   
+		/// </summary>
+		public const int YellowHallowFx = 57;
+		/// <summary>
+		/// £¨!£©ÁÁ·Û°×É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§½Ï´ó£¬²»ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PinkMagic = 58;
+		/// <summary>
+		/// £¨!£©¾§À¶É«Á£×Ó£¬¸ßÀ¶¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlueTorch = 59;
+		/// <summary>
+		/// £¨!£©Æ«·ÛºìÉ«Á£×Ó£¬¸ßºì¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedTorch = 60;
+		/// <summary>
+		/// £¨!£©ÁÁÂÌÉ«Á£×Ó£¬¸ßÂÌ¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreenTorch = 61;
+		/// <summary>
+		/// £¨!£©×ÏÉ«Á£×Ó£¬¸ß×Ï¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PurpleTorch = 62;
+		/// <summary>
+		/// (!)»Ò°×É«Á£×Ó£¬°×¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int WhiteTorch = 63;
+		/// <summary>
+		/// (!)´¿½ğÉ«Á£×Ó£¬×Ô·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int YellowTorch = 64;
+		/// <summary>
+		/// (!)Éî×ÏÉ«Á£×Ó£¬×Ô·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DemonTorch = 65;
+		/// <summary>
+		/// (!)°×É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§·Ç³£´ó£¬ÔÚÖØÁ¦ÏÂÑ¸ËÙ±ä´ó²¢ÇÒĞı×ª£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int WhiteTransparent = 66;
+		/// <summary>
+		/// (!)Ç³º£À¶É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CyanIce = 67;
+		/// <summary>
+		/// (!)°µÀ¶±ù¾§£¬ÊÜÖØÁ¦Ê±·¢°µÀ¶¹âÉîÀ¶É«£¬²»ÊÜÖØÁ¦Ê±¸ßÁÁ·¢À¶¹âÁÁÇàÉ« 
+		/// </summary>
+		public const int DarkCyanIce = 68;
+		/// <summary>
+		/// ·ÛÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinPink = 69;
+		/// <summary>
+		/// (!)Í¸Ã÷×ÏÉ«Á£×Ó ÊÜÖØÁ¦Ê±·¢°µ×Ï¹âÉî×ÏÉ« ²»ÊÜÖØÁ¦Ê±¸ßÁÁ·¢·Û¹âÁÁ·ÛÉ«
+		/// </summary>
+		public const int TransparentPurple = 70;
+		/// <summary>
+		/// (.)Í¸Ã÷·ÛÉ«ÌØĞ§ ·¢·ÛÇ³ÁÁ·ÛÉ« ÊÜÖØÁ¦Ê±Ğı×ªÀ©É¢
+		/// </summary>
+		public const int TransparentPinkFx = 71;
+		/// <summary>
+		/// (.)ºì·ÛÉ«Á£×Ó£¬¸ßÁÁ£¬ÔÚÖØÁ¦ÏÂÀ©É¢²¢ÏûÉ¢£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int SolidPinkFx = 72;
+		/// <summary>
+		/// (!)ÁÁºì·ÛÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÔÚÖØÁ¦ÏÂÀ©É¢²¢ÏûÉ¢£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int BrightPinkFx = 73;
+		/// <summary>
+		/// (!)ÁÁÂÌÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÔÚÖØÁ¦ÏÂÀ©É¢²¢ÏûÉ¢£¬ÎŞÖØÁ¦Ê±ÏûÉ¢½Ï¿ì¡£
+		/// </summary>
+		public const int BrightGreenFx = 74;
+		/// <summary>
+		/// (!)×çÖä»ğ°Ñ£¬·¢»ÆÂÌÇ³»ÆÂÌÉ«£¬ÊÜÖØÁ¦
+		/// </summary>
+		public const int CursedFire = 75;
+		/// <summary>
+		/// (.)ÏÂÑ©£¬²»·¢Ç³°×É«£¬ÊÜÖØÁ¦Ê±Ğı×ª´ó·¶Î§À©É¢£¬´æÔÚÊ±¼ä³¤£¬Óöµ½Îï¿éÏûÊ§
+		/// </summary>
+		public const int Snow = 76;
+		/// <summary>
+		/// ÒõÓ°Ä¾ ²»·¢Ç³Éî»ÒÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int ThinGrey1 = 77;
+		/// <summary>
+		/// ºìÄ¾ ²»·¢Ç³ºì×ØÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int ThinCopper = 78;
+		/// <summary>
+		/// ±¡»Æ²ÄÖÊ ²»·¢Ç³Ç³»ÆÉ« ÊÜÖØÁ¦ÏÂÂä²»Ğı×ª ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int ThinYellow1 = 79;
+		/// <summary>
+		/// ±ù¿é ²»·¢Ç³À¶°×É« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì¡£
+		/// </summary>
+		public const int IceBlock = 80;
+		/// <summary>
+		/// Îı¿óÊ¯ ²»·¢Ç³»ÒÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int Tin = 81;
+		/// <summary>
+		/// Ç¦¿óÊ¯ ²»·¢Ç³À¶ºÚÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int Lead = 82;
+		/// <summary>
+		/// Ç¦¿óÊ¯ ²»·¢Ç³À¶ºÚÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int Tungsten = 83;
+		/// <summary>
+		/// ²¬¿óÊ¯ ²»·¢Ç³Ç³À¶ÒøÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int Platinum = 84;
+		/// <summary>
+		/// É³ºÖ²ÄÖÊ ²»·¢Ç³Ç³³ÈÉ« ÊÜÖØÁ¦ ²»ÊÜÖØÁ¦ÏûÊ§¿ì
+		/// </summary>
+		public const int ThinSandy = 85;
+		/// <summary>
+		/// (!)ÉÙÅ®·ÛÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§½Ï´ó£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PinkTrans = 86;
+		/// <summary>
+		/// (!)ÁÁ½ğ»ÆÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int YellowTrans = 87;
+		/// <summary>
+		/// (!)°×Æ«Ç³À¶É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlueTrans = 88;
+		/// <summary>
+		/// (!)°×ÂÌÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreenTrans = 89;
+		/// <summary>
+		/// (!)·ÛºìÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§ÖĞµÈ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedTrans = 90;
+		/// <summary>
+		/// (!)ÁÁ°×É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§´ó£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int WhiteTrans = 91;
+		/// <summary>
+		/// (!)À¶°×É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§½Ï´ó£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CyanTrans = 92;
+		/// <summary>
+		/// ËÉÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DarkGrass = 93;
+		/// <summary>
+		/// Éî»ÆÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PaleDarkGrass = 94;
+		/// <summary>
+		/// ÉîºìÆ«ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DarkRedGrass = 95;
+		/// <summary>
+		/// ÉîÀ¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlackGreenGrass = 96;
+		/// <summary>
+		/// Éî×ÏÆ«ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DarkRedGrass1 = 97;
+		/// <summary>
+		/// ×ÏÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PurpleWater = 98;
+		/// <summary>
+		/// Ç³ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CyanWater = 99;
+		/// <summary>
+		/// Ç³·ÛÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PinkWater1 = 100;
+		/// <summary>
+		/// Ç³À¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int CyanWater1 = 101;
+		/// <summary>
+		/// Ç³»ÆÍÁÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int OrangeWater = 102;
+		/// <summary>
+		/// ÉîÀ¶Æ«°×É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int DarkBlueWater = 103;
+		/// <summary>
+		/// Éî·ÛÆ«ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int HotPinkWater = 104;
+		/// <summary>
+		/// ´óºìÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedWater = 105;
+		/// <summary>
+		/// (.)ºì»ÆÂÌÈıÉ«»ğÑæÉ«Á£×Ó£¬¸ßÁÁ£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RgbMaterial = 106;
+		/// <summary>
+		/// (!)ÁÁ°×ÂÌÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§Ğ¡£¬ÔÚÖØÁ¦ÏÂÄÜ¹»ĞüÍ£½Ï³¤Ê±¼ä¡£
+		/// </summary>
+		public const int GreenFXPowder = 107;
+		/// <summary>
+		/// Ç³»ÒÇ³À¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PurpleRound = 108;
+		/// <summary>
+		/// ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlackMaterial1 = 109;
+		/// <summary>
+		/// (.)ÁÁÇ³À¶Æ«ÂÌÉ«Á£×Ó£¬¸ßÁÁ£¬ÔÚÖØÁ¦ÏÂ¿ìËÙÀ©É¢·¶Î§µ«²»´ó¡£
+		/// </summary>
+		public const int GreenBubble = 110;
+		/// <summary>
+		/// (.)ÁÁÀ¶É«Á£×Ó£¬¸ßÁÁ£¬ÔÚÖØÁ¦ÏÂ¿ìËÙÀ©É¢·¶Î§µ«²»´ó¡£
+		/// </summary>
+		public const int CyanBubble = 111;
+		/// <summary>
+		/// (.)ÁÁ·ÛÉ«Á£×Ó£¬¸ßÁÁ£¬ÔÚÖØÁ¦ÏÂ¿ìËÙÀ©É¢·¶Î§µ«²»´ó¡£
+		/// </summary>
+		public const int PinkBubble = 112;
+		/// <summary>
+		/// (.)ÁÁÉîÀ¶Æ«°×É«Á£×Ó£¬¸ßÁÁ£¬ÔÚÖØÁ¦ÏÂ¿ìËÙÀ©É¢·¶Î§µ«²»´ó¡£
+		/// </summary>
+		public const int BlueIce = 113;
+		/// <summary>
+		/// (.)ÁÁ·ÛÆ«ºìÉ«Á£×Ó£¬¸ßÁÁ£¬ÔÚÖØÁ¦ÏÂ¿ìËÙÀ©É¢·¶Î§µ«²»´ó¡£
+		/// </summary>
+		public const int PinkYellowBubble = 114;
+		/// <summary>
+		/// ĞâºìÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì
+		/// </summary>
+		public const int RedGrass = 115;
+		/// <summary>
+		/// ÉîÀ¶É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int BlueGreenGrass = 116;
+		/// <summary>
+		/// ½ÏĞâºìÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int RedGrass1 = 117;
+		/// <summary>
+		/// ×ÏÀ¶°×É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PurpleGems1 = 118;
+		/// <summary>
+		/// Éî·ÛºìÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PinkGems = 119;
+		/// <summary>
+		/// Éî×Ø°×É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int PalePinkGems = 120;
+		/// <summary>
+		/// Éî»ÒºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinGrey2 = 121;
+		/// <summary>
+		/// Éî»úĞµÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinIron = 122;
+		/// <summary>
+		/// Éî·ÛºìÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int HotPinkBubble = 123;
+		/// <summary>
+		/// Ç³»ÆÆ«°×É«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int YellowWhiteBubble = 124;
+		/// <summary>
+		/// ÉîºìÆ«ºÚÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinRed = 125;
+		/// <summary>
+		/// Éî»ÒÆ«ÂÌÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinGrey3 = 126;
+		/// <summary>
+		/// (!)ÑÒ½¬É«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§Ğ¡£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int OrangeFire = 127;
+		/// <summary>
+		/// Ò¶ÂÌ¿óÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int GreenGems = 128;
+		/// <summary>
+		/// ÉîÍÁ»ÆÉ«Á£×Ó£¬²»·¢¹â£¬ÊÜÖØÁ¦Ó°Ïì¡£
+		/// </summary>
+		public const int ThinBrown1 = 129;
+		/// <summary>
+		/// (!)°×·ÛÉ«Á£×Ó£¬×Ô·¢¹â£¬·¶Î§½Ï´ó£¬ÔÚÖØÁ¦ÏÂ»á³ÊÏÖÁ£×ÓÏÂ×¹ÌØĞ§£¬ÔÚÎŞÖØÁ¦Ê±»áĞüÍ£À©É¢£¬½Ï¿ìÏûÉ¢¡£
+		/// </summary>
+		public const int TrailingRed = 130;
+		/// <summary>
+		/// ·¢¹âÒ·Î² ÂÌÉ« ÉÏÉıÑÌ»ğ, ·¢ÂÌÉ«¹â
+		/// </summary>
+		public const int TrailingGreen = 131;
+		/// <summary>
+		/// ·¢¹âÒ·Î² ÇàÉ« µôÂäÑÌ»ğ, ·¢ÇàÉ«¹â
+		/// </summary>
+		public const int TrailingCyan = 132;
+		/// <summary>
+		/// ·¢¹âÒ·Î² »ÆÉ« µôÂäÑÌ»ğ, ·¢ÇàÉ«¹â
+		/// </summary>
+		public const int TrailingYellow = 133;
+		/// <summary>
+		/// Ò·Î² ·ÛÉ« µôÂäÑÌ»ğ
+		/// </summary>
+		public const int TrailingPink = 134;
+		/// <summary>
+		/// ·¢¹âÇàÉ« ±ù»ğ°Ñ, ·¢ÇàÉ«¹â
+		/// </summary>
+		public const int IceTorch = 135;
+		/// <summary>
+		/// ºìÉ«²ÄÖÊ
+		/// </summary>
+		public const int Red = 136;
+		/// <summary>
+		/// ÁÁÀ¶É«/ÇàÉ«²ÄÖÊ
+		/// </summary>
+		public const int BrightCyan = 137;
+		/// <summary>
+		/// ÁÁ³ÈÉ«/×ØÉ«²ÄÖÊ
+		/// </summary>
+		public const int BrightOrange = 138;
+		/// <summary>
+		/// ÇàÉ« Ö½Ğ¼
+		/// </summary>
+		public const int CyanConfetti = 139;
+		/// <summary>
+		/// ÂÌÉ« Ö½Ğ¼
+		/// </summary>
+		public const int GreenConfetti = 140;
+		/// <summary>
+		/// ·ÛÉ« Ö½Ğ¼
+		/// </summary>
+		public const int PinkConfetti = 141;
+		/// <summary>
+		/// »ÆÉ« Ö½Ğ¼
+		/// </summary>
+		public const int YellowConfetti = 142;
+		/// <summary>
+		///Ç³»ÒÉ« Ê¯¿é
+		/// </summary>
+		public const int LightGreyStone = 143;
+		/// <summary>
+		/// ÑŞÍ­ Ê¯¿é
+		/// </summary>
+		public const int CopperStone = 144;
+		/// <summary>
+		/// ·ÛÉ« Ê¯¿é
+		/// </summary>
+		public const int PinkStone = 145;
+		/// <summary>
+		/// ÂÌÉ«/×ØÉ«²ÄÖÊ »ìºÏ
+		/// </summary>
+		public const int GreenBrown = 146;
+		/// <summary>
+		/// ³ÈÉ«²ÄÖÊ
+		/// </summary>
+		public const int OrangeFx2 = 147;
+		/// <summary>
+		/// ±¥ºÍºìÉ«²ÄÖÊ
+		/// </summary>
+		public const int RedDesaturated = 148;
+		/// <summary>
+		/// °×É«²ÄÖÊ
+		/// </summary>
+		public const int White = 149;
+		/// <summary>
+		/// ºÚÉ«/»ÆÉ«/À¶°×²ÄÖÊ
+		/// </summary>
+		public const int BlackYellowBluishwhite = 150;
+		/// <summary>
+		/// ±¡°×É«²ÄÖÊ
+		/// </summary>
+		public const int ThinWhite = 151;
+		/// <summary>
+		/// ·¢¹âÁÁ³ÈÉ« ÅİÅİ
+		/// </summary>
+		public const int OrangeBubble = 152;
+		/// <summary>
+		/// ÁÁ³ÈÉ« ÅİÅİ²ÄÖÊ
+		/// </summary>
+		public const int OrangeBubbleMaterial = 153;
+		/// <summary>
+		/// ±¡²Ô°×À¶É«²ÄÖÊ
+		/// </summary>
+		public const int BlueThin = 154;
+		/// <summary>
+		/// ±¡°µ×ØÉ«²ÄÖÊ
+		/// </summary>
+		public const int DarkBrown = 155;
+		/// <summary>
+		/// ·¢¹âÁÁÀ¶É«/°×É« ÅİÅİ²ÄÖÊ, ·¢²Ô°×À¶É«¹â
+		/// </summary>
+		public const int BlueWhiteBubble = 156;
+		/// <summary>
+		/// (.)±¡ÂÌÉ«ÌØĞ§, ¸ßÁÁ
+		/// </summary>
+		public const int GreenFx = 157;
+		/// <summary>
+		/// ·¢¹â³ÈÉ« »ğÑæ, ·¢³ÈÉ«¹â
+		/// </summary>
+		public const int OrangeFire1 = 158;
+		/// <summary>
+		/// ·¢¹âÉÁË¸ »ÆÉ«ÌØĞ§, ·¢»ÆÉ«¹â
+		/// </summary>
+		public const int YellowFx = 159;
+		/// <summary>
+		/// ·¢¹â¶ÌÔİ ÇàÉ«ÌØĞ§, ·¢ÁÁÇàÉ«¹â
+		/// </summary>
+		public const int CyanShortFx = 160;
+		/// <summary>
+		/// ÇàÉ«²ÄÖÊ
+		/// </summary>
+		public const int CyanMaterial = 161;
+		/// <summary>
+		/// ·¢¹â¶ÌÔİ ³ÈÉ«ÌØĞ§, ·¢ÁÁ³ÈÉ«¹â
+		/// </summary>
+		public const int OrangeShortFx = 162;
+		/// <summary>
+		/// (.)ÁÁÂÌÉ« ±¡²ÄÖÊ, ¸ßÁÁ
+		/// </summary>
+		public const int BrightGreen = 163;
+		/// <summary>
+		/// ·¢¹âflickering ·ÛÉ«ÌØĞ§, ·¢ÌÒºìÉ«¹â
+		/// </summary>
+		public const int PinkFx = 164;
+		/// <summary>
+		/// °×É«/À¶É« ÅİÅİ²ÄÖÊ
+		/// </summary>
+		public const int WhiteBlueBubble = 165;
+		/// <summary>
+		/// ±¡ÁÁ·ÛÉ«²ÄÖÊ
+		/// </summary>
+		public const int PinkThinBright = 166;
+		/// <summary>
+		/// ±¡ÂÌÉ«²ÄÖÊ
+		/// </summary>
+		public const int ThinGreen = 167;
+		/// <summary>
+		/// !ÁÁ·ÛÉ« ÅİÅİ
+		/// </summary>
+		public const int PinkBrightBubble = 168;
+		/// <summary>
+		/// ·¢¹â»ÆÉ«ÌØĞ§, ·¢Éî»ÆÉ«¹â
+		/// </summary>
+		public const int YellowFx1 = 169;
+		/// <summary>
+		/// (.)±¡³ÈÉ«ÌØĞ§, ·¢Î¢Èõ°×É«¹â
+		/// </summary>
+		public const int Ichor = 170;
+		/// <summary>
+		/// ÁÁ×ÏÉ« ÅİÅİ²ÄÖÊ
+		/// </summary>
+		public const int PurpleBubble = 171;
+		/// <summary>
+		/// (.)Ç³À¶É« Î¢³¾, ·¢Î¢ÈõÀ¶É«¹â
+		/// </summary>
+		public const int BlueParticle = 172;
+		/// <summary>
+		/// ·¢¹â¶ÌÔİ ×ÏÉ«ÌØĞ§, ·¢ÁÁ×ÏÉ«¹â
+		/// </summary>
+		public const int PurpleShortFx = 173;
+		/// <summary>
+		/// ·¢¹âÁÁ³ÈÉ« ÅİÅİ²ÄÖÊ, ·¢³ÈºìÉ«¹â
+		/// </summary>
+		public const int OrangeFire2 = 174;
+		/// <summary>
+		/// (.)¶ÌÔİ °×É«ÌØĞ§, ¸ßÁÁ
+		/// </summary>
+		public const int WhiteShortFx = 175;
+		/// <summary>
+		///Ç³À¶É« Î¢³¾
+		/// </summary>
+		public const int LightBlueParticle = 176;
+		/// <summary>
+		///Ç³·ÛÉ« Î¢³¾
+		/// </summary>
+		public const int LightPinkParticle = 177;
+		/// <summary>
+		///Ç³ÂÌÉ« Î¢³¾
+		/// </summary>
+		public const int LightGreenParticle = 178;
+		/// <summary>
+		///Ç³×ÏÉ« Î¢³¾
+		/// </summary>
+		public const int LightPurpleParticle = 179;
+		/// <summary>
+		/// ·¢¹âÇ³ÇàÉ« Î¢³¾, ¸ßÁÁ
+		/// </summary>
+		public const int LightCyanParticle = 180;
+		/// <summary>
+		/// (.)Ç³ÇàÉ«/·ÛÉ« ÅİÅİ²ÄÖÊ, ¸ßÁÁ
+		/// </summary>
+		public const int CyanPinkBubble = 181;
+		/// <summary>
+		/// (.)Ç³ºìÉ« ÅİÅİ²ÄÖÊ, ¼¸ºõ²»·¢ºìÉ«¹â
+		/// </summary>
+		public const int RedBubble = 182;
+		/// <summary>
+		/// (.)Í¸Ã÷ ºìÉ« ÅİÅİ²ÄÖÊ, ¸ßÁÁ
+		/// </summary>
+		public const int RedTransBubble = 183;
+		/// <summary>
+		/// ¿İÂÌÉ«¡¢ÂÌ»ÒÉ« Î¢³¾ ÔÚµØÃæÍ£Áô
+		/// </summary>
+		public const int GreenishGreyParticle = 184;
+		/// <summary>
+		/// ·¢¹âÇ³ÇàÉ« Ë®¾§²ÄÖÊ, ·¢ÇàÉ«¹â
+		/// </summary>
+		public const int CyanCrystal = 185;
+		/// <summary>
+		/// ²Ô°×°µÀ¶É« ÑÌ
+		/// </summary>
+		public const int DarkBlueSmoke = 186;
+		/// <summary>
+		/// ·¢¹âÇ³ÇàÉ« Î¢³¾, ·¢ÇàÉ«¹â
+		/// </summary>
+		public const int LightCyanParticle1 = 187;
+		/// <summary>
+		/// ÁÁÂÌÉ« ÅİÅİ
+		/// </summary>
+		public const int GreenBubble1 = 188;
+		/// <summary>
+		/// ±¡³ÈÉ«²ÄÖÊ
+		/// </summary>
+		public const int OrangeMaterial = 189;
+		/// <summary>
+		/// ±¡½ğÉ«²ÄÖÊ
+		/// </summary>
+		public const int GoldMaterial = 190;
+		/// <summary>
+		/// ºÚÉ« Ñ©»¨
+		/// </summary>
+		public const int BlackFlakes = 191;
+		/// <summary>
+		/// Ñ©²ÄÖÊ
+		/// </summary>
+		public const int SnowMaterial = 192;
+		/// <summary>
+		/// ÂÌÉ«²ÄÖÊ
+		/// </summary>
+		public const int GreenMaterial1 = 193;
+		/// <summary>
+		/// ±¡×ØÉ«²ÄÖÊ
+		/// </summary>
+		public const int BrownMaterial = 194;
+		/// <summary>
+		/// ±¡ºÚÉ«²ÄÖÊ
+		/// </summary>
+		public const int BlackMaterial2 = 195;
+		/// <summary>
+		/// ±¡ÂÌÉ«²ÄÖÊ
+		/// </summary>
+		public const int ThinGreen1 = 196;
+		/// <summary>
+		/// (.)±¡ÁÁÇàÉ«²ÄÖÊ, ¸ßÁÁ
+		/// </summary>
+		public const int BrightCyanMaterial = 197;
+		/// <summary>
+		/// ºÚÉ«/°×É« Î¢³¾
+		/// </summary>
+		public const int BlackWhiteParticle = 198;
+		/// <summary>
+		/// ²Ô°× ×ÏÉ«/ºÚÉ«/»ÒÉ« Î¢³¾
+		/// </summary>
+		public const int PurpleBlackGrey = 199;
+		/// <summary>
+		/// ·ÛÉ« Î¢³¾
+		/// </summary>
+		public const int PinkParticle = 200;
+		/// <summary>
+		///Ç³·ÛÉ« Î¢³¾
+		/// </summary>
+		public const int LightPinkParticle1 = 201;
+		/// <summary>
+		///Ç³ÇàÉ« Î¢³¾
+		/// </summary>
+		public const int LightCyanParticle2 = 202;
+		/// <summary>
+		/// »ÒÉ« Î¢³¾
+		/// </summary>
+		public const int GreyParticle = 203;
+		/// <summary>
+		/// (.)°×É« Î¢³¾, ¸ßÁÁ
+		/// </summary>
+		public const int WhiteParticle = 204;
+		/// <summary>
+		/// (.)±¡·ÛÉ«²ÄÖÊ, ¼¸ºõ²»·¢·ÛÉ«¹â
+		/// </summary>
+		public const int ThinPinkMaterial = 205;
+		/// <summary>
+		/// ·¢¹â¶ÌÔİ ÇàÉ«ÌØĞ§, ·¢ÁÁÀ¶É«¹â
+		/// </summary>
+		public const int CyanShortFx1 = 206;
+		/// <summary>
+		/// ±¡×ØÉ«²ÄÖÊ
+		/// </summary>
+		public const int BrownMaterial1 = 207;
+		/// <summary>
+		/// ³ÈÉ« Ê¯¿é
+		/// </summary>
+		public const int OrangeStone = 208;
+		/// <summary>
+		/// ²Ô°× ÂÌÉ« Ê¯¿é
+		/// </summary>
+		public const int PaleGreenStone = 209;
+		/// <summary>
+		/// off °×É«²ÄÖÊ
+		/// </summary>
+		public const int OffWhite = 210;
+		/// <summary>
+		/// ÁÁÀ¶É« Î¢³¾
+		/// </summary>
+		public const int BrightBlueParticle = 211;
+		/// <summary>
+		/// °×É« Î¢³¾
+		/// </summary>
+		public const int WhiteParticle1 = 212;
+		/// <summary>
+		/// (.)¶ÌÔİ Î¢°×É«ÌØĞ§, ¼¸ºõ²»·¢°×É«¹â
+		/// </summary>
+		public const int WhiteShortFx1 = 213;
+		/// <summary>
+		/// ±¡²Ô°× ×ØÉ«²ÄÖÊ
+		/// </summary>
+		public const int Thin = 214;
+		/// <summary>
+		/// ±¡khaki²ÄÖÊ
+		/// </summary>
+		public const int ThinKhaki = 215;
+		/// <summary>
+		/// ²Ô°× ·ÛÉ«²ÄÖÊ
+		/// </summary>
+		public const int Pale = 216;
+		/// <summary>
+		/// ÇàÉ« Î¢³¾
+		/// </summary>
+		public const int Cyan = 217;
+		/// <summary>
+		/// ÌÒºìÉ« Î¢³¾
+		/// </summary>
+		public const int Hot = 218;
+		/// <summary>
+		/// ·¢¹âÒ·Î² ºìÉ« ·ÉĞĞ×ÅµÄÑÌ»ğ, ·¢³ÈÉ«¹â
+		/// </summary>
+		public const int TrailingRed1 = 219;
+		/// <summary>
+		/// ·¢¹âÒ·Î² ÂÌÉ« ·ÉĞĞ×ÅµÄÑÌ»ğ, ·¢ÂÌÉ«¹â
+		/// </summary>
+		public const int TrailingGreen1 = 220;
+		/// <summary>
+		/// ·¢¹âÒ·Î² À¶É« ·ÉĞĞ×ÅµÄÑÌ»ğ, ·¢²Ô°×À¶É«¹â
+		/// </summary>
+		public const int TrailingBlue = 221;
+		/// <summary>
+		/// ·¢¹âÒ·Î² »ÆÉ« ·ÉĞĞ×ÅµÄÑÌ»ğ, ·¢»ÆÉ«¹â
+		/// </summary>
+		public const int TrailingYellow1 = 222;
+		/// <summary>
+		/// (.)Ò·Î² ºìÉ« ·ÉĞĞ×ÅµÄÑÌ»ğ, ¸ßÁÁ
+		/// </summary>
+		public const int TrailingRed2 = 223;
+		/// <summary>
+		/// ±¡À¶É«²ÄÖÊ
+		/// </summary>
+		public const int ThinBlue = 224;
+		/// <summary>
+		/// ³ÈÉ«²ÄÖÊ
+		/// </summary>
+		public const int OrangeMaterial1 = 225;
+		/// <summary>
+		/// 
+		/// </summary>
+		public const int ElectricCyan = 226;
+
+		/// <summary>
+		/// ·¢¹âÔÂÑ× »ğÑæ!!!
+		/// </summary>
+		public const int CyanLunarFire = 229;
+		/// <summary>
+		/// ·¢¹âÉÁË¸ ×ÏÉ«ÌØĞ§, ·¢×Ï¹â 
+		/// </summary>
+		public const int PurpleFx = 230;
+	}
 }

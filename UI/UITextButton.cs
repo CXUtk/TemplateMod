@@ -18,10 +18,18 @@ namespace TemplateMod.UI
         /// 显现在按钮上的文本
         /// </summary>
         public string ButtonText { get; set; }
-        /// <summary>
-        /// 按钮文本的颜色
-        /// </summary>
-        public Color TextDefaultColor { get; set; }
+		/// <summary>
+		/// 显现在按钮上的文本
+		/// </summary>
+		public string ButtonTextTrue { get; set; }
+		/// <summary>
+		/// 显现在按钮上的文本
+		/// </summary>
+		public string ButtonTextFalse { get; set; }
+		/// <summary>
+		/// 按钮文本的颜色
+		/// </summary>
+		public Color TextDefaultColor { get; set; }
 
 		public Color TextChangeColor { get; set; }
 
@@ -33,9 +41,11 @@ namespace TemplateMod.UI
 
 		private UIText _text;
 
-        public UITextButton(string text)
+        public UITextButton(string textFalse, string textTrue)
         {
-			ButtonText = text;
+			ButtonText = textFalse;
+			ButtonTextFalse = textFalse;
+			ButtonTextTrue = textTrue;
 			TextDefaultColor = new Color(200, 200, 200);
 			TextChangeColor = Color.White;
 			ChangeScale = 1.2f;
@@ -54,6 +64,14 @@ namespace TemplateMod.UI
 		private void _text_OnClick(UIMouseEvent evt, UIElement listeningElement)
 		{
 			Value = !Value;
+			if (Value)
+			{
+				ButtonText = ButtonTextTrue;
+			}
+			else
+			{
+				ButtonText = ButtonTextFalse;
+			}
 		}
 
 		public override void MouseOver(UIMouseEvent evt)

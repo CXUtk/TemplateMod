@@ -50,8 +50,8 @@ namespace TemplateMod.Items
 			// 这个数值越低越快，因为TR游戏速度每秒是60帧，这里的30就是
 			// 10.0 / 60.0 = 0.1666... 秒挥动一次！也就是一秒6次
 			// 一般来说我们要把这两个值设成一样，但也有例外的时候，我们以后会讲
-			item.useTime = 10;
-			item.useAnimation = 10;
+			item.useTime = 4;
+			item.useAnimation = 4;
 
 			// 使用方式，这个值决定了武器使用时到底是按什么样的动画播放
 			// 1 代表挥动，也就是剑类武器！
@@ -60,10 +60,11 @@ namespace TemplateMod.Items
 			// 4 唔，这个一般不是用在武器上的，想象一下生命水晶使用的时候的动作
 			// 5 手持，枪、弓、法杖类武器的动作，用途最广，这里就用它
 			item.useStyle = 5;
+			item.holdStyle = ItemHoldStyleID.HarpHoldingOut;
 
 			// 决定了这个武器鼠标按住不放能不能一直攻击， true代表可以
 			// （我就是要按废你的鼠标！
-			item.autoReuse = false;
+			item.autoReuse = true;
 
 			// 决定了这个武器的伤害属性，
 			// melee 代表近战
@@ -102,18 +103,75 @@ namespace TemplateMod.Items
 
 			// 决定枪射出点什么和射出的速度的量
 			// 这里我让枪射出子弹，并且以 （7像素 / 帧） 的速度射出去 
-			item.shoot = ProjectileID.Bullet;
-			item.shootSpeed = 7f;
+			item.shoot = mod.ProjectileType("ChasePro");
+			item.shootSpeed = 17f;
 
 			// 选择这个枪射出（的时候消耗什么作为弹药，这里选择子弹
 			// 你也可以删（或者注释）掉这一句，这样枪就什么都不消耗了
 			//【重要】如果设置了消耗什么弹药，那么之前shoot设置的值就会被弹药物品的属性所覆盖
 			// 也就是说，你到底射出的是什么就由弹药决定了！
-			// item.useAmmo = AmmoID.Bullet;
+			 item.useAmmo = AmmoID.Bullet;
+			
 
 			// 好了，到这里差不多就是一个普通的枪需要填写的属性了
 			// 至于更高级的枪怎么制作，嘿嘿，往后看吧。
 
+		}
+
+		public override Vector2? HoldoutOffset()
+		{
+			return new Vector2(0.0f, 0.0f);
+		}
+		public override Vector2? HoldoutOrigin()
+		{
+			return base.HoldoutOrigin();
+		}
+		public override void HoldStyle(Player player)
+		{
+			if (Math.Abs(Main.time % 20 - 10.0f) < 0.01)
+			{
+				player.bodyFrame.Y = player.bodyFrame.Height * 2;
+			}
+			else if (Main.time % 20 < 1)
+			{
+				player.bodyFrame.Y = player.bodyFrame.Height * 4;
+			}
+		}
+		public override bool HoldItemFrame(Player player)
+		{
+			if (Math.Abs(Main.time % 20 - 10.0f) < 0.01)
+			{
+				player.bodyFrame.Y = player.bodyFrame.Height * 2;
+			}
+			else if (Main.time % 20 < 1)
+			{
+				player.bodyFrame.Y = player.bodyFrame.Height * 4;
+			}
+
+			//player.bodyFrame.Y += player.bodyFrame.Height * 20;
+			//if(player.bodyFrame.Y > player.bodyFrame.Height * 20)
+			//{
+			//	player.bodyFrame.Y = 0;
+			//}
+			return false;
+		}
+
+		public override void PickAmmo(Player player, ref int type, ref float speed, ref int damage, ref float knockback)
+		{
+			base.PickAmmo(player, ref type, ref speed, ref damage, ref knockback);
+		}
+	
+
+
+
+		public override bool ConsumeAmmo(Player player)
+		{
+			return Main.rand.Next(10) < 4;
+		}
+		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		{
+			type = Main.rand.Next(0, Main.maxProjectileTypes);
+			return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
 		}
 
 
@@ -125,7 +183,7 @@ namespace TemplateMod.Items
 			ModRecipe recipe1 = new ModRecipe(mod);
 
 			// 这里我设置了这把剑要1个木头就能制作
-			recipe1.AddIngredient(ItemID.IronBar, 10);
+			recipe1.AddIngredient(ItemID.MoltenFury, 10);
 
 			// 我设置了这把剑要在铁砧旁边合成
 			recipe1.AddTile(TileID.Anvils);

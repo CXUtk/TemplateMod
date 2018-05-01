@@ -39,6 +39,8 @@ namespace TemplateMod.UICollection
 
 		private UIValueChanger _valueChangerScale;
 
+		private UITextButton _textButton;
+
 		private bool DustOn = false;
 
 		protected override void Initialize(UIPanel WindowPanel)
@@ -83,18 +85,24 @@ namespace TemplateMod.UICollection
 			_valueChangerScale.OnValueChange += _valueChangerScale_OnValueChange;
 			_valueChangerScale.SetValue(1.0f);
 
-			UITextButton textButton = new UITextButton("重力开启");
-			textButton.TextChangeColor = Color.Yellow;
-			textButton.Left.Set(120, 0.0f);
-			textButton.Top.Set(140, 0.0f);
-			textButton.Width.Set(60, 0f);
-			textButton.Height.Set(30, 0f);
+			_textButton = new UITextButton("重力关闭", "重力开启");
+			_textButton.TextChangeColor = Color.Yellow;
+			_textButton.Left.Set(120, 0.0f);
+			_textButton.Top.Set(150, 0.0f);
+			_textButton.Width.Set(60, 0f);
+			_textButton.Height.Set(30, 0f);
+			_textButton.OnClick += TextButton_OnClick;
 
-			WindowPanel.Append(textButton);
+			WindowPanel.Append(_textButton);
 			WindowPanel.Append(_valueChangerScale);
 			WindowPanel.Append(_valueChangerID);
 			WindowPanel.Append(_valueChangerNumber);
 			WindowPanel.Append(_testButton);
+		}
+
+		private void TextButton_OnClick(UIMouseEvent evt, UIElement listeningElement)
+		{
+			_dustInfo.noGravity = _textButton.Value;
 		}
 
 		private void _valueChangerScale_OnValueChange(float value, UIElement sender)

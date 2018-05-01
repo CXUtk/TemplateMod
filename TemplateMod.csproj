@@ -67,7 +67,17 @@
     <Content Include="Images\Box.png" />
     <Content Include="Images\Box2.png" />
     <Content Include="Images\CloseButton.png" />
+    <Content Include="Items\Armors\ExampleBreastplate.png" />
+    <Content Include="Items\Armors\ExampleBreastplate_Arms.png" />
+    <Content Include="Items\Armors\ExampleBreastplate_Body.png" />
+    <Content Include="Items\Armors\ExampleBreastplate_FemaleBody.png" />
+    <Content Include="Items\Armors\ExampleHelmet.png" />
+    <Content Include="Items\Armors\ExampleHelmet_Head.png" />
+    <Content Include="Items\Armors\ExampleLeggings.png" />
+    <Content Include="Items\Armors\ExampleLeggings_Legs.png" />
     <Content Include="Items\DXTBlade.png" />
+    <Content Include="Items\ExampleWings.png" />
+    <Content Include="Items\ExampleWings_Wings.png" />
     <Content Include="Items\PoisonousPotion.png" />
     <Content Include="Items\PurpleStone.png" />
     <Content Include="Items\TemplateGun.png" />
@@ -77,14 +87,24 @@
     <Content Include="Libraries\Microsoft.Xna.Framework.Graphics.dll" />
     <Content Include="Libraries\ReLogic.dll" />
     <Content Include="Libraries\Terraria.exe" />
+    <Content Include="Projectiles\Generator.png" />
+    <Content Include="Projectiles\ChasePro.png" />
+    <Content Include="Projectiles\TestPro.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffs\GreenLight.cs" />
+    <Compile Include="Items\Armors\ExampleBreastplate.cs" />
+    <Compile Include="Items\Armors\ExampleHelmet.cs" />
+    <Compile Include="Items\Armors\ExampleLeggings.cs" />
+    <Compile Include="Items\ExampleWings.cs" />
     <Compile Include="Items\PoisonousPotion.cs" />
     <Compile Include="Items\PurpleStone.cs" />
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
     <Compile Include="Items\ThunderPickaxe.cs" />
+    <Compile Include="Projectiles\Generator.cs" />
+    <Compile Include="Projectiles\ChasePro.cs" />
+    <Compile Include="Projectiles\TestPro.cs" />
     <Compile Include="TemplateMod.cs" />
     <Compile Include="TemplatePlayer.cs" />
     <Compile Include="UICollection\DustTestUI.cs" />

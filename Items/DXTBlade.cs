@@ -126,8 +126,7 @@ namespace TemplateMod.Items
 			for(float theta = 0.0f; theta < MathHelper.TwoPi; theta += 0.1f)
 			{
 				Vector2 org = Vector2.UnitY;
-				//(float)Math.Cos(2 * theta) + 1.0f;
-				float r = 1;//2 * (float)Math.Sin(1 + Math.Sin(3 * theta) * Math.Pow(2.0, Math.Sin(3 * theta)));
+				float r = 2 * (float)Math.Sin(1 + Math.Sin(3 * theta) * Math.Pow(2.0, Math.Sin(3 * theta)));
 				Projectile.NewProjectile(player.position, org.RotatedBy(theta - 1.57f) * r, ProjectileID.Bullet, 100, 1, player.whoAmI);
 			}
 			return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
