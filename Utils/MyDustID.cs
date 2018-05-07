@@ -1,937 +1,969 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 /// <summary>
-/// �����ռ��Լ��ģ�����ļ�����ʮ�������ڲ�Դ���һ����
-/// ʹ�õ�ʱ����Ҫ using FallenStar49;
+/// 命名空间自己改，这个文件是四十九落星内部源码的一部分
 /// </summary>
 namespace TemplateMod.Utils
 {
 	/// <summary>
-	/// DXTsT���Ƶ�����ID��
-	/// ����ʱ�䣺2017/1/31
-	/// ��Ȩ���У�DXTsT & ��ʮ������������
+	/// DXTsT自制的粒子ID表
+	/// 制作时间：2017/1/31
+	/// 版权所有：DXTsT & 四十九落星制作组
 	/// 
-	/// ˵���������ֶδ��У�������ʶ����˵��������Ч�����ںڰ����Է���
-	/// ���У�.����ʶ��˵��������Ч���������ʾ���ǲ��ᷢ��
-	/// ����Dustȫ�������ᷢ�⣡
+	/// 说明：以下字段带有（!）标识符的说明此粒子效果会在黑暗中自发光
+	/// 带有（.）标识符说明此粒子效果会高亮显示但是不会发光
+	/// 其余Dust全部都不会发光！
+	/// 
+	/// 感谢所有参与制作者：Rainbow Fluorescence，子冀，海琴烟
 	/// </summary>
 	public static class MyDustId
 	{
 		/// <summary>
-		/// �������ӣ������⣬������Ӱ�졣
+		/// 土壤粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BrownDirt = 0;
 		/// <summary>
-		/// ��ʯ���ӣ������⣬������Ӱ�졣
+		/// 岩石粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GreyStone = 1;
 		/// <summary>
-		/// ǳ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GreenGrass = 2;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGreenGrass = 3;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 灰色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GreyPebble = 4;
 		/// <summary>
-		/// ���ɫ���ӣ������⣬������Ӱ�졣
+		/// 深红色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int RedBlood = 5;
 		/// <summary>
-		/// (!)�ٻ�ɫ�������ӣ��Է��⣬��Χ�еȣ�������Ӱ�졣
+		///（!）橘黄色火焰粒子，自发光，范围中等，受重力影响。
 		/// </summary>
 		public const int Fire = 6;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 深土壤色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Wood = 7;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 铁矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PurpleGems = 8;
 		/// <summary>
-		/// ͭ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 铜矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int OrangeGems = 9;
 		/// <summary>
-		/// ���ɫ���ӣ������⣬������Ӱ�졣
+		/// 金矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int YellowGems = 10;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 银矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int WhiteGems = 11;
 		/// <summary>
-		/// �����ɫ���ӣ������⣬������Ӱ�졣
+		/// 精金矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int RedGems = 12;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 钴蓝矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int CyanGems = 13;
 		/// <summary>
-		/// ħ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 魔晶矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int CorruptionParticle = 14;
 		/// <summary>
-		/// ��!������ɫ���ӣ��Է��⣬��Χ�󣬲�������Ӱ�����������³���ʱ��䳤��
+		///（!）冰晶色粒子，自发光，范围大，不受重力影响且在重力下持续时间变长。
 		/// </summary>
 		public const int BlueMagic = 15;
 		/// <summary>
-		/// ��.��ǳ����ɫ���ӣ������⣬��������Ӱ�����������³���ʱ��䳤��
+		///（.）浅蓝云色粒高亮，不受重力影响且在重力下持续时间变长。
 		/// </summary>
 		public const int WhiteClouds = 16;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 蓝黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGrey = 17;
 		/// <summary>
-		/// Ҷ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 叶绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int SicklyGreen = 18;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 金色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinYellow = 19;
 		/// <summary>
-		/// ��!������ɫ���ӣ��Է��⣬��Χ�еȣ���������Ӱ�����������³���ʱ��䳤��
+		/// （!）纯白色粒子，自发光，范围中等，不受重力影响且在重力下持续时间变长。
 		/// </summary>
 		public const int WhiteLingering = 20;
 		/// <summary>
-		/// ��!������ɫ���ӣ��Է��⣬��ΧС����������Ӱ�����������³���ʱ��䳤��
+		/// （!）亮粉色粒子，自发光，范围小，不受重力影响且在重力下持续时间变长。
 		/// </summary>
 		public const int PurpleLingering = 21;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 深土壤色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Brown = 22;
 		/// <summary>
-		/// ΢������ɫ���ӣ������⣬������Ӱ�졣
+		/// 微粉土壤色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Orange = 23;
 		/// <summary>
-		/// ΢������ɫ���ӣ������⣬������Ӱ�졣
+		/// 微紫土壤色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinBrown = 24;
 		/// <summary>
-		/// ����ʯɫ���ӣ������⣬������Ӱ�졣
+		/// 狱岩石色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Copper = 25;
 		/// <summary>
-		/// �ݲ�ɫ���ӣ������⣬������Ӱ�졣
+		/// 枯草色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Iron = 26;
 		/// <summary>
-		/// ��!�����Ϸ�ɫ���ӣ��Է��⣬��Χ�еȣ���������Ӱ�����������³���ʱ��䳤��
+		/// （!）蓝紫粉色粒子，自发光，范围中等，不受重力影响且在重力下持续时间变长。
 		/// </summary>
 		public const int PurpleLight = 27;
 		/// <summary>
-		/// ��ͭɫ���ӣ������⣬������Ӱ�졣
+		/// 深铜色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DullCopper = 28;
 		/// <summary>
-		/// ��!������ɫ���ӣ��Է��⣬������Ӱ�졣
+		/// （!）深蓝色粒子，自发光，受重力影响。
 		/// </summary>
 		public const int DarkBluePinkLight = 29;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 银白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Silver = 30;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬��������Ӱ�졣
+		/// 白云色粒子，不发光，不受重力影响。
 		/// </summary>
 		public const int Smoke = 31;
 		/// <summary>
-		/// ���ɫ���ӣ������⣬������Ӱ�졣
+		/// 深黄色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Sand = 32;
 		/// <summary>
-		/// ˮ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 水蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Water = 33;
 		/// <summary>
-		/// ��ƻ���ɫ���ӣ��Է��⣬��Χ�еȣ��������²����֣��������������֡�
+		///（!）金黄火焰色粒子，自发光，范围中等，在重力下不显现，在无重力下显现。
 		/// </summary>
 		public const int RedLight = 35;
 		/// <summary>
-		/// ǳ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int MuddyPale = 36;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 深蓝黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DarkGrey = 37;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 深土壤色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int MuddyBrown = 38;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int JungleGrass = 39;
 		/// <summary>
-		/// ��Ҷ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深叶绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGrass = 40;
 		/// <summary>
-		/// ��!����ˮ��ɫ���ӣ��Է��⣬��Χ����������ͣ����ɢ��ʱ��ϳ���������ʱ��ɢ�Ͽ졣
+		/// （!）亮水蓝色粒子，自发光，范围大，在重力下停留扩散且时间较长，无重力时消散较快。
 		/// </summary>
 		public const int BlueCircle = 41;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 深钴蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinTeal = 42;
 		/// <summary>
-		/// ��!������ɫ���ӣ����ȶ����⣬��Դ����͸�����շ�Χ���С�����ȣ���������Ӱ�졣
+		/// （!）亮光色粒子，不稳定发光，光源不穿透，光照范围与大小成正比，不受重力影响。
 		/// </summary>
 		public const int WhiteLight = 43;
 		/// <summary>
-		/// ��!������ɫ���ӣ����׹⣬��Χ�ܴ���������ͣ����ɢ��ʱ��ϳ���������ʱ��ɢ�Ͽ졣
+		/// （!）黄绿色粒子，发白光，范围很大，在重力下停留扩散且时间较长，无重力时消散较快。
 		/// </summary>
 		public const int GreenSpores = 44;
 		/// <summary>
-		/// ��!����ˮ��ɫ���ӣ��Է��⣬��������ͣ����ɢ��ʱ��ϳ���������ʱ��ɢ�Ͽ졣
+		/// （!）深水蓝色粒子，自发光，在重力下停留扩散且时间较长，无重力时消散较快。
 		/// </summary>
 		public const int LightBlueCircle = 45;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬��������Ӱ�졣
+		/// 深绿色粒子，不发光，不受重力影响。
 		/// </summary>
 		public const int GreenMaterial = 46;
 		/// <summary>
-		/// X����ɫ���ӣ������⣬������Ӱ�졣
+		/// 深蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int CyanGrass = 47;
 		/// <summary>
-		/// XĢ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 蘑菇矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlueMushroom = 48;
 		/// <summary>
-		/// X��ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 蓝偏黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlueDrakParticle = 49;
 		/// <summary>
-		/// X����ɫ���ӣ������⣬������Ӱ�졣
+		/// 深精金矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int RedParticle = 50;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 白土色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PearlStone = 51;
 		/// <summary>
-		/// ��ɫˮ ����ǳ��ɫ ������ �߶�͸��
+		/// 粉，水，不发光，浅，色，受，力，高度。明。
 		/// </summary>
 		public const int PinkWater = 52;
 		/// <summary>
-		/// ��ɫ���� ����ǳ���ɫ ������ ����������ʧ��  
+		/// 灰色材质，不发光，浅深灰色，受重力，不受重力消失快。
 		/// </summary>
 		public const int GreyMaterial = 53;
 		/// <summary>
-		/// ��ɫ���� ����ǳ��ɫ ������ ����������ʧ��  
+		/// 黑色材质，不发光，浅黑色，受重力，不受重力消失快。
 		/// </summary>
 		public const int BlackMaterial = 54;
 		/// <summary>
-		/// ��!���������ɫ���ӣ��Է��⣬��Χ�ϴ�������ʱ��ת��ɢ 
+		/// （!）亮金火焰色粒子，自发光，范围较大，受重力时旋转扩散。
 		/// </summary>
 		public const int OrangeFx = 55;
 		/// <summary>
-		/// ��!������ɫ���ӣ��Է��⣬��Χ�еȣ�����������ɢ����ɢ�Ͽ졣
+		/// （!）天蓝色粒子，自发光，范围中等，在重力下扩散，消散较快。
 		/// </summary>
 		public const int CyanFx = 56;
 		/// <summary>
-		/// ��!��С�ͻ�ɫ��ʥ��Ч������ǳǳ��ɫ����ɫ��������ʱ��ת��ɢ   
+		/// （!）小型黄色神圣特效，自发光，发黄浅浅黄色、金色，受重力时旋转扩散。
 		/// </summary>
 		public const int YellowHallowFx = 57;
 		/// <summary>
-		/// ��!�����۰�ɫ���ӣ��Է��⣬��Χ�ϴ󣬲�������Ӱ�졣
+		/// （!）亮粉白色粒子，自发光，范围较大，不受重力影响。
 		/// </summary>
 		public const int PinkMagic = 58;
 		/// <summary>
-		/// ��!������ɫ���ӣ������⣬������Ӱ�졣
+		/// （!）晶蓝色粒子，自发光，高蓝光，受重力影响。
 		/// </summary>
 		public const int BlueTorch = 59;
 		/// <summary>
-		/// ��!��ƫ�ۺ�ɫ���ӣ��ߺ�⣬������Ӱ�졣
+		/// （!）偏粉红色粒子，自发光，高红光，受重力影响。
 		/// </summary>
 		public const int RedTorch = 60;
 		/// <summary>
-		/// ��!������ɫ���ӣ����̹⣬������Ӱ�졣
+		/// （!）亮绿色粒子，自发光，高绿光，受重力影响。
 		/// </summary>
 		public const int GreenTorch = 61;
 		/// <summary>
-		/// ��!����ɫ���ӣ����Ϲ⣬������Ӱ�졣
+		/// （!）紫色粒子，自发光，高紫光，受重力影响。
 		/// </summary>
 		public const int PurpleTorch = 62;
 		/// <summary>
-		/// (!)�Ұ�ɫ���ӣ��׹⣬������Ӱ�졣
+		/// (!)灰白色粒子，自发光，白光，受重力影响。
 		/// </summary>
 		public const int WhiteTorch = 63;
 		/// <summary>
-		/// (!)����ɫ���ӣ��Է��⣬������Ӱ�졣
+		/// (!)纯金色粒子，自发光，受重力影响。
 		/// </summary>
 		public const int YellowTorch = 64;
 		/// <summary>
-		/// (!)����ɫ���ӣ��Է��⣬������Ӱ�졣
+		/// (!)深紫色粒子，自发光，受重力影响。
 		/// </summary>
 		public const int DemonTorch = 65;
 		/// <summary>
-		/// (!)��ɫ���ӣ��Է��⣬��Χ�ǳ�����������Ѹ�ٱ������ת��������ʱ��ɢ�Ͽ졣
+		/// (!)白色粒子，自发光，范围非常大，在重力下迅速变大并且旋转，无重力时消散较快。
 		/// </summary>
 		public const int WhiteTransparent = 66;
 		/// <summary>
-		/// (!)ǳ����ɫ���ӣ��Է��⣬��Χ�еȣ�������Ӱ�졣
+		/// (!)浅海蓝色粒子，自发光，范围中等，受重力影响。
 		/// </summary>
 		public const int CyanIce = 67;
 		/// <summary>
-		/// (!)����������������ʱ������������ɫ����������ʱ��������������ɫ 
+		/// (!)暗蓝冰晶，自发光，受重力时发暗蓝光深蓝色，不受重力时高亮发蓝光亮青色。
 		/// </summary>
 		public const int DarkCyanIce = 68;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 粉色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinPink = 69;
 		/// <summary>
-		/// (!)͸����ɫ���� ������ʱ�����Ϲ�����ɫ ��������ʱ�������۹�����ɫ
+		/// (!)透明紫色粒子，自发光，受重力时发暗紫光深紫色，不受重力时高亮发粉光亮粉色。
 		/// </summary>
 		public const int TransparentPurple = 70;
 		/// <summary>
-		/// (.)͸����ɫ��Ч ����ǳ����ɫ ������ʱ��ת��ɢ
+		/// (.)透明粉色特效，高亮，发粉浅亮粉色，受重力时旋转扩散。
 		/// </summary>
 		public const int TransparentPinkFx = 71;
 		/// <summary>
-		/// (.)���ɫ���ӣ�����������������ɢ����ɢ��������ʱ��ɢ�Ͽ졣
+		/// (.)红粉色粒子，高亮，在重力下扩散并消散，无重力时消散较快。
 		/// </summary>
 		public const int SolidPinkFx = 72;
 		/// <summary>
-		/// (!)�����ɫ���ӣ��Է��⣬��Χ�еȣ�����������ɢ����ɢ��������ʱ��ɢ�Ͽ졣
+		/// (!)亮红粉色粒子，自发光，范围中等，在重力下扩散并消散，无重力时消散较快。
 		/// </summary>
 		public const int BrightPinkFx = 73;
 		/// <summary>
-		/// (!)����ɫ���ӣ��Է��⣬��Χ�еȣ�����������ɢ����ɢ��������ʱ��ɢ�Ͽ졣
+		/// (!)亮绿色粒子，自发光，范围中等，在重力下扩散并消散，无重力时消散较快。
 		/// </summary>
 		public const int BrightGreenFx = 74;
 		/// <summary>
-		/// (!)�����ѣ�������ǳ����ɫ��������
+		/// (!)诅咒火把，自发光，发黄绿浅黄绿色，受重力。
 		/// </summary>
 		public const int CursedFire = 75;
 		/// <summary>
-		/// (.)��ѩ������ǳ��ɫ��������ʱ��ת��Χ��ɢ������ʱ�䳤�����������ʧ
+		/// 下雪，浅白色，受重力时旋转大范围扩散，存在时间长，遇到物块消失。
 		/// </summary>
 		public const int Snow = 76;
 		/// <summary>
-		/// ��Ӱľ ����ǳ���ɫ ������ ����������ʧ��
+		/// 阴影木，不发光，浅深灰色，受重力，不受重力消失快。
 		/// </summary>
 		public const int ThinGrey1 = 77;
 		/// <summary>
-		/// ��ľ ����ǳ����ɫ ������ ����������ʧ��
+		/// 红木，不发光，浅红棕色，受重力，不受重力消失快。
 		/// </summary>
 		public const int ThinCopper = 78;
 		/// <summary>
-		/// ���Ʋ��� ����ǳǳ��ɫ ���������䲻��ת ����������ʧ��
+		/// 薄黄材质，不发光，浅黄色，受重力下落不旋转，不受重力消失快。
 		/// </summary>
 		public const int ThinYellow1 = 79;
 		/// <summary>
-		/// ���� ����ǳ����ɫ ������ ����������ʧ�졣
+		/// 冰块，不发光，浅蓝白色，受重力，不受重力消失快。
 		/// </summary>
 		public const int IceBlock = 80;
 		/// <summary>
-		/// ����ʯ ����ǳ��ɫ ������ ����������ʧ��
+		/// 锡矿石，不发光，浅灰色，受重力，不受重力消失快。
 		/// </summary>
 		public const int Tin = 81;
 		/// <summary>
-		/// Ǧ��ʯ ����ǳ����ɫ ������ ����������ʧ��
+		/// 铅矿石，不发光，浅蓝黑色，受重力，不受重力消失快。
 		/// </summary>
 		public const int Lead = 82;
 		/// <summary>
-		/// Ǧ��ʯ ����ǳ����ɫ ������ ����������ʧ��
+		/// 铅矿石，不发光，浅蓝黑色，受重力，不受重力消失快。
 		/// </summary>
 		public const int Tungsten = 83;
 		/// <summary>
-		/// ����ʯ ����ǳǳ����ɫ ������ ����������ʧ��
+		/// 铂矿石，不发光，浅蓝银色，受重力，不受重力消失快。
 		/// </summary>
 		public const int Platinum = 84;
 		/// <summary>
-		/// ɳ�ֲ��� ����ǳǳ��ɫ ������ ����������ʧ��
+		/// 沙褐材质，不发光，浅橙色，受重力，不受重力消失快。
 		/// </summary>
 		public const int ThinSandy = 85;
 		/// <summary>
-		/// (!)��Ů��ɫ���ӣ��Է��⣬��Χ�ϴ�������Ӱ�졣
+		/// (!)少女粉色粒子，自发光，范围较大，受重力影响。
 		/// </summary>
 		public const int PinkTrans = 86;
 		/// <summary>
-		/// (!)�����ɫ���ӣ��Է��⣬��Χ�еȣ�������Ӱ�졣
+		/// (!)亮金黄色粒子，自发光，范围中等，受重力影响。
 		/// </summary>
 		public const int YellowTrans = 87;
 		/// <summary>
-		/// (!)��ƫǳ��ɫ���ӣ��Է��⣬��Χ�еȣ�������Ӱ�졣
+		/// (!)白偏浅蓝色粒子，自发光，范围中等，受重力影响。
 		/// </summary>
 		public const int BlueTrans = 88;
 		/// <summary>
-		/// (!)����ɫ���ӣ��Է��⣬��Χ�еȣ�������Ӱ�졣
+		/// (!)白绿色粒子，自发光，范围中等，受重力影响。
 		/// </summary>
 		public const int GreenTrans = 89;
 		/// <summary>
-		/// (!)�ۺ�ɫ���ӣ��Է��⣬��Χ�еȣ�������Ӱ�졣
+		/// (!)粉红色粒子，自发光，范围中等，受重力影响。
 		/// </summary>
 		public const int RedTrans = 90;
 		/// <summary>
-		/// (!)����ɫ���ӣ��Է��⣬��Χ��������Ӱ�졣
+		/// (!)亮白色粒子，自发光，范围大，受重力影响。
 		/// </summary>
 		public const int WhiteTrans = 91;
 		/// <summary>
-		/// (!)����ɫ���ӣ��Է��⣬��Χ�ϴ�������Ӱ�졣
+		/// (!)蓝白色粒子，自发光，范围较大，受重力影响。
 		/// </summary>
 		public const int CyanTrans = 92;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 松绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DarkGrass = 93;
 		/// <summary>
-		/// �����ɫ���ӣ������⣬������Ӱ�졣
+		/// 深黄绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PaleDarkGrass = 94;
 		/// <summary>
-		/// ���ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深红偏黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DarkRedGrass = 95;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 深蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlackGreenGrass = 96;
 		/// <summary>
-		/// ����ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深紫偏黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DarkRedGrass1 = 97;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 紫色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PurpleWater = 98;
 		/// <summary>
-		/// ǳ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int CyanWater = 99;
 		/// <summary>
-		/// ǳ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅粉色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PinkWater1 = 100;
 		/// <summary>
-		/// ǳ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int CyanWater1 = 101;
 		/// <summary>
-		/// ǳ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅黄土色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int OrangeWater = 102;
 		/// <summary>
-		/// ����ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深蓝偏白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DarkBlueWater = 103;
 		/// <summary>
-		/// ���ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深粉偏黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int HotPinkWater = 104;
 		/// <summary>
-		/// ���ɫ���ӣ������⣬������Ӱ�졣
+		/// 大红色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int RedWater = 105;
 		/// <summary>
-		/// (.)�������ɫ����ɫ���ӣ�������������Ӱ�졣
+		/// (.)红黄绿三色火焰色粒子，高亮，受重力影响。
 		/// </summary>
-		public const int RgbMaterial = 106;
+		public const int RGBMaterial = 106;
 		/// <summary>
-		/// (!)������ɫ���ӣ��Է��⣬��ΧС�����������ܹ���ͣ�ϳ�ʱ�䡣
+		/// (!)亮白绿色粒子，自发光，范围小，在重力下能够悬停较长时间。
 		/// </summary>
 		public const int GreenFXPowder = 107;
 		/// <summary>
-		/// ǳ��ǳ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅灰浅蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PurpleRound = 108;
 		/// <summary>
-		/// ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlackMaterial1 = 109;
 		/// <summary>
-		/// (.)��ǳ��ƫ��ɫ���ӣ��������������¿�����ɢ��Χ������
+		/// (.)亮浅蓝偏绿色粒子，高亮，在重力下快速扩散范围但不大。
 		/// </summary>
 		public const int GreenBubble = 110;
 		/// <summary>
-		/// (.)����ɫ���ӣ��������������¿�����ɢ��Χ������
+		/// (.)亮蓝色粒子，高亮，在重力下快速扩散范围但不大。
 		/// </summary>
 		public const int CyanBubble = 111;
 		/// <summary>
-		/// (.)����ɫ���ӣ��������������¿�����ɢ��Χ������
+		/// (.)亮粉色粒子，高亮，在重力下快速扩散范围但不大。
 		/// </summary>
 		public const int PinkBubble = 112;
 		/// <summary>
-		/// (.)������ƫ��ɫ���ӣ��������������¿�����ɢ��Χ������
+		/// (.)亮深蓝偏白色粒子，高亮，在重力下快速扩散范围但不大。
 		/// </summary>
 		public const int BlueIce = 113;
 		/// <summary>
-		/// (.)����ƫ��ɫ���ӣ��������������¿�����ɢ��Χ������
+		/// (.)亮粉偏红色粒子，高亮，在重力下快速扩散范围但不大。
 		/// </summary>
 		public const int PinkYellowBubble = 114;
 		/// <summary>
-		/// ���ɫ���ӣ������⣬������Ӱ��
+		/// 锈红色粒子，不发光，受重力影响
 		/// </summary>
 		public const int RedGrass = 115;
 		/// <summary>
-		/// ����ɫ���ӣ������⣬������Ӱ�졣
+		/// 深蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlueGreenGrass = 116;
 		/// <summary>
-		/// �����ɫ���ӣ������⣬������Ӱ�졣
+		/// 较锈红色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int RedGrass1 = 117;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 紫蓝白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PurpleGems1 = 118;
 		/// <summary>
-		/// ��ۺ�ɫ���ӣ������⣬������Ӱ�졣
+		/// 深粉红色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PinkGems = 119;
 		/// <summary>
-		/// ���ذ�ɫ���ӣ������⣬������Ӱ�졣
+		/// 深棕白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PalePinkGems = 120;
 		/// <summary>
-		/// ��Һ�ɫ���ӣ������⣬������Ӱ�졣
+		/// 深灰黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGrey2 = 121;
 		/// <summary>
-		/// ���еɫ���ӣ������⣬������Ӱ�졣
+		/// 深机械色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinIron = 122;
 		/// <summary>
-		/// ��ۺ�ɫ���ӣ������⣬������Ӱ�졣
+		/// 深粉红色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int HotPinkBubble = 123;
 		/// <summary>
-		/// ǳ��ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 浅黄偏白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int YellowWhiteBubble = 124;
 		/// <summary>
-		/// ���ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深红偏黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinRed = 125;
 		/// <summary>
-		/// ���ƫ��ɫ���ӣ������⣬������Ӱ�졣
+		/// 深灰偏绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGrey3 = 126;
 		/// <summary>
-		/// (!)�ҽ�ɫ���ӣ��Է��⣬��ΧС��������Ӱ�졣
+		/// (!)岩浆色粒子，自发光，范围小，受重力影响。
 		/// </summary>
 		public const int OrangeFire = 127;
 		/// <summary>
-		/// Ҷ�̿�ɫ���ӣ������⣬������Ӱ�졣
+		/// 叶绿矿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GreenGems = 128;
 		/// <summary>
-		/// ������ɫ���ӣ������⣬������Ӱ�졣
+		/// 深土黄色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinBrown1 = 129;
 		/// <summary>
-		/// (!)�׷�ɫ���ӣ��Է��⣬��Χ�ϴ��������»����������׹��Ч����������ʱ����ͣ��ɢ���Ͽ���ɢ��
+		/// (!)白粉色粒子，自发光，范围较大，在重力下会呈现粒子下坠特效，在无重力时会悬停扩散，较快消散。
 		/// </summary>
-		public const int TrailingRed = 130;
+		public const int TrailingPinkWhite = 130;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����̻�, ����ɫ��
+		/// (!)绿色粒子，自发光，重力下扩散范围更大。
 		/// </summary>
 		public const int TrailingGreen = 131;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����̻�, ����ɫ��
+		/// (!)蓝色粒子，自发光，重力下曳尾。
 		/// </summary>
 		public const int TrailingCyan = 132;
+        /// <summary>
+        /// (!)黄色粒子，自发光，重力下曳尾。
+        /// </summary>
+        public const int TrailingYellow = 133;
+        /// <summary>
+        /// (!)粉色粒子，自发光，重力下曳尾。
+        /// </summary>
+        public const int TrailingPink = 134;
+        /// <summary>
+        /// (!)冰火把，青色粒子, 自发光。
+        /// </summary>
+        public const int IceTorch = 135;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����̻�, ����ɫ��
-		/// </summary>
-		public const int TrailingYellow = 133;
-		/// <summary>
-		/// ҷβ ��ɫ �����̻�
-		/// </summary>
-		public const int TrailingPink = 134;
-		/// <summary>
-		/// ������ɫ �����, ����ɫ��
-		/// </summary>
-		public const int IceTorch = 135;
-		/// <summary>
-		/// ��ɫ����
+		/// 红色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int Red = 136;
+        /// <summary>
+        /// 亮蓝色/青色，不发光受重力影响。
+        /// </summary>
+        public const int BrightCyan = 137;
+        /// <summary>
+        /// 亮橙色/棕色，不发光受重力影响。
+        /// </summary>
+        public const int BrightOrange = 138;
 		/// <summary>
-		/// ����ɫ/��ɫ����
-		/// </summary>
-		public const int BrightCyan = 137;
-		/// <summary>
-		/// ����ɫ/��ɫ����
-		/// </summary>
-		public const int BrightOrange = 138;
-		/// <summary>
-		/// ��ɫ ֽм
+		/// 青色纸屑，不发光，受重力缓慢下落。
 		/// </summary>
 		public const int CyanConfetti = 139;
+        /// <summary>
+        /// 绿色纸屑，不发光，受重力缓慢下落。
+        /// </summary>
+        public const int GreenConfetti = 140;
+        /// <summary>
+        /// 粉色纸屑，不发光，受重力缓慢下落。
+        /// </summary>
+        public const int PinkConfetti = 141;
+        /// <summary>
+        /// 黄色纸屑，不发光，受重力缓慢下落。
+        /// </summary>
+        public const int YellowConfetti = 142;
+        /// <summary>
+        /// 浅灰色石块粒子，不发光，受重力影响。
+        /// </summary>
+        public const int LightGreyStone = 143;
+        /// <summary>
+        /// 铜红色铜砖粒子，不发光，受重力影响。
+        /// </summary>
+        public const int CopperStone = 144;
+        /// <summary>
+        /// 粉色石块粒子，不发光，受重力影响。
+        /// </summary>
+        public const int PinkStone = 145;
+        /// <summary>
+        /// 钛金砖粒子，不发光，受重力影响。
+        /// </summary>
+        public const int GreenBrown = 146;
+        /// <summary>
+        /// 橙色粒子，不发光，受重力影响。
+        /// </summary>
+        public const int OrangeFx2 = 147;
+        /// <summary>
+        /// 饱和红色粒子，不发光，受重力影响。
+        /// </summary>
+        public const int RedDesaturated = 148;
+        /// <summary>
+        /// 白色粒子，不发光，受重力影响。
+        /// </summary>
+        public const int White = 149;
 		/// <summary>
-		/// ��ɫ ֽм
-		/// </summary>
-		public const int GreenConfetti = 140;
-		/// <summary>
-		/// ��ɫ ֽм
-		/// </summary>
-		public const int PinkConfetti = 141;
-		/// <summary>
-		/// ��ɫ ֽм
-		/// </summary>
-		public const int YellowConfetti = 142;
-		/// <summary>
-		///ǳ��ɫ ʯ��
-		/// </summary>
-		public const int LightGreyStone = 143;
-		/// <summary>
-		/// ��ͭ ʯ��
-		/// </summary>
-		public const int CopperStone = 144;
-		/// <summary>
-		/// ��ɫ ʯ��
-		/// </summary>
-		public const int PinkStone = 145;
-		/// <summary>
-		/// ��ɫ/��ɫ���� ���
-		/// </summary>
-		public const int GreenBrown = 146;
-		/// <summary>
-		/// ��ɫ����
-		/// </summary>
-		public const int OrangeFx2 = 147;
-		/// <summary>
-		/// ���ͺ�ɫ����
-		/// </summary>
-		public const int RedDesaturated = 148;
-		/// <summary>
-		/// ��ɫ����
-		/// </summary>
-		public const int White = 149;
-		/// <summary>
-		/// ��ɫ/��ɫ/���ײ���
+		/// 黑色/黄色/蓝白粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlackYellowBluishwhite = 150;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄白色材质，不发光，受重力影响。
 		/// </summary>
 		public const int ThinWhite = 151;
 		/// <summary>
-		/// ��������ɫ ����
+		/// 亮橙色粒子，不发光，有重力直接消失，无重力变小到一定程度下落消失。
 		/// </summary>
 		public const int OrangeBubble = 152;
 		/// <summary>
-		/// ����ɫ ���ݲ���
+		/// 亮橙色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int OrangeBubbleMaterial = 153;
 		/// <summary>
-		/// ���԰���ɫ����
+		/// 薄苍白蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlueThin = 154;
 		/// <summary>
-		/// ������ɫ����
+		/// 薄暗棕色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int DarkBrown = 155;
 		/// <summary>
-		/// ��������ɫ/��ɫ ���ݲ���, ���԰���ɫ��
+		/// (!)亮蓝色/白色粒子，发苍白/蓝色光，高亮显示，受重力影响。
 		/// </summary>
 		public const int BlueWhiteBubble = 156;
 		/// <summary>
-		/// (.)����ɫ��Ч, ����
+		/// (.)薄绿色粒子，不发光，高亮，闪烁，受重力影响。
 		/// </summary>
 		public const int GreenFx = 157;
 		/// <summary>
-		/// �����ɫ ����, ����ɫ��
+		/// (!)橙色火焰粒子，发橙色光，受重力影响。
 		/// </summary>
 		public const int OrangeFire1 = 158;
 		/// <summary>
-		/// ������˸ ��ɫ��Ч, ����ɫ��
+		/// (!)黄色/白色粒子，发黄色光，不受重力影响，无重力消失快。
 		/// </summary>
 		public const int YellowFx = 159;
 		/// <summary>
-		/// ������� ��ɫ��Ч, ������ɫ��
+		/// (!)青色粒子，发亮青色光，不受重力影响，消失快。
 		/// </summary>
 		public const int CyanShortFx = 160;
 		/// <summary>
-		/// ��ɫ����
+		/// 青色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int CyanMaterial = 161;
 		/// <summary>
-		/// ������� ��ɫ��Ч, ������ɫ��
+		/// (!)橙色火焰粒子，发橙色光，不受重力影响，消失快。
 		/// </summary>
 		public const int OrangeShortFx = 162;
 		/// <summary>
-		/// (.)����ɫ ������, ����
+		/// (.)亮绿色粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int BrightGreen = 163;
 		/// <summary>
-		/// ����flickering ��ɫ��Ч, ���Һ�ɫ��
+		/// (!)粉色粒子，发桃红色光，不受重力影响，无重力消失快。
 		/// </summary>
 		public const int PinkFx = 164;
 		/// <summary>
-		/// ��ɫ/��ɫ ���ݲ���
+		/// 白色/蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int WhiteBlueBubble = 165;
 		/// <summary>
-		/// ������ɫ����
+		/// 薄亮粉色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PinkThinBright = 166;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGreen = 167;
 		/// <summary>
-		/// !����ɫ ����
+		/// (!)亮粉色粒子，发桃红色光，无重力变大。
 		/// </summary>
 		public const int PinkBrightBubble = 168;
 		/// <summary>
-		/// �����ɫ��Ч, �����ɫ��
+		/// (!)发光黄色粒子, 发深黄色光，受重力影响，消失快。
 		/// </summary>
 		public const int YellowFx1 = 169;
 		/// <summary>
-		/// (.)����ɫ��Ч, ��΢����ɫ��
+		/// (!)薄橙色特效, 发微弱白色光，受重力影响。
 		/// </summary>
 		public const int Ichor = 170;
 		/// <summary>
-		/// ����ɫ ���ݲ���
+		/// 亮紫色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PurpleBubble = 171;
 		/// <summary>
-		/// (.)ǳ��ɫ ΢��, ��΢����ɫ��
+		/// (!)浅蓝色，发极弱蓝光，高亮，受重力影响。
 		/// </summary>
 		public const int BlueParticle = 172;
 		/// <summary>
-		/// ������� ��ɫ��Ч, ������ɫ��
+		/// (!)亮紫色粒子，发紫色光，不受重力影响，消失快。
 		/// </summary>
 		public const int PurpleShortFx = 173;
 		/// <summary>
-		/// ��������ɫ ���ݲ���, ���Ⱥ�ɫ��
+		/// (!)亮橙色粒子，发橙红色光，受重力影响。
 		/// </summary>
 		public const int OrangeFire2 = 174;
 		/// <summary>
-		/// (.)���� ��ɫ��Ч, ����
+		/// (.)白色粒子，不发光，高亮，不受重力影响，消失快。
 		/// </summary>
 		public const int WhiteShortFx = 175;
 		/// <summary>
-		///ǳ��ɫ ΢��
+		/// 浅蓝色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int LightBlueParticle = 176;
 		/// <summary>
-		///ǳ��ɫ ΢��
+		/// 浅粉色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int LightPinkParticle = 177;
 		/// <summary>
-		///ǳ��ɫ ΢��
+		/// 浅绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int LightGreenParticle = 178;
 		/// <summary>
-		///ǳ��ɫ ΢��
+		/// 浅紫色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int LightPurpleParticle = 179;
 		/// <summary>
-		/// ����ǳ��ɫ ΢��, ����
+		/// (.)发光浅青粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int LightCyanParticle = 180;
 		/// <summary>
-		/// (.)ǳ��ɫ/��ɫ ���ݲ���, ����
+		/// (.)浅青色/粉色粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int CyanPinkBubble = 181;
 		/// <summary>
-		/// (.)ǳ��ɫ ���ݲ���, ����������ɫ��
+		/// (.)浅红色粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int RedBubble = 182;
 		/// <summary>
-		/// (.)͸�� ��ɫ ���ݲ���, ����
+		/// (.)半透明红色粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int RedTransBubble = 183;
 		/// <summary>
-		/// ����ɫ���̻�ɫ ΢�� �ڵ���ͣ��
+		/// 枯绿色/绿灰色粒子，不发光，不受重力影响。
 		/// </summary>
 		public const int GreenishGreyParticle = 184;
 		/// <summary>
-		/// ����ǳ��ɫ ˮ������, ����ɫ��
+		/// (!)浅青色粒子，发青色光，受重力影响。
 		/// </summary>
 		public const int CyanCrystal = 185;
 		/// <summary>
-		/// �԰װ���ɫ ��
+		/// 暗蓝色粒子，不发光，不受重力影响。
 		/// </summary>
 		public const int DarkBlueSmoke = 186;
 		/// <summary>
-		/// ����ǳ��ɫ ΢��, ����ɫ��
+		/// (!)浅青色粒子，发青色光，受重力影响，消失快。
 		/// </summary>
 		public const int LightCyanParticle1 = 187;
 		/// <summary>
-		/// ����ɫ ����
+		/// 亮绿色粒子，不发光，不受重力影响。
 		/// </summary>
 		public const int GreenBubble1 = 188;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄橙色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int OrangeMaterial = 189;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄金色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GoldMaterial = 190;
 		/// <summary>
-		/// ��ɫ ѩ��
+		/// 黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlackFlakes = 191;
 		/// <summary>
-		/// ѩ����
+		/// 雪白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int SnowMaterial = 192;
 		/// <summary>
-		/// ��ɫ����
+		/// 绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GreenMaterial1 = 193;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄棕色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BrownMaterial = 194;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄黑色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlackMaterial2 = 195;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄绿色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int ThinGreen1 = 196;
 		/// <summary>
-		/// (.)������ɫ����, ����
+		/// (.)薄亮青色粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int BrightCyanMaterial = 197;
 		/// <summary>
-		/// ��ɫ/��ɫ ΢��
+		/// 黑色/白色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int BlackWhiteParticle = 198;
 		/// <summary>
-		/// �԰� ��ɫ/��ɫ/��ɫ ΢��
+		/// 黑色/灰色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PurpleBlackGrey = 199;
 		/// <summary>
-		/// ��ɫ ΢��
+		/// 橙色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int PinkParticle = 200;
 		/// <summary>
-		///ǳ��ɫ ΢��
+		/// 浅橙色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int LightPinkParticle1 = 201;
 		/// <summary>
-		///ǳ��ɫ ΢��
+		/// 浅青色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int LightCyanParticle2 = 202;
 		/// <summary>
-		/// ��ɫ ΢��
+		/// 灰色粒子，不发光，受重力影响。
 		/// </summary>
 		public const int GreyParticle = 203;
 		/// <summary>
-		/// (.)��ɫ ΢��, ����
+		/// (.)白色/黄色/橙黄色粒子，不发光，高亮，受重力影响。
 		/// </summary>
 		public const int WhiteParticle = 204;
 		/// <summary>
-		/// (.)����ɫ����, ����������ɫ��
+		/// (!)薄粉色材质粒子，几乎不发粉色光，高亮，受重力影响。
 		/// </summary>
 		public const int ThinPinkMaterial = 205;
 		/// <summary>
-		/// ������� ��ɫ��Ч, ������ɫ��
+		/// (!)青色粒子，发很暗的蓝色光，不受重力影响，消失快。
 		/// </summary>
-		public const int CyanShortFx1 = 206;
+		public const int CyanShortFx1 = 206;//从这开始
 		/// <summary>
-		/// ����ɫ����
+		/// 薄棕色材质，不发光，受重力。
 		/// </summary>
 		public const int BrownMaterial1 = 207;
 		/// <summary>
-		/// ��ɫ ʯ��
+		/// 橙色石块，不发光，受重力。
 		/// </summary>
 		public const int OrangeStone = 208;
 		/// <summary>
-		/// �԰� ��ɫ ʯ��
+		/// 苍青色石块，不发光，受重力。
 		/// </summary>
 		public const int PaleGreenStone = 209;
 		/// <summary>
-		/// off ��ɫ����
+		/// 白色粒子，不发光，受重力。
 		/// </summary>
 		public const int OffWhite = 210;
 		/// <summary>
-		/// ����ɫ ΢��
+		/// 亮蓝色粒子，不发光，受重力。
 		/// </summary>
 		public const int BrightBlueParticle = 211;
 		/// <summary>
-		/// ��ɫ ΢��
+		/// 白色粒子，不发光，受重力。
 		/// </summary>
 		public const int WhiteParticle1 = 212;
 		/// <summary>
-		/// (.)���� ΢��ɫ��Ч, ����������ɫ��
+		/// (!)黄色粒子，发很暗的黄光，高亮，受重力影响，极微小且消失快。
 		/// </summary>
 		public const int WhiteShortFx1 = 213;
 		/// <summary>
-		/// ���԰� ��ɫ����
+		/// 薄苍棕色粒子，不发光，受重力。
 		/// </summary>
 		public const int Thin = 214;
 		/// <summary>
-		/// ��khaki����
+		/// 薄棕色粒子，不发光，受重力。
 		/// </summary>
 		public const int ThinKhaki = 215;
 		/// <summary>
-		/// �԰� ��ɫ����
+		/// 苍粉色粒子，不发光，受重力。
 		/// </summary>
 		public const int Pale = 216;
 		/// <summary>
-		/// ��ɫ ΢��
+		/// 青色粒子，不发光，受重力。
 		/// </summary>
 		public const int Cyan = 217;
 		/// <summary>
-		/// �Һ�ɫ ΢��
+		/// 红色粒子，不发光，受重力。
 		/// </summary>
 		public const int Hot = 218;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����ŵ��̻�, ����ɫ��
+		/// (!)红色粒子，发橙色光，重力下曳尾。
 		/// </summary>
 		public const int TrailingRed1 = 219;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����ŵ��̻�, ����ɫ��
+		/// (!)亮绿色粒子，发亮绿色光，重力下曳尾。
 		/// </summary>
 		public const int TrailingGreen1 = 220;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����ŵ��̻�, ���԰���ɫ��
+		/// (!)蓝色粒子，发蓝色光，重力下曳尾。
 		/// </summary>
 		public const int TrailingBlue = 221;
 		/// <summary>
-		/// ����ҷβ ��ɫ �����ŵ��̻�, ����ɫ��
+		/// (!)黄色粒子，发黄色光，重力下曳尾。
 		/// </summary>
 		public const int TrailingYellow1 = 222;
 		/// <summary>
-		/// (.)ҷβ ��ɫ �����ŵ��̻�, ����
+		/// (.)粉色粒子，不发光，高亮，重力下曳尾。
 		/// </summary>
 		public const int TrailingRed2 = 223;
 		/// <summary>
-		/// ����ɫ����
+		/// 薄蓝色材质，不发光，受重力。
 		/// </summary>
 		public const int ThinBlue = 224;
 		/// <summary>
-		/// ��ɫ����
+		/// 橙色材质，不发光，受重力。
 		/// </summary>
 		public const int OrangeMaterial1 = 225;
 		/// <summary>
-		/// 
+		/// (!)亮浅蓝色粒子，发亮浅蓝色光，高亮，受重力。
 		/// </summary>
 		public const int ElectricCyan = 226;
-
 		/// <summary>
-		/// �������� ����!!!
+		/// 亮紫色粒子，不发光，受重力影响，高速旋转，无重力消散较快
+		/// </summary>
+		public const int PurpleParticle1 = 227;
+		/// <summary>
+		/// (!)亮黄色+白色粒子，发黄色光，受重力影响
+		/// </summary>
+		public const int YellowGoldenFire = 228;
+		/// <summary>
+		/// (!)发光月炎 火焰!!! 重力下高速旋转
 		/// </summary>
 		public const int CyanLunarFire = 229;
 		/// <summary>
-		/// ������˸ ��ɫ��Ч, ���Ϲ� 
+		/// (!)类似月炎，但是照明范围较大，重力下高速旋转
 		/// </summary>
-		public const int PurpleFx = 230;
+		public const int CyanLunarFire1 = 230;
+		/// <summary>
+		/// (!)橙红色粒子，发橙色光，重力下消散时间较长
+		/// </summary>
+		public const int OrangeFx3 = 231;
+		/// <summary>
+		/// 屎黄色粒子，不发光，受重力影响
+		/// </summary>
+		public const int YellowMaterial1 = 232;
+		/// <summary>
+		/// 黄色+屎黄色粒子，不发光，受重力影响
+		/// </summary>
+		public const int YellowMaterial2 = 233;
+		/// <summary>
+		/// (!)淡紫色粒子，发出紫色光，受重力影响
+		/// </summary>
+		public const int PurpleHighFx = 234;
+		/// <summary>
+		/// (.)血红色高亮粒子，半透明，不受重力影响
+		/// </summary>
+		public const int RedBlood1 = 234;
+		/// <summary>
+		/// 银白色粒子，不发光，受重力影响
+		/// </summary>
+		public const int SilverMaterial = 234;
 	}
 }

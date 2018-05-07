@@ -35,7 +35,7 @@ namespace TemplateMod.Items
 		{
 			// 伤害！想都不要想，后面这个值随便改吧，但是不要超过2147483647
 			// 不然…… 你试试就知道了
-			item.damage = 1;
+			item.damage = 175;
 
 			// 击退，你懂的，但是这个击退有个上限就是20，超过20击退效果跟20没什么区别
 			// 后面的 'f' 表示这是个小数，8.25
@@ -98,8 +98,8 @@ namespace TemplateMod.Items
 			// 这就是一个基本的剑类MOD武器所需要的属性，后面有别的武器的时候还会有更多属性，不要着急
 			// 可以尝试改一改这些数据，在游戏中看看效果
 
-			item.shoot = ProjectileID.TerraBeam;
-			item.shootSpeed = 10f;
+			item.shoot = mod.ProjectileType("FalseBeam");
+			item.shootSpeed = 16f;
 		}
 
 
@@ -121,20 +121,18 @@ namespace TemplateMod.Items
 			recipe1.SetResult(this);
 			recipe1.AddRecipe();
 		}
+		//for(float theta = 0.0f; theta < MathHelper.TwoPi; theta += 0.1f)
+		//{
+		//	Vector2 org = Vector2.UnitY;
+		//	float r = 2 * (float)Math.Sin(1 + Math.Sin(3 * theta) * Math.Pow(2.0, Math.Sin(3 * theta)));
+		//	Projectile.NewProjectile(player.position, org.RotatedBy(theta - 1.57f) * r, ProjectileID.Bullet, 100, 1, player.whoAmI);
+		//}
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			for(float theta = 0.0f; theta < MathHelper.TwoPi; theta += 0.1f)
-			{
-				Vector2 org = Vector2.UnitY;
-				float r = 2 * (float)Math.Sin(1 + Math.Sin(3 * theta) * Math.Pow(2.0, Math.Sin(3 * theta)));
-				Projectile.NewProjectile(player.position, org.RotatedBy(theta - 1.57f) * r, ProjectileID.Bullet, 100, 1, player.whoAmI);
-			}
-			return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
+			type = mod.ProjectileType("TestPro");
+			return true;
 		}
-		public override void MeleeEffects(Player player, Rectangle hitbox)
-		{
-			Dust.NewDust(hitbox.TopLeft(), hitbox.Width, hitbox.Height, MyDustId.RedTorch, 0, 0, 100, Color.White, 1.0f);
-		}
+
 		public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
 		{
 			target.AddBuff(mod.BuffType("GreenLight"), 200000);

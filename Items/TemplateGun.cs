@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
+using TemplateMod.VecMap;
 
 // 注意这里命名空间变了，多了个.Items
 // 因为这个文件在Items文件夹，而读取图片的时候是根据命名空间读取的，如果写错了可能图片就读不到了
@@ -17,6 +18,13 @@ namespace TemplateMod.Items
 	// 保证类名跟文件名一致，这样也方便查找
 	public class TemplateGun : ModItem
 	{
+		private string[] _strList = new string[]
+		{
+			//"D", "X", "T", "s", "T"
+			"小","裙","子"
+		};
+
+		private int counter = 0;
 		// 设置物品名字，描述的地方
 		public override void SetStaticDefaults()
 		{
@@ -50,8 +58,8 @@ namespace TemplateMod.Items
 			// 这个数值越低越快，因为TR游戏速度每秒是60帧，这里的30就是
 			// 10.0 / 60.0 = 0.1666... 秒挥动一次！也就是一秒6次
 			// 一般来说我们要把这两个值设成一样，但也有例外的时候，我们以后会讲
-			item.useTime = 4;
-			item.useAnimation = 4;
+			item.useTime = 25;
+			item.useAnimation = 25;
 
 			// 使用方式，这个值决定了武器使用时到底是按什么样的动画播放
 			// 1 代表挥动，也就是剑类武器！
@@ -104,13 +112,13 @@ namespace TemplateMod.Items
 			// 决定枪射出点什么和射出的速度的量
 			// 这里我让枪射出子弹，并且以 （7像素 / 帧） 的速度射出去 
 			item.shoot = mod.ProjectileType("ChasePro");
-			item.shootSpeed = 17f;
+			item.shootSpeed = 11f;
 
 			// 选择这个枪射出（的时候消耗什么作为弹药，这里选择子弹
 			// 你也可以删（或者注释）掉这一句，这样枪就什么都不消耗了
 			//【重要】如果设置了消耗什么弹药，那么之前shoot设置的值就会被弹药物品的属性所覆盖
 			// 也就是说，你到底射出的是什么就由弹药决定了！
-			 item.useAmmo = AmmoID.Bullet;
+			// item.useAmmo = AmmoID.Bullet;
 			
 
 			// 好了，到这里差不多就是一个普通的枪需要填写的属性了
@@ -170,8 +178,16 @@ namespace TemplateMod.Items
 		}
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			type = Main.rand.Next(0, Main.maxProjectileTypes);
-			return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
+			List<Vector2> list = LoadVec.GetVecMap(_strList[(counter++) % _strList.Length]);
+			Vector2 orig = new Vector2(speedX, speedY);
+			float normal = orig.ToRotation();
+			foreach (var vec in list)
+			{
+				Vector2 vel = vec * 5;
+				vel = vel.RotatedBy(normal);
+				Projectile.NewProjectile(position, Vector2.Normalize(orig * 5) + vel, type, 100, 10, player.whoAmI);
+			}
+			return false;
 		}
 
 

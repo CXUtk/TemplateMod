@@ -16,12 +16,21 @@ namespace TemplateMod.UI
 
     public class UIValueChanger : UIElement
     {
+		/// <summary>
+		/// 当前值，浮点
+		/// </summary>
 		public float CurrentValue { get; private set; }
-
+		/// <summary>
+		/// 最大值
+		/// </summary>
 		public float MaxValue { get; }
-
+		/// <summary>
+		/// 最小值
+		/// </summary>
 		public float MinValue { get; }
-
+		/// <summary>
+		/// 保留小数点的位数
+		/// </summary>
 		public int Digits { get; set; }
 
 		public event ValueChangeEvent OnValueChange;
@@ -33,6 +42,10 @@ namespace TemplateMod.UI
 		private UIText _valueDisplay;
 
 		private float _step;
+
+		private float _pressCounter;
+
+		private const float PRESS_DELAY = 15.0f;
 
 		public UIValueChanger(float minValue, float maxValue, float step, string label)
         {
@@ -48,6 +61,7 @@ namespace TemplateMod.UI
 			_subButton.Width.Set(30.0f, 0.0f);
 			_subButton.Height.Set(30.0f, 0.0f);
 			_subButton.OnClick += _minusButton_OnClick;
+			_subButton.OnMouseDown += _subButton_OnMouseDown;
 
 			_addButton = new UIButton(Drawing.Box1);
 			_addButton.ButtonText = "+";
@@ -56,6 +70,7 @@ namespace TemplateMod.UI
 			_addButton.Width.Set(30.0f, 0.0f);
 			_addButton.Height.Set(30.0f, 0.0f);
 			_addButton.OnClick += _addButton_OnClick;
+			_addButton.OnMouseDown += _addButton_OnMouseDown;
 
 			_valueDisplay = new UIText(CurrentValue.ToString());
 			_valueDisplay.Left.Set(-30.0f, 0.5f);
@@ -75,10 +90,51 @@ namespace TemplateMod.UI
 			this.Append(_valueDisplay);
 		}
 
+
+		private void _addButton_OnMouseDown(UIMouseEvent evt, UIElement listeningElement)
+		{
+			_pressCounter = 0;
+		}
+
+		private void _subButton_OnMouseDown(UIMouseEvent evt, UIElement listeningElement)
+		{
+			_pressCounter = 0;
+		}
+
 		public void SetValue(float value)
 		{
 			CurrentValue = value;
 			UpdateText();
+		}
+
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+			if (Main.mouseLeft)
+			{
+				if (_subButton.IsMouseHovering || _addButton.IsMouseHovering)
+				{
+					_pressCounter++;
+				}
+				if (Main.time % 2 < 1)
+				{
+					if (_pressCounter > PRESS_DELAY && _subButton.IsMouseHovering)
+					{
+						if (CurrentValue > MinValue)
+							CurrentValue -= _step;
+						else
+							CurrentValue = MinValue;
+					}
+					else if (_pressCounter > PRESS_DELAY && _addButton.IsMouseHovering)
+					{
+						if (CurrentValue < MaxValue)
+							CurrentValue += _step;
+						else
+							CurrentValue = MaxValue;
+					}
+				}
+				UpdateText();
+			}
 		}
 
 		private void UpdateText()
@@ -95,7 +151,7 @@ namespace TemplateMod.UI
 				CurrentValue -= _step;
 			else
 				CurrentValue = MinValue;
-
+			_pressCounter = 0;
 			UpdateText();
 		}
 
@@ -105,7 +161,7 @@ namespace TemplateMod.UI
 				CurrentValue += _step;
 			else
 				CurrentValue = MaxValue;
-
+			_pressCounter = 0;
 			UpdateText();
 		}
 

@@ -62,6 +62,8 @@
     <Content Include="Buffs\GreenLight.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+    <Content Include="Dusts\Spark.png" />
+    <Content Include="Dusts\TestDust.png" />
     <Content Include="icon.png" />
     <Content Include="Images\Bar.png" />
     <Content Include="Images\Box.png" />
@@ -87,12 +89,15 @@
     <Content Include="Libraries\Microsoft.Xna.Framework.Graphics.dll" />
     <Content Include="Libraries\ReLogic.dll" />
     <Content Include="Libraries\Terraria.exe" />
+    <Content Include="Projectiles\FalseBeam.png" />
     <Content Include="Projectiles\Generator.png" />
     <Content Include="Projectiles\ChasePro.png" />
     <Content Include="Projectiles\TestPro.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffs\GreenLight.cs" />
+    <Compile Include="Dusts\Spark.cs" />
+    <Compile Include="Dusts\TestDust.cs" />
     <Compile Include="Items\Armors\ExampleBreastplate.cs" />
     <Compile Include="Items\Armors\ExampleHelmet.cs" />
     <Compile Include="Items\Armors\ExampleLeggings.cs" />
@@ -102,6 +107,7 @@
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
     <Compile Include="Items\ThunderPickaxe.cs" />
+    <Compile Include="Projectiles\FalseBeam.cs" />
     <Compile Include="Projectiles\Generator.cs" />
     <Compile Include="Projectiles\ChasePro.cs" />
     <Compile Include="Projectiles\TestPro.cs" />
@@ -118,8 +124,18 @@
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UISlot.cs" />
     <Compile Include="UI\WindowUIState.cs" />
+    <Compile Include="VecMap\LoadVec.cs" />
+    <Compile Include="VecMap\VectorMap.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="VecMap\D.vec" />
+    <None Include="VecMap\s.vec" />
+    <None Include="VecMap\T.vec" />
+    <None Include="VecMap\X.vec" />
+    <None Include="VecMap\子.vec" />
+    <None Include="VecMap\小.vec" />
+    <None Include="VecMap\裙.vec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

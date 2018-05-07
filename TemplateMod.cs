@@ -23,6 +23,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TemplateMod.UICollection;
 using TemplateMod.UI;
+using TemplateMod.VecMap;
 
 // 用两个斜杠开头的句子都是注释QAQ，对程序运行没有任何影响，读我就行了，不用删
 
@@ -41,6 +42,8 @@ namespace TemplateMod
 		public static ModHotKey DustTestKey;
 
 		private static List<ConditionalInterface> _userInterfaces;
+
+
 
 		public TemplateMod()
 		{
@@ -70,6 +73,7 @@ namespace TemplateMod
 			DustTestKey = RegisterHotKey("呼出Dust测试界面", "K");
 			_userInterfaces = new List<ConditionalInterface>();
 			AddUI(new DustTestUI());
+			LoadVec.LoadVectors();
 		}
 
 		private static void AddUI(UIState state)

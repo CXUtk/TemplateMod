@@ -30,11 +30,17 @@ namespace TemplateMod.UI
 		/// 按钮文本的颜色
 		/// </summary>
 		public Color TextDefaultColor { get; set; }
-
+		/// <summary>
+		/// 按钮变换的颜色
+		/// </summary>
 		public Color TextChangeColor { get; set; }
-
+		/// <summary>
+		/// 鼠标移动放大倍数
+		/// </summary>
 		public float ChangeScale { get; set; }
-
+		/// <summary>
+		/// 默认值，true
+		/// </summary>
 		public bool Value { get; private set; }
 
         private float _alpha;

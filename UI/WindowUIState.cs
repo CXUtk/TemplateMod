@@ -13,7 +13,7 @@ namespace TemplateMod.UI
 {
 	public class WindowUIState : UIState
 	{
-		public UIPanel WindowPanel;
+		protected UIPanel WindowPanel;
 		private UIButton close;
 		private Vector2 _offset;
 		private bool _dragging = false;
@@ -71,11 +71,6 @@ namespace TemplateMod.UI
 
 		}
 
-		private void Close_OnClick(UIMouseEvent evt, UIElement listeningElement)
-		{
-			OnClose(evt, listeningElement);
-		}
-
 		protected virtual void OnClose(UIMouseEvent evt, UIElement listeningElement)
 		{
 
@@ -84,6 +79,11 @@ namespace TemplateMod.UI
 		protected virtual void OnDraw(SpriteBatch sb)
 		{
 
+		}
+
+		private void Close_OnClick(UIMouseEvent evt, UIElement listeningElement)
+		{
+			OnClose(evt, listeningElement);
 		}
 
 		private void DragStart(UIMouseEvent evt, UIElement listeningElement)

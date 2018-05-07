@@ -13,7 +13,11 @@ namespace TemplateMod.UI
 {
 	public class UIAdvPanel : UIElement
 	{
-		public int CornerSize = 12;
+		public int CornerSize
+		{
+			get;
+			set;
+		}
 		private const int TEXTURE_PADDING = 3;
 		private const int BAR_SIZE = 2;
 		public Texture2D MainTexture;
@@ -21,6 +25,7 @@ namespace TemplateMod.UI
 
 		public UIAdvPanel(Texture2D texture)
 		{
+			CornerSize = 12;
 			MainTexture = texture;
 			base.SetPadding(CornerSize);
 		}
