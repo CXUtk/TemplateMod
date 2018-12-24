@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Terraria, Version=1.3.5.1, Culture=neutral, processorArchitecture=x86">
@@ -59,15 +60,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Backgrounds\ExampleBiomeSurfaceClose.png" />
+    <Content Include="Backgrounds\ExampleBiomeSurfaceMid0.png" />
     <Content Include="Buffs\GreenLight.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
     <Content Include="Dusts\Spark.png" />
     <Content Include="Dusts\TestDust.png" />
+    <Content Include="Effects\Comic.fx" />
     <Content Include="icon.png" />
     <Content Include="Images\Bar.png" />
     <Content Include="Images\Box.png" />
     <Content Include="Images\Box2.png" />
+    <Content Include="Images\noise1.png" />
+    <Content Include="Images\Trans.png" />
     <Content Include="Images\CloseButton.png" />
     <Content Include="Items\Armors\ExampleBreastplate.png" />
     <Content Include="Items\Armors\ExampleBreastplate_Arms.png" />
@@ -84,17 +90,23 @@
     <Content Include="Items\PurpleStone.png" />
     <Content Include="Items\TemplateGun.png" />
     <Content Include="Items\ThunderPickaxe.png" />
+    <Content Include="Items\Tiles\ChinaLantern.png" />
     <Content Include="Libraries\Microsoft.Xna.Framework.dll" />
     <Content Include="Libraries\Microsoft.Xna.Framework.Game.dll" />
     <Content Include="Libraries\Microsoft.Xna.Framework.Graphics.dll" />
     <Content Include="Libraries\ReLogic.dll" />
     <Content Include="Libraries\Terraria.exe" />
+    <Content Include="Projectiles\ElectricPro.png" />
     <Content Include="Projectiles\FalseBeam.png" />
+    <Content Include="Projectiles\RedMagnet.png" />
+    <Content Include="Projectiles\Transform.png" />
     <Content Include="Projectiles\Generator.png" />
     <Content Include="Projectiles\ChasePro.png" />
     <Content Include="Projectiles\TestPro.png" />
+    <Content Include="Tiles\Lantern.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backgrounds\TestBackGround.cs" />
     <Compile Include="Buffs\GreenLight.cs" />
     <Compile Include="Dusts\Spark.cs" />
     <Compile Include="Dusts\TestDust.cs" />
@@ -107,27 +119,58 @@
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
     <Compile Include="Items\ThunderPickaxe.cs" />
+    <Compile Include="Items\Tiles\ChinaLantern.cs" />
+    <Compile Include="NPCs\TestNPC.cs" />
+    <Compile Include="NPCs\Sarcophagus.cs" />
+    <Compile Include="Projectiles\ElectricPro.cs" />
+    <Compile Include="Projectiles\RedMagnet.cs" />
     <Compile Include="Projectiles\FalseBeam.cs" />
+    <Compile Include="Projectiles\Transform.cs" />
     <Compile Include="Projectiles\Generator.cs" />
     <Compile Include="Projectiles\ChasePro.cs" />
     <Compile Include="Projectiles\TestPro.cs" />
+    <Compile Include="Sky\EffectManager2.cs" />
+    <Compile Include="Sky\EffectManager.cs" />
+    <Compile Include="Sky\TestScreenShaderData.cs" />
+    <Compile Include="Sky\DisortSky.cs" />
+    <Compile Include="Sky\TestSky.cs" />
     <Compile Include="TemplateMod.cs" />
+    <Compile Include="TemplateWorld.cs" />
+    <Compile Include="TemplateNPC.cs" />
     <Compile Include="TemplatePlayer.cs" />
+    <Compile Include="Tiles\Lantern.cs" />
     <Compile Include="UICollection\DustTestUI.cs" />
     <Compile Include="UI\ConditionalInterface.cs" />
     <Compile Include="UI\UITextButton.cs" />
     <Compile Include="UI\UIValueChanger.cs" />
     <Compile Include="UI\UISlider.cs" />
     <Compile Include="Utils\Drawing.cs" />
+    <Compile Include="Utils\MyMatrix.cs" />
     <Compile Include="Utils\MyDustID.cs" />
     <Compile Include="UI\UIAdvPanel.cs" />
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UISlot.cs" />
     <Compile Include="UI\WindowUIState.cs" />
+    <Compile Include="Utils\RBTree.cs" />
     <Compile Include="VecMap\LoadVec.cs" />
     <Compile Include="VecMap\VectorMap.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Effects\Comic.xnb" />
+    <None Include="Effects\comic2.xnb" />
+    <None Include="Effects\DisortScreen.xnb" />
+    <None Include="Effects\Flash.xnb" />
+    <None Include="Effects\Fuzzy.xnb" />
+    <None Include="Effects\FuzzyScreen.xnb" />
+    <None Include="Effects\GreyStep.xnb" />
+    <None Include="Effects\Magnify.xnb" />
+    <None Include="Effects\MosaicScreen.xnb" />
+    <None Include="Effects\NegativeColor.xnb" />
+    <None Include="Effects\NuclearScreen.xnb" />
+    <None Include="Effects\Rainbowize.xnb" />
+    <None Include="Effects\Swirl.xnb" />
+    <None Include="Effects\TestScreen.xnb" />
+    <None Include="Effects\UpdownScreen.xnb" />
     <None Include="VecMap\D.vec" />
     <None Include="VecMap\s.vec" />
     <None Include="VecMap\T.vec" />
@@ -136,6 +179,7 @@
     <None Include="VecMap\小.vec" />
     <None Include="VecMap\裙.vec" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

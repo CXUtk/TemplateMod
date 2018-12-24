@@ -1,9 +1,9 @@
-/*
- * Ä£°åMOD 
+ï»¿/*
+ * æ¨¡æ¿MOD 
  * TemplateMod.cs
- * ×÷Õß£ºDXTsT
+ * ä½œè€…ï¼šDXTsT
  * 
- * ÔÊĞí±à¼­ĞŞ¸Ä
+ * å…è®¸ç¼–è¾‘ä¿®æ”¹
  */
 
 using System;
@@ -17,6 +17,7 @@ using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
+using System.Text;
 using Terraria.ModLoader;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework;
@@ -24,15 +25,16 @@ using Microsoft.Xna.Framework.Graphics;
 using TemplateMod.UICollection;
 using TemplateMod.UI;
 using TemplateMod.VecMap;
+using TemplateMod.Sky;
 
-// ÓÃÁ½¸öĞ±¸Ü¿ªÍ·µÄ¾ä×Ó¶¼ÊÇ×¢ÊÍQAQ£¬¶Ô³ÌĞòÔËĞĞÃ»ÓĞÈÎºÎÓ°Ïì£¬¶ÁÎÒ¾ÍĞĞÁË£¬²»ÓÃÉ¾
+// ç”¨ä¸¤ä¸ªæ–œæ å¼€å¤´çš„å¥å­éƒ½æ˜¯æ³¨é‡ŠQAQï¼Œå¯¹ç¨‹åºè¿è¡Œæ²¡æœ‰ä»»ä½•å½±å“ï¼Œè¯»æˆ‘å°±è¡Œäº†ï¼Œä¸ç”¨åˆ 
 
-// ÒÔÉÏ¶¼ÊÇĞèÒªÊ¹ÓÃµÄ³ÌĞò¼¯£¬²»ÒªÂÒ¶¯£¬²»È»´úÂë»á³öÎÊÌâ
+// ä»¥ä¸Šéƒ½æ˜¯éœ€è¦ä½¿ç”¨çš„ç¨‹åºé›†ï¼Œä¸è¦ä¹±åŠ¨ï¼Œä¸ç„¶ä»£ç ä¼šå‡ºé—®é¢˜
 
-// ÒıÈëÃüÃû¿Õ¼ä£¬ÕâÀï¾ÍÊÇMODµÄÃû×ÖTemplateMod
+// å¼•å…¥å‘½åç©ºé—´ï¼Œè¿™é‡Œå°±æ˜¯MODçš„åå­—TemplateMod
 namespace TemplateMod
 {
-	// MODµÄÖ÷ÀàÃû×Ö£¬ĞèÒªÓëÎÄ¼şÃû¡¢MODÃûÍêÈ«Ò»ÖÂ£¬²¢ÇÒ¼Ì³ĞModÀà
+	// MODçš„ä¸»ç±»åå­—ï¼Œéœ€è¦ä¸æ–‡ä»¶åã€MODåå®Œå…¨ä¸€è‡´ï¼Œå¹¶ä¸”ç»§æ‰¿Modç±»
 	public class TemplateMod : Mod
 	{
 		public static bool ShowDustTestUI = false;
@@ -41,40 +43,126 @@ namespace TemplateMod
 
 		public static ModHotKey DustTestKey;
 
+		public static Dictionary<string, Effect> MODEffectTable;
+
+		public static EffectManager _effectManager;
+
+		public static EffectManager2 _twistEffectManager;
+
+		public static Vector2 TwistedPos;
+
+		public static float TwistedStrength;
+
 		private static List<ConditionalInterface> _userInterfaces;
+
 
 
 
 		public TemplateMod()
 		{
-			// MODµÄ³õÊ¼»¯º¯Êı£¬ÓÃÀ´ÉèÖÃÒ»Ğ©ÊôĞÔ
-			// ×¢Òâ£¬Õâ¸úLoad() º¯Êı²»Ò»Ñù
+			// MODçš„åˆå§‹åŒ–å‡½æ•°ï¼Œç”¨æ¥è®¾ç½®ä¸€äº›å±æ€§
+			// æ³¨æ„ï¼Œè¿™è·ŸLoad() å‡½æ•°ä¸ä¸€æ ·
 			Properties = new ModProperties()
 			{
-				// ×Ô¶¯¼ÓÔØÌùÍ¼Ê²Ã´µÄ
+				// è‡ªåŠ¨åŠ è½½è´´å›¾ä»€ä¹ˆçš„
 				Autoload = true,
 
-				// ×Ô¶¯¼ÓÔØÑª¿éÌùÍ¼
+				// è‡ªåŠ¨åŠ è½½è¡€å—è´´å›¾
 				AutoloadGores = true,
 
-				// ×Ô¶¯¼ÓÔØÉùÒôÎÄ¼ş
+				// è‡ªåŠ¨åŠ è½½å£°éŸ³æ–‡ä»¶
 				AutoloadSounds = true,
 
-				// ×Ô¶¯¼ÓÔØ±³¾°Í¼Æ¬
+				// è‡ªåŠ¨åŠ è½½èƒŒæ™¯å›¾ç‰‡
 				AutoloadBackgrounds = true
 			};
 
-			// ÒÔÉÏÕâĞ©ÁË½âÒ»ÏÂ¾ÍĞĞÁË£¬Ã¿¸ömod¶¼ÒªÓĞÕâ¸ö
+			// ä»¥ä¸Šè¿™äº›äº†è§£ä¸€ä¸‹å°±è¡Œäº†ï¼Œæ¯ä¸ªmodéƒ½è¦æœ‰è¿™ä¸ª
 		}
 
 		public override void Load()
 		{
 			Instance = this;
-			DustTestKey = RegisterHotKey("ºô³öDust²âÊÔ½çÃæ", "K");
+			DustTestKey = RegisterHotKey("å‘¼å‡ºDustæµ‹è¯•ç•Œé¢", "K");
 			_userInterfaces = new List<ConditionalInterface>();
 			AddUI(new DustTestUI());
+			MODEffectTable = new Dictionary<string, Effect>();
+			MODEffectTable["Comic"] = GetEffect("Effects/Comic");
+			MODEffectTable["Comic2"] = GetEffect("Effects/comic2");
+			MODEffectTable["Swirl"] = GetEffect("Effects/Swirl");
+			MODEffectTable["Disorder"] = GetEffect("Effects/Disorder");
+			MODEffectTable["Bloom"] = GetEffect("Effects/Bloom");
+			MODEffectTable["DisortScreen"] = GetEffect("Effects/DisortScreen");
+			MODEffectTable["Color"] = GetEffect("Effects/Color");
+			//MODEffectTable["DisortScreen"] = GetEffect("Effects/DisortScreen");
+			var effect = new Ref<Effect>(MODEffectTable["Disorder"]);
+			var effect2 = new Ref<Effect>(MODEffectTable["Bloom"]);
+			Filters.Scene["Template:UltraLight"] = new Filter(
+				new TestScreenShaderData(effect, "Pass1"),
+				EffectPriority.High);
+			SkyManager.Instance["Template:UltraLight"] = new TestSky();
+
+			Filters.Scene["Template:Disort"] = new Filter(
+				new ScreenShaderData(effect2, "Pass1")/*.UseImage(GetTexture("Images/noise1"), 0, SamplerState.AnisotropicClamp)*/,
+				EffectPriority.VeryHigh);
+			SkyManager.Instance["Template:Disort"] = new DisortSky();
+
+
 			LoadVec.LoadVectors();
+			_effectManager = new EffectManager();
+			_twistEffectManager = new EffectManager2("Disorder", 10);
+			TwistedStrength = 0;
+			Filters.Scene.OnPostDraw += Scene_OnPostDraw;
+			Main.OnPostDraw += Main_OnPostDraw;
 		}
+
+		public override void Unload()
+		{
+			Main.OnPostDraw -= Main_OnPostDraw;
+		}
+
+		private void Main_OnPostDraw(GameTime obj)
+		{
+		}
+
+		private void Scene_OnPostDraw()
+		{
+			if (_twistEffectManager.CanDraw)
+			{
+				RenderTarget2D renderTarget2D = Main.screenTarget;
+				GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice;
+				for (int i = 0; i < _twistEffectManager.Length; i++)
+				{
+					if (!_twistEffectManager[i].IsDead)
+					{
+						RenderTarget2D renderTarget = renderTarget2D != Main.screenTarget ? Main.screenTarget : Main.screenTargetSwap;
+						graphicsDevice.SetRenderTarget(renderTarget);
+						graphicsDevice.Clear(Color.Black);
+						Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+						_twistEffectManager[i].Effect.Parameters["uIntensity"].SetValue(TemplateMod.TwistedStrength);
+
+						_twistEffectManager[i].Effect.Parameters["uLengthSq"].SetValue(0.03f);
+						_twistEffectManager[i].Effect.Parameters["uEffectPos"].SetValue(_twistEffectManager[i].Rect.Center() - Main.screenPosition);
+						_twistEffectManager[i].Effect.CurrentTechnique.Passes["Pass1"].Apply();
+						Main.spriteBatch.Draw((Texture2D)renderTarget2D, Vector2.Zero, Main.bgColor);
+						Main.spriteBatch.End();
+						renderTarget2D = renderTarget2D != Main.screenTarget ? Main.screenTarget : Main.screenTargetSwap;
+					}
+				}
+				graphicsDevice.SetRenderTarget((RenderTarget2D)null);
+				graphicsDevice.Clear(Color.Black);
+				if ((double)Main.player[Main.myPlayer].gravDir == -1.0)
+					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, (Effect)null, Main.GameViewMatrix.EffectMatrix);
+				else
+					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+
+				Main.spriteBatch.Draw((Texture2D)renderTarget2D, Vector2.Zero, Color.White);
+				Main.spriteBatch.End();
+				for (int index = 0; index < 8; ++index)
+					graphicsDevice.Textures[index] = (Texture)null;
+			}
+		}
+		
 
 		private static void AddUI(UIState state)
 		{
@@ -92,6 +180,18 @@ namespace TemplateMod
 					ui.Draw(spriteBatch, Main._drawInterfaceGameTime);
 				}
 			}
+			if (_effectManager.CanDraw)
+			{
+				_effectManager.Draw(spriteBatch);
+			}
+			spriteBatch.End();
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.Transform);
+			TemplateMod.MODEffectTable["Color"].Parameters["uTime"].SetValue((float)Main.time);
+			TemplateMod.MODEffectTable["Color"].CurrentTechnique.Passes["Pass1"].Apply();
+			DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, Main.fontMouseText, "æµ‹è¯•å­—ä½“æ•ˆvfdgä¸°ç››çš„è¦…å­¤å„¿è¦†ç›–ç‰©ä»¥è€Œè¿‡è´¹ æœ", new Vector2(100, 100),
+				Color.White);
+			spriteBatch.End();
+			spriteBatch.Begin();
 		}
 
 

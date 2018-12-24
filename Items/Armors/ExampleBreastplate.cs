@@ -30,7 +30,7 @@ namespace TemplateMod.Items.Armors
 			item.value = Item.sellPrice(0, 1, 0, 0);
 			item.rare = ItemRarityID.Orange;
 			// 装备的防御值
-			item.defense = 25;
+			item.defense = 75;
 		}
 
 		public override void UpdateEquip(Player player)
@@ -48,10 +48,6 @@ namespace TemplateMod.Items.Armors
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-			// 99个血腥锭
-			recipe.AddIngredient(ItemID.CrimtaneBar, 99);
-			// 铁砧旁边合成
-			recipe.AddTile(TileID.Anvils);
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}

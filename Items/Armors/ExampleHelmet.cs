@@ -28,7 +28,7 @@ namespace TemplateMod.Items.Armors
 			item.rare = ItemRarityID.Orange;
 
 			// 防御+12
-			item.defense = 12;
+			item.defense = 50;
 		}
 
 		// 重点来了，IsArmorSet这个重写函数用来判断身上的物品能不能组成一件完整套装
@@ -44,12 +44,13 @@ namespace TemplateMod.Items.Armors
 			// 套装描述，就是鼠标移上去最底下现实的套装效果
 			player.setBonus = "进一步增加回血速度，吸取红心范围增大" +
 				"\n增加10%伤害减免";
-			player.endurance += 0.1f;
+			player.endurance += 0.6f;
 			player.lifeRegen += 2;
 			player.lifeMagnet = true;
 			// 加点特技
 			player.armorEffectDrawShadow = true;
 		}
+
 
 		public override void AddRecipes()
 		{

@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using TemplateMod.Utils;
+using System.Windows.Forms;
 
 // 不说了
 namespace TemplateMod.Items
@@ -16,6 +17,9 @@ namespace TemplateMod.Items
 	// 也不说了
 	public class PurpleStone : ModItem
 	{
+		List<MyMatrix> transPos = new List<MyMatrix>();
+
+
 		// 设置物品名字，描述的地方
 		public override void SetStaticDefaults()
 		{
@@ -41,6 +45,55 @@ namespace TemplateMod.Items
 			
 			// 这个属性代表这是专家模式专有物品，稀有度颜色会是彩虹的！
 			item.expert = true;
+			//for(float f = 0.0f; f < 1.0f; f += 0.11f)
+			//{
+			//	transPos.Add(MyMatrix.FromVector24(Vector2.Lerp(new Vector2(0, -100f), new Vector2(85.5f, 50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector24(Vector2.Lerp(new Vector2(0, -100f), new Vector2(-85.5f, 50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector24(Vector2.Lerp(new Vector2(85.5f, 50.0f), new Vector2(-85.5f, 50.0f), f)));
+			//}
+			//for (float f = 0.0f; f < 1.0f; f += 0.11f)
+			//{
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(50.0f, 50.0f, 50.0f), new Vector3(50.0f, -50.0f, 50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(50.0f, 50.0f, 50.0f), new Vector3(-50.0f, 50.0f, 50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(50.0f, 50.0f, 50.0f), new Vector3(50.0f, 50.0f, -50.0f), f)));
+
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(-50.0f, -50.0f, 50.0f), new Vector3(-50.0f, -50.0f, -50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(-50.0f, -50.0f, 50.0f), new Vector3(50.0f, -50.0f, 50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(-50.0f, -50.0f, 50.0f), new Vector3(-50.0f, 50.0f, 50.0f), f)));
+
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(-50.0f, 50.0f, -50.0f), new Vector3(50.0f, 50.0f, -50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(-50.0f, 50.0f, -50.0f), new Vector3(-50.0f, 50.0f, 50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(-50.0f, 50.0f, -50.0f), new Vector3(-50.0f, -50.0f, -50.0f), f)));
+
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(50.0f, -50.0f, -50.0f), new Vector3(50.0f, 50.0f, -50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(50.0f, -50.0f, -50.0f), new Vector3(-50.0f, -50.0f, -50.0f), f)));
+			//	transPos.Add(MyMatrix.FromVector34(
+			//		Vector3.Lerp(new Vector3(50.0f, -50.0f, -50.0f), new Vector3(50.0f, -50.0f, 50.0f), f)));
+			//}
+			//transPos.Add(MyMatrix.FromVector34(new Vector3(50.0f, 50.0f, 50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(-50.0f, -50.0f, 50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(-50.0f, 50.0f, 50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(50.0f, -50.0f, 50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(50.0f, 50.0f, -50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(-50.0f, -50.0f, -50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(-50.0f, 50.0f, -50.0f)));
+			//	transPos.Add(MyMatrix.FromVector34(new Vector3(50.0f, -50.0f, -50.0f)));
+			for (float i = -16.28f; i < 16.28f; i += 0.2f)
+			{
+				transPos.Add(MyMatrix.FromVector34(new Vector3((float) (50.0f * Math.Cos(i)),
+					(float) (50.0f * Math.Sin(i)), i / 0.05f)));
+			}
 		}
 
 
@@ -119,16 +172,16 @@ namespace TemplateMod.Items
 			// 本来还想写更多属性的，但是现在就写这么多吧，大家应该能看出规律了吧
 			// 在写多电脑要炸了吧QAQ
 			// 不如写写紫气好了
-
-
-			// 这个循环里的代码执行3次，也就是每一帧放出3次粒子，一秒就是180个，还挺多的
-			if (hideVisual == false)
+			player.stealth -= 0.1f;
+			Vector2 diff = Main.MouseScreen - new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f);
+			for (int i = 0; i < transPos.Count; i++)
 			{
-				for (int i = 0; i < 3; i++)
-				{
-					Dust.NewDustDirect(player.position, player.width, player.height,
-						MyDustId.PurpleLight, -player.velocity.X * 0.5f, -player.velocity.Y * 0.5f, 100, Color.White, 1.0f);
-				}
+				MyMatrix tmp = MyMatrix.RotationMatrixTY(diff.X * 0.02);
+					/** MyMatrix.ScaleMatrixT(1.0, 1.0, 0.2 + Math.Abs(Math.Sin(Main.time * 0.02f)));*/ /** MyMatrix.RotationMatrixTZ(0.05);// * MyMatrix.TranslationMatrix(15.0, 15.0);*/
+				tmp = tmp * transPos[i];
+				//transPos[i] = tmp;
+				Projectile.NewProjectile(player.Center + tmp.ExtractVector2(),
+					Vector2.Zero, mod.ProjectileType("Transform"), 100, 100f, player.whoAmI);
 			}
 
 		}

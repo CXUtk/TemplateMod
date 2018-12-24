@@ -55,6 +55,7 @@ namespace TemplateMod.Buffs
 		// 第二个参数是buff在玩家身上的位置，因为玩家很有可能同时存在很多buff，如何从中选中这个buff就是要靠这个值了
 		public override void Update(Player player, ref int buffIndex)
 		{
+			player.stealth = 0.1f;
 			// 冒绿光
 			for (int i = 0; i < 3; i++)
 			{

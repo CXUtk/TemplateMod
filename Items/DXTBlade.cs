@@ -27,7 +27,10 @@ namespace TemplateMod.Items
 
 			// 物品的描述，加入换行符 '\n' 可以多行显示哦
 			Tooltip.SetDefault("这把剑看起来很有用\n" +
-				"虽然我并不这么觉得");
+				"虽然我并不这么觉得\n"
+				);
+			
+			//item.modItem.GetType().GetProperty("mod").SetValue(item.modItem, ModLoader.GetMod("FallenStar49"), null);
 		}
 
 		// 最最最重要的物品基本属性部分
@@ -100,6 +103,8 @@ namespace TemplateMod.Items
 
 			item.shoot = mod.ProjectileType("FalseBeam");
 			item.shootSpeed = 16f;
+
+
 		}
 
 
@@ -108,16 +113,6 @@ namespace TemplateMod.Items
 		{
 			// 一定要写的
 			ModRecipe recipe1 = new ModRecipe(mod);
-
-			// 这里我设置了这把剑要1个木块就能制作
-
-
-			recipe1.AddIngredient(ItemID.Bottle, 1);
-
-			// 我设置了这把剑要在工作台旁边合成
-			recipe1.AddTile(TileID.WorkBenches);
-
-			// 这两个函数确保合成表被加进游戏中了
 			recipe1.SetResult(this);
 			recipe1.AddRecipe();
 		}
@@ -129,8 +124,33 @@ namespace TemplateMod.Items
 		//}
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			type = mod.ProjectileType("TestPro");
-			return true;
+			Vector2 vec = Main.MouseWorld - player.Center;
+			vec = Vector2.Normalize(vec);
+			// 角度变化
+			for (int i = 0; i < 10; i++)
+			{
+				// 加上一个随机向量
+				Vector2 finalVec = vec * 16f + new Vector2(Main.rand.NextFloatDirection() * 5f,
+					Main.rand.NextFloatDirection() * 5f);
+				// 射出去！
+				Projectile.NewProjectile(position, finalVec, type, damage, knockBack, player.whoAmI);
+			}
+			return false;
+		}
+		
+		public override void HoldItem(Player player)
+		{
+			player.stealth = 0.1f;
+		}
+
+		public override void UseStyle(Player player)
+		{
+			
+		}
+
+		public override void MeleeEffects(Player player, Rectangle hitbox)
+		{
+			player.stealth = 0.1f;
 		}
 
 		public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
