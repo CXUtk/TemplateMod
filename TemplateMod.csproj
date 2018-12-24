@@ -86,6 +86,7 @@
     <Content Include="Items\DXTBlade.png" />
     <Content Include="Items\ExampleWings.png" />
     <Content Include="Items\ExampleWings_Wings.png" />
+    <Content Include="Items\MagicMissile.png" />
     <Content Include="Items\PoisonousPotion.png" />
     <Content Include="Items\PurpleStone.png" />
     <Content Include="Items\TemplateGun.png" />
@@ -98,6 +99,7 @@
     <Content Include="Libraries\Terraria.exe" />
     <Content Include="Projectiles\ElectricPro.png" />
     <Content Include="Projectiles\FalseBeam.png" />
+    <Content Include="Projectiles\RedMagnetControllable.png" />
     <Content Include="Projectiles\RedMagnet.png" />
     <Content Include="Projectiles\Transform.png" />
     <Content Include="Projectiles\Generator.png" />
@@ -116,6 +118,7 @@
     <Compile Include="Items\ExampleWings.cs" />
     <Compile Include="Items\PoisonousPotion.cs" />
     <Compile Include="Items\PurpleStone.cs" />
+    <Compile Include="Items\MagicMissile.cs" />
     <Compile Include="Items\TemplateGun.cs" />
     <Compile Include="Items\DXTBlade.cs" />
     <Compile Include="Items\ThunderPickaxe.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="NPCs\TestNPC.cs" />
     <Compile Include="NPCs\Sarcophagus.cs" />
     <Compile Include="Projectiles\ElectricPro.cs" />
+    <Compile Include="Projectiles\RedMagnetControllable.cs" />
     <Compile Include="Projectiles\RedMagnet.cs" />
     <Compile Include="Projectiles\FalseBeam.cs" />
     <Compile Include="Projectiles\Transform.cs" />

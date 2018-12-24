@@ -94,7 +94,6 @@ namespace TemplateMod.Sky
 			{
 				if (!ent.IsDead)
 				{
-					Main.NewText("Draw");
 					ent.Effect.Parameters["uIntensity"].SetValue(0.6f * (ent.TimeLeft / 40.0f));
 					ent.Effect.Parameters["uColor"].SetValue(Color.Red.ToVector3());
 					ent.Effect.Parameters["uLightPos"].SetValue(new Vector3(0.5f, 0.5f, 0.3f));

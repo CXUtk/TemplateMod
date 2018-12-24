@@ -10,12 +10,12 @@ using System.Linq;
 
 namespace TemplateMod.Projectiles
 {
-	public class RedMagnet : ModProjectile
+	public class RedMagnetControllable : ModProjectile
 	{
 		float baseRot = 0.0f;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("猩红磁暴球");
+			DisplayName.SetDefault("可控猩红磁暴球");
 		}
 		public override void SetDefaults()
 		{
@@ -47,8 +47,41 @@ namespace TemplateMod.Projectiles
 
 		public override void AI()
 		{
-			// 累加帧计时器
-			projectile.frameCounter++;
+			if (projectile.timeLeft < 30)
+				projectile.alpha += 10;
+			// 核心代码部分
+
+			// 如果玩家仍然在控制弹幕
+			if (Main.player[projectile.owner].channel)
+			{
+				// 获取弹幕持有者
+				Player player = Main.player[projectile.owner];
+
+				// 从玩家到达鼠标位置的单位向量
+				Vector2 unit = Vector2.Normalize(Main.MouseWorld - player.Center);
+				// 随机角度
+				float rotaion = unit.ToRotation();
+				// 调整玩家转向以及手持物品的转动方向
+				player.direction = Main.MouseWorld.X < player.Center.X ? -1 : 1;
+				player.itemRotation = (float)Math.Atan2(rotaion.ToRotationVector2().Y * player.direction,
+					rotaion.ToRotationVector2().X * player.direction);
+
+				// 从弹幕到达鼠标位置的单位向量
+				Vector2 unit2 = Vector2.Normalize(Main.MouseWorld - projectile.Center);
+				// 让弹幕缓慢朝鼠标方向移动
+				projectile.velocity = unit2 * 5;
+			}
+			else
+			{
+				// 如果玩家放弃吟唱就慢慢消失
+				if (projectile.timeLeft > 30)
+					projectile.timeLeft = 30;
+				// 返回函数这样就不会执行下面的攻击代码
+				return;
+			}
+
+				// 累加帧计时器
+				projectile.frameCounter++;
 			// 当计时器经过了7帧
 			if (projectile.frameCounter % 7 == 0)
 			{
@@ -59,8 +92,7 @@ namespace TemplateMod.Projectiles
 				projectile.frame++;
 				projectile.frame %= 5;
 			}
-			if (projectile.timeLeft < 30)
-				projectile.alpha += 10;
+
 			NPC target = null;
 			// 最大寻敌距离
 			float distanceMax = 400f;
@@ -100,12 +132,6 @@ namespace TemplateMod.Projectiles
 				}
 			}
 
-		}
-		public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
-		{
-			spriteBatch.End();
-			spriteBatch.Begin();
-			base.PostDraw(spriteBatch, lightColor);
 		}
 	}
 }
