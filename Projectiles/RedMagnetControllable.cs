@@ -65,11 +65,20 @@ namespace TemplateMod.Projectiles
 				player.direction = Main.MouseWorld.X < player.Center.X ? -1 : 1;
 				player.itemRotation = (float)Math.Atan2(rotaion.ToRotationVector2().Y * player.direction,
 					rotaion.ToRotationVector2().X * player.direction);
-
+				player.itemTime = 2;
+				player.itemAnimation = 2;
 				// 从弹幕到达鼠标位置的单位向量
 				Vector2 unit2 = Vector2.Normalize(Main.MouseWorld - projectile.Center);
 				// 让弹幕缓慢朝鼠标方向移动
-				projectile.velocity = unit2 * 5;
+				if(Vector2.Distance(projectile.Center, Main.MouseWorld) < 5)
+				{
+					projectile.velocity *= 0;
+					projectile.Center = Main.MouseWorld;
+				}
+				else
+				{
+					projectile.velocity = unit2 * 5;
+				}
 			}
 			else
 			{

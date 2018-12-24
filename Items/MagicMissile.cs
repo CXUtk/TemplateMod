@@ -48,11 +48,12 @@ namespace TemplateMod.Items
 			item.maxStack = 1;
 			item.noMelee = true;
 			item.shoot = mod.ProjectileType("RedMagnetControllable");
+			Item.staff[item.type] = true;
 			item.shootSpeed = 4f;
 			// 新属性item.channel，表示这个物品是否是吟唱施法
 			item.channel = true;
 			// 如果channel是true，则autoReuse一定要是false
-			item.autoReuse = false;
+			item.autoReuse = true;
 
 			// 物品方面代码没有太大的变化
 		}

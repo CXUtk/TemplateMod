@@ -24,6 +24,7 @@ namespace TemplateMod.Projectiles
 			projectile.scale = 1.5f;
             projectile.friendly = true;
 			//projectile.hostile = true;
+			projectile.penetrate = -1;
 			projectile.melee = true;
             projectile.timeLeft = 600;
 			projectile.ignoreWater = true;
@@ -78,10 +79,34 @@ namespace TemplateMod.Projectiles
 				//	, MyDustId.Fire, 0f, 0f, 100, default(Color), 3f);
 				//dust.noGravity = true;
 			}
+			if(projectile.timeLeft < 3)
+			{
+				Explode();
+			}
+		}
+
+		private void Explode()
+		{
+			// 只是个标记，防止多次爆炸
+			if (projectile.tileCollide)
+			{
+				projectile.tileCollide = false;
+				projectile.position = projectile.Center;
+				projectile.width = projectile.height = 128;
+				projectile.Center = projectile.position;
+				projectile.timeLeft = 3;
+			}
+		}
+ 
+
+		public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+		{
+			Explode();
 		}
 		public override void Kill(int timeLeft)
         {
-			
+
+			Main.PlaySound(SoundID.Item14, projectile.position);
 			Collision.HitTiles(projectile.position, projectile.velocity, projectile.width, projectile.height);
 			for (int i = 0; i < 30; i++)
 			{

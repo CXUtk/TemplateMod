@@ -139,6 +139,7 @@
     <Compile Include="Sky\DisortSky.cs" />
     <Compile Include="Sky\TestSky.cs" />
     <Compile Include="TemplateMod.cs" />
+    <Compile Include="TemplateProjectile.cs" />
     <Compile Include="TemplateWorld.cs" />
     <Compile Include="TemplateNPC.cs" />
     <Compile Include="TemplatePlayer.cs" />

@@ -188,8 +188,8 @@ namespace TemplateMod
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.Transform);
 			TemplateMod.MODEffectTable["Color"].Parameters["uTime"].SetValue((float)Main.time);
 			TemplateMod.MODEffectTable["Color"].CurrentTechnique.Passes["Pass1"].Apply();
-			DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, Main.fontMouseText, "测试字体效vfdg丰盛的覅孤儿覆盖物以而过费 果", new Vector2(100, 100),
-				Color.White);
+			// DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, Main.fontMouseText, "测试字体效vfdg丰盛的覅孤儿覆盖物以而过费 果", new Vector2(100, 100),
+			//	Color.White);
 			spriteBatch.End();
 			spriteBatch.Begin();
 		}
