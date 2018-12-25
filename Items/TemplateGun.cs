@@ -68,8 +68,8 @@ namespace TemplateMod.Items
 			// 这个数值越低越快，因为TR游戏速度每秒是60帧，这里的30就是
 			// 10.0 / 60.0 = 0.1666... 秒挥动一次！也就是一秒6次
 			// 一般来说我们要把这两个值设成一样，但也有例外的时候，我们以后会讲
-			item.useTime = 40;
-			item.useAnimation = 40;
+			item.useTime = 4;
+			item.useAnimation = 4;
 
 			// 使用方式，这个值决定了武器使用时到底是按什么样的动画播放
 			// 1 代表挥动，也就是剑类武器！
@@ -121,7 +121,7 @@ namespace TemplateMod.Items
 
 			// 决定枪射出点什么和射出的速度的量
 			// 这里我让枪射出子弹，并且以 （7像素 / 帧） 的速度射出去 
-			item.shoot = mod.ProjectileType("RedMagnet");
+			item.shoot = mod.ProjectileType("ExplodingBullet");
 			item.shootSpeed = 3f;
 
 			// 选择这个枪射出（的时候消耗什么作为弹药，这里选择子弹

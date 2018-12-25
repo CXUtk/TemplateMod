@@ -98,6 +98,8 @@
     <Content Include="Libraries\ReLogic.dll" />
     <Content Include="Libraries\Terraria.exe" />
     <Content Include="Projectiles\ElectricPro.png" />
+    <Content Include="Projectiles\Explosion\ExplodingBullet.png" />
+    <Content Include="Projectiles\Explosion\Explode1.png" />
     <Content Include="Projectiles\FalseBeam.png" />
     <Content Include="Projectiles\RedMagnetControllable.png" />
     <Content Include="Projectiles\RedMagnet.png" />
@@ -126,6 +128,8 @@
     <Compile Include="NPCs\TestNPC.cs" />
     <Compile Include="NPCs\Sarcophagus.cs" />
     <Compile Include="Projectiles\ElectricPro.cs" />
+    <Compile Include="Projectiles\Explosion\Explode1.cs" />
+    <Compile Include="Projectiles\Explosion\ExplodingBullet.cs" />
     <Compile Include="Projectiles\RedMagnetControllable.cs" />
     <Compile Include="Projectiles\RedMagnet.cs" />
     <Compile Include="Projectiles\FalseBeam.cs" />
@@ -156,6 +160,7 @@
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UISlot.cs" />
     <Compile Include="UI\WindowUIState.cs" />
+    <Compile Include="Utils\ProjectileExtras.cs" />
     <Compile Include="Utils\RBTree.cs" />
     <Compile Include="VecMap\LoadVec.cs" />
     <Compile Include="VecMap\VectorMap.cs" />
