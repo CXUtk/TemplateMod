@@ -94,6 +94,7 @@ namespace TemplateMod
 			MODEffectTable["Bloom"] = GetEffect("Effects/Bloom");
 			MODEffectTable["DisortScreen"] = GetEffect("Effects/DisortScreen");
 			MODEffectTable["Color"] = GetEffect("Effects/Color");
+			MODEffectTable["Edge"] = GetEffect("Effects/Edge");
 			//MODEffectTable["DisortScreen"] = GetEffect("Effects/DisortScreen");
 			var effect = new Ref<Effect>(MODEffectTable["Disorder"]);
 			var effect2 = new Ref<Effect>(MODEffectTable["Bloom"]);

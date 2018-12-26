@@ -49,19 +49,28 @@ namespace TemplateMod
 		}
 		public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Color drawColor)
 		{
-			//Main.spriteBatch.End();
-			//Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.Transform);
-			////TemplateMod.MODEffectTable["Swirl"].Parameters["uIntensity"].SetValue((float)Math.Sin(Main.time * 0.03));
-			//////TemplateMod.MODEffectTable["Comic2"].Parameters["uOpacity"].SetValue(0.3f);
-			////TemplateMod.MODEffectTable["Swirl"].CurrentTechnique.Passes["Pass1"].Apply();
-			//TemplateMod.MODEffectTable["Bloom"].CurrentTechnique.Passes["Pass1"].Apply();
+			if (locked)
+			{
+				Main.spriteBatch.End();
+				Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.Transform);
+				//TemplateMod.MODEffectTable["Swirl"].Parameters["uIntensity"].SetValue((float)Math.Sin(Main.time * 0.03));
+				////TemplateMod.MODEffectTable["Comic2"].Parameters["uOpacity"].SetValue(0.3f);
+				//TemplateMod.MODEffectTable["Swirl"].CurrentTechnique.Passes["Pass1"].Apply();
+				TemplateMod.MODEffectTable["Edge"].Parameters["uColor"].SetValue(Color.Orange.ToVector3());
+				TemplateMod.MODEffectTable["Edge"].Parameters["uImageSize0"].SetValue(new Vector2(Main.npcTexture[npc.type].Width,
+					Main.npcTexture[npc.type].Height / Main.npcFrameCount[npc.type]));
+				TemplateMod.MODEffectTable["Edge"].CurrentTechnique.Passes["Pass1"].Apply();
+			}
 			return true;
 		}
 
 		public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Color drawColor)
 		{
-			//spriteBatch.End();
-			//spriteBatch.Begin();
+			if (locked)
+			{
+				spriteBatch.End();
+				spriteBatch.Begin();
+			}
 		}
 	}
 }

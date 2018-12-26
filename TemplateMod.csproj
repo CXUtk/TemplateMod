@@ -173,6 +173,7 @@
     <None Include="Effects\Comic.xnb" />
     <None Include="Effects\comic2.xnb" />
     <None Include="Effects\DisortScreen.xnb" />
+    <None Include="Effects\Edge.xnb" />
     <None Include="Effects\Flash.xnb" />
     <None Include="Effects\Fuzzy.xnb" />
     <None Include="Effects\FuzzyScreen.xnb" />

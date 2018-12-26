@@ -127,7 +127,7 @@ namespace TemplateMod.Projectiles.Gravitational
 			for(int i = 0; i < posArray.Length; i++)
 			{
 				spriteBatch.Draw(Main.magicPixel, posArray[i] - Main.screenPosition, 
-					new Rectangle(0, 0, 1, 1), Color.Orange * 0.85f, 0f, Vector2.One * 0.5f, 2f, SpriteEffects.None, 0f);
+					new Rectangle(0, 0, 1, 1), Color.Orange * 0.85f, 0f, Vector2.One * 0.5f, 3f, SpriteEffects.None, 0f);
 			}
 			return false;
 		}
