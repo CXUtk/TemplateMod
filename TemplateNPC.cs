@@ -12,6 +12,37 @@ namespace TemplateMod
 {
 	public class TemplateNPC : GlobalNPC
 	{
+		public override bool InstancePerEntity
+		{
+			get
+			{
+				return true;
+			}
+		}
+
+		private int prevAIStyle = -1;
+		private bool locked = false;
+
+		public override void ResetEffects(NPC npc)
+		{
+			locked = false;
+		}
+		public void LockNPC()
+		{
+			locked = true;
+		}
+
+		public override void SetDefaults(NPC npc)
+		{
+			base.SetDefaults(npc);
+			prevAIStyle = npc.aiStyle;
+		}
+
+		public override bool PreAI(NPC npc)
+		{
+			return !locked;
+		}
+
 		public override bool StrikeNPC(NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
 		{
 			return base.StrikeNPC(npc, ref damage, defense, ref knockback, hitDirection, ref crit);

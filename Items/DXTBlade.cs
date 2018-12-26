@@ -103,8 +103,6 @@ namespace TemplateMod.Items
 
 			item.shoot = mod.ProjectileType("FalseBeam");
 			item.shootSpeed = 16f;
-
-
 		}
 
 

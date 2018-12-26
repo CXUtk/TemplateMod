@@ -94,13 +94,13 @@ namespace TemplateMod.Projectiles
 				//	projectile.velocity += Main.rand.NextVector2Circular(15, 15);
 				//}
 
-				// 如果能被30整除，也就是每0.5秒
-				if(projectile.timeLeft % 30 == 0)
-				{
-					// 向反方向发射一模一样的弹幕
-					Projectile.NewProjectile(projectile.position, -projectile.velocity, projectile.type,
-						projectile.damage, projectile.knockBack, projectile.owner, 1);
-				}
+				//// 如果能被30整除，也就是每0.5秒
+				//if(projectile.timeLeft % 30 == 0)
+				//{
+				//	// 向反方向发射一模一样的弹幕
+				//	Projectile.NewProjectile(projectile.position, -projectile.velocity, projectile.type,
+				//		projectile.damage, projectile.knockBack, projectile.owner, 1);
+				//}
 			}
 		}
 	}
