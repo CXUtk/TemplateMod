@@ -16,6 +16,8 @@ namespace TemplateMod.Projectiles.Gravitational
 		private float[] dy = { -1.5f, 1.5f, -1.5f, 1.5f };
 		private int damage;
 		private Vector2[] posArray = new Vector2[300];
+		private NPC target = null;
+		private bool onEnemy = false;
 
 		public override void SetStaticDefaults()
 		{
@@ -36,8 +38,8 @@ namespace TemplateMod.Projectiles.Gravitational
 		public override void AI()
 		{
 			Player player = Main.player[projectile.owner];
-			bool onEnemy = false;
-			NPC target1 = null;
+
+
 			if (player.channel)
 			{
 				Vector2 unit = Vector2.Normalize(Main.MouseWorld - player.Center);
@@ -56,19 +58,22 @@ namespace TemplateMod.Projectiles.Gravitational
 				Vector2 current = projectile.Center;
 				posArray[0] = projectile.Center;
 				Vector2 unitDir = projectile.velocity;
+
 				for (int i = 1; i < posArray.Length; i++)
 				{
-					NPC target = null;
-					float distanceMax = 500f;
-					foreach (NPC npc in Main.npc)
+					if (target == null || !target.active)
 					{
-						if (npc.active && !npc.friendly)
+						float distanceMax = 500f;
+						foreach (NPC npc in Main.npc)
 						{
-							float currentDistance = Vector2.Distance(npc.Center, current);
-							if (currentDistance < distanceMax)
+							if (npc.active && !npc.friendly)
 							{
-								distanceMax = currentDistance;
-								target = npc;
+								float currentDistance = Vector2.Distance(npc.Center, Main.MouseWorld);
+								if (currentDistance < distanceMax)
+								{
+									distanceMax = currentDistance;
+									target = npc;
+								}
 							}
 						}
 					}
@@ -83,28 +88,12 @@ namespace TemplateMod.Projectiles.Gravitational
 						if (Vector2.Distance(current, target.Center) < 5)
 						{
 							onEnemy = true;
-							target1 = target;
 						}
 					}
 					current += unitDir;
 					posArray[i] = current;
 
 				}
-			}
-			else
-			{
-				//projectile.Kill();
-			}
-			if (onEnemy)
-			{
-				target1.GetGlobalNPC<TemplateNPC>().LockNPC();
-				target1.velocity = Vector2.Normalize(Main.MouseWorld - target1.Center) * 11f;
-				if (Vector2.Distance(target1.Center, Main.MouseWorld) < 11)
-				{
-					target1.velocity *= 0;
-					target1.Center = Main.MouseWorld;
-				}
-				return;
 			}
 			if (player.altFunctionUse == 2)
 			{
@@ -114,7 +103,20 @@ namespace TemplateMod.Projectiles.Gravitational
 				}
 				projectile.Kill();
 				player.reuseDelay = 40;
+				return;
 			}
+			if (onEnemy)
+			{
+				target.GetGlobalNPC<TemplateNPC>().LockNPC();
+				target.velocity = Vector2.Normalize(Main.MouseWorld - target.Center) * 11f;
+				if (Vector2.Distance(target.Center, Main.MouseWorld) < 11)
+				{
+					target.velocity *= 0;
+					target.Center = Main.MouseWorld;
+				}
+				return;
+			}
+
 		}
 
 		public override bool ShouldUpdatePosition()
@@ -126,8 +128,11 @@ namespace TemplateMod.Projectiles.Gravitational
 		{
 			for(int i = 0; i < posArray.Length; i++)
 			{
-				spriteBatch.Draw(Main.magicPixel, posArray[i] - Main.screenPosition, 
-					new Rectangle(0, 0, 1, 1), Color.Orange * 0.85f, 0f, Vector2.One * 0.5f, 3f, SpriteEffects.None, 0f);
+				if (i > 30)
+				{
+					spriteBatch.Draw(Main.magicPixel, posArray[i] + Main.rand.NextVector2Circular(1, 1) - Main.screenPosition,
+						new Rectangle(0, 0, 1, 1), Color.Orange * 0.85f, 0f, Vector2.One * 0.5f, 3f, SpriteEffects.None, 0f);
+				}
 			}
 			return false;
 		}

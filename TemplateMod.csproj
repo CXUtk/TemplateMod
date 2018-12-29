@@ -86,6 +86,7 @@
     <Content Include="Items\DXTBlade.png" />
     <Content Include="Items\ExampleWings.png" />
     <Content Include="Items\ExampleWings_Wings.png" />
+    <Content Include="Items\BlasterCannon2.png" />
     <Content Include="Items\MagicMissile.png" />
     <Content Include="Items\PoisonousPotion.png" />
     <Content Include="Items\PurpleStone.png" />
@@ -98,6 +99,8 @@
     <Content Include="Libraries\Microsoft.Xna.Framework.Graphics.dll" />
     <Content Include="Libraries\ReLogic.dll" />
     <Content Include="Libraries\Terraria.exe" />
+    <Content Include="Projectiles\Blaster\ChargingBlaster.png" />
+    <Content Include="Projectiles\Blaster\BlasterPro.png" />
     <Content Include="Projectiles\ElectricPro.png" />
     <Content Include="Projectiles\Explosion\ExplodingBullet.png" />
     <Content Include="Projectiles\Explosion\Explode1.png" />
@@ -119,6 +122,7 @@
     <Compile Include="Items\Armors\ExampleBreastplate.cs" />
     <Compile Include="Items\Armors\ExampleHelmet.cs" />
     <Compile Include="Items\Armors\ExampleLeggings.cs" />
+    <Compile Include="Items\BlasterCannon2.cs" />
     <Compile Include="Items\ExampleWings.cs" />
     <Compile Include="Items\PoisonousPotion.cs" />
     <Compile Include="Items\PurpleStone.cs" />
@@ -130,6 +134,8 @@
     <Compile Include="Items\Tiles\ChinaLantern.cs" />
     <Compile Include="NPCs\TestNPC.cs" />
     <Compile Include="NPCs\Sarcophagus.cs" />
+    <Compile Include="Projectiles\Blaster\ChargingBlaster.cs" />
+    <Compile Include="Projectiles\Blaster\BlasterPro.cs" />
     <Compile Include="Projectiles\ElectricPro.cs" />
     <Compile Include="Projectiles\Explosion\Explode1.cs" />
     <Compile Include="Projectiles\Explosion\ExplodingBullet.cs" />
