@@ -14,8 +14,9 @@ namespace TemplateMod
 	{
 		public override void PostUpdate()
 		{
-			TemplateMod._effectManager.Update();
-			TemplateMod._twistEffectManager.Update();
+			//TemplateMod._effectManager.Update();
+			//TemplateMod._twistEffectManager.Update();
+			base.PostUpdate();
 		}
 	}
 }

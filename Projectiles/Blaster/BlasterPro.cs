@@ -73,9 +73,9 @@ namespace TemplateMod.Projectiles.Blaster
 				float distanceMax = 500f;
 				foreach (NPC npc in Main.npc)
 				{
-					// 如果npc活着且敌对
+					// 如果npc没被选过，活着且敌对
 					if (npc.active && !npc.friendly && npc.whoAmI >= 0 && !visited[npc.whoAmI]
-						&& Collision.CanHitLine(projectile.Center, 1, 1, npc.Center, 1, 1))
+						&& Collision.CanHit(projectile.position, projectile.width, projectile.height, npc.position, npc.width, npc.height))
 					{
 						// 计算距离
 						float currentDistance = Vector2.Distance(npc.Center, projectile.Center);

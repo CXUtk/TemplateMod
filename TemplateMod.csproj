@@ -176,6 +176,7 @@
     <Compile Include="VecMap\VectorMap.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Effects\Color.xnb" />
     <None Include="Effects\Comic.xnb" />
     <None Include="Effects\comic2.xnb" />
     <None Include="Effects\DisortScreen.xnb" />

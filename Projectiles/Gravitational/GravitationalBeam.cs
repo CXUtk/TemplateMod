@@ -43,9 +43,9 @@ namespace TemplateMod.Projectiles.Gravitational
 			if (player.channel)
 			{
 				Vector2 unit = Vector2.Normalize(Main.MouseWorld - player.Center);
-				// 随机角度
+				//随机角度
 				float rotaion = unit.ToRotation();
-				// 调整玩家转向以及手持物品的转动方向
+				//调整玩家转向以及手持物品的转动方向
 				player.direction = Main.MouseWorld.X < player.Center.X ? -1 : 1;
 				player.itemRotation = (float)Math.Atan2(rotaion.ToRotationVector2().Y * player.direction,
 					rotaion.ToRotationVector2().X * player.direction);
@@ -126,7 +126,7 @@ namespace TemplateMod.Projectiles.Gravitational
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
 		{
-			for(int i = 0; i < posArray.Length; i++)
+			for (int i = 0; i < posArray.Length; i++)
 			{
 				if (i > 30)
 				{
@@ -137,39 +137,39 @@ namespace TemplateMod.Projectiles.Gravitational
 			return false;
 		}
 
-		//public override void Kill(int timeLeft)
-		//{
-		//	// 注意是这里的伤害是之前保存的伤害
-		//	Projectile.NewProjectileDirect(projectile.Center, Vector2.Zero, 
-		//		mod.ProjectileType("Explode1"), damage, 10f, projectile.owner);
-		//	projectile.damage = 0;
+		public override void Kill(int timeLeft)
+		{
+			//// 注意是这里的伤害是之前保存的伤害
+			//Projectile.NewProjectileDirect(projectile.Center, Vector2.Zero,
+			//	mod.ProjectileType("Explode1"), damage, 10f, projectile.owner);
+			//projectile.damage = 0;
 
-		//	// 原版爆炸粒子
-		//	//for (int i = 0; i < 50; i++)
-		//	//{
-		//	//	var dust = Dust.NewDustDirect(new Vector2(projectile.position.X, projectile.position.Y),
-		//	//		projectile.width, projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
-		//	//	dust.velocity *= 1.4f;
-		//	//}
-		//	//for (int i = 0; i < 80; i++)
-		//	//{
-		//	//	var dust = Dust.NewDustDirect(new Vector2(projectile.position.X, projectile.position.Y),
-		//	//		projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
-		//	//	dust.noGravity = true;
-		//	//	dust.velocity *= 5f;
-		//	//	dust = Dust.NewDustDirect(new Vector2(projectile.position.X, projectile.position.Y),
-		//	//		projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
-		//	//	dust.velocity *= 3f;
-		//	//}
-		//	//for (int i = 0; i < 4; i++)
-		//	//{
-		//	//	var gore = Gore.NewGoreDirect(new Vector2(projectile.position.X + projectile.width / 2 - 24f,
-		//	//		projectile.position.Y + projectile.height / 2 - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
-		//	//	gore.scale = 1.5f;
-		//	//	gore.velocity.X = gore.velocity.X + dx[i];
-		//	//	gore.velocity.Y = gore.velocity.Y + dy[i];
-		//	//}
-		//}
+			// 原版爆炸粒子
+			//for (int i = 0; i < 50; i++)
+			//{
+			//	var dust = Dust.NewDustDirect(new Vector2(projectile.position.X, projectile.position.Y),
+			//		projectile.width, projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+			//	dust.velocity *= 1.4f;
+			//}
+			//for (int i = 0; i < 80; i++)
+			//{
+			//	var dust = Dust.NewDustDirect(new Vector2(projectile.position.X, projectile.position.Y),
+			//		projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+			//	dust.noGravity = true;
+			//	dust.velocity *= 5f;
+			//	dust = Dust.NewDustDirect(new Vector2(projectile.position.X, projectile.position.Y),
+			//		projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+			//	dust.velocity *= 3f;
+			//}
+			//for (int i = 0; i < 4; i++)
+			//{
+			//	var gore = Gore.NewGoreDirect(new Vector2(projectile.position.X + projectile.width / 2 - 24f,
+			//		projectile.position.Y + projectile.height / 2 - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+			//	gore.scale = 1.5f;
+			//	gore.velocity.X = gore.velocity.X + dx[i];
+			//	gore.velocity.Y = gore.velocity.Y + dy[i];
+			//}
+		}
 	}
 }
 

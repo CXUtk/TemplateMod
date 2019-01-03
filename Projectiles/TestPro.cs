@@ -123,11 +123,11 @@ namespace TemplateMod.Projectiles
 		{
 			projectile.localNPCImmunity[target.whoAmI] = -1;
 			target.immune[projectile.owner] = 5;
-			TemplateMod._effectManager.Insert(target.Center);
+			//TemplateMod._effectManager.Insert(target.Center);
 			if (projectile.ai[1] == 0)
 			{
 				TemplateMod.TwistedStrength = 3.14f;
-				TemplateMod._twistEffectManager.Insert(target.Center);
+				// TemplateMod._twistEffectManager.Insert(target.Center);
 				HashSet<NPC> npcSet = new HashSet<NPC>();
 				NPC closest = null;
 				float maxDist = 1000f;
