@@ -172,7 +172,7 @@ namespace TemplateMod.Items
 			// 本来还想写更多属性的，但是现在就写这么多吧，大家应该能看出规律了吧
 			// 在写多电脑要炸了吧QAQ
 			// 不如写写紫气好了
-			player.stealth -= 0.1f;
+			player.GetModPlayer<TemplatePlayer>().stealth = 0.1f;
 			Vector2 diff = Main.MouseScreen - new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f);
 			for (int i = 0; i < transPos.Count; i++)
 			{

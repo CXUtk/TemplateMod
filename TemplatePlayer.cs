@@ -21,7 +21,6 @@ namespace TemplateMod
 
 		public override void PostUpdate()
 		{
-			stealth = 1f;
 			// 在类外的调用方式 player.GetModPlayer<TemplatePlayer>().stealth = 0.1f;
 		}
 
