@@ -173,16 +173,17 @@ namespace TemplateMod.Items
 			// 在写多电脑要炸了吧QAQ
 			// 不如写写紫气好了
 			player.GetModPlayer<TemplatePlayer>().stealth = 0.1f;
-			Vector2 diff = Main.MouseScreen - new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f);
-			for (int i = 0; i < transPos.Count; i++)
-			{
-				MyMatrix tmp = MyMatrix.RotationMatrixTY(diff.X * 0.02);
-					/** MyMatrix.ScaleMatrixT(1.0, 1.0, 0.2 + Math.Abs(Math.Sin(Main.time * 0.02f)));*/ /** MyMatrix.RotationMatrixTZ(0.05);// * MyMatrix.TranslationMatrix(15.0, 15.0);*/
-				tmp = tmp * transPos[i];
-				//transPos[i] = tmp;
-				Projectile.NewProjectile(player.Center + tmp.ExtractVector2(),
-					Vector2.Zero, mod.ProjectileType("Transform"), 100, 100f, player.whoAmI);
-			}
+			player.GetModPlayer<TemplatePlayer>().Undead = true;
+			//Vector2 diff = Main.MouseScreen - new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f);
+			//for (int i = 0; i < transPos.Count; i++)
+			//{
+			//	MyMatrix tmp = MyMatrix.RotationMatrixTY(diff.X * 0.02);
+			//		/** MyMatrix.ScaleMatrixT(1.0, 1.0, 0.2 + Math.Abs(Math.Sin(Main.time * 0.02f)));*/ /** MyMatrix.RotationMatrixTZ(0.05);// * MyMatrix.TranslationMatrix(15.0, 15.0);*/
+			//	tmp = tmp * transPos[i];
+			//	//transPos[i] = tmp;
+			//	Projectile.NewProjectile(player.Center + tmp.ExtractVector2(),
+			//		Vector2.Zero, mod.ProjectileType("Transform"), 100, 100f, player.whoAmI);
+			//}
 
 		}
 	}

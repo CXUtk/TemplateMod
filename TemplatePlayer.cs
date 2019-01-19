@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 
@@ -14,14 +15,29 @@ namespace TemplateMod
 	{
 		public float stealth;
 
+		/// <summary>
+		/// 不死之身
+		/// </summary>
+		public bool Undead
+		{
+			get;
+			set;
+		}
+
+		private int UndeadCD = 0;
+
 		public override void ResetEffects()
 		{
 			stealth = 1.0f;
+			Undead = false;
 		}
 
 		public override void PostUpdate()
 		{
-			// 在类外的调用方式 player.GetModPlayer<TemplatePlayer>().stealth = 0.1f;
+			if(Undead && UndeadCD > 0)
+			{
+				UndeadCD--;
+			}
 		}
 
 		public override void ModifyDrawInfo(ref PlayerDrawInfo drawInfo)
@@ -79,6 +95,17 @@ namespace TemplateMod
 				Projectile.NewProjectileDirect(target.Center + new Vector2(0, -500), new Vector2(0, 5),
 				mod.ProjectileType("TestPro"), 155, 7f, player.whoAmI);
 			}
+		}
+
+		public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+		{
+			if(Undead && UndeadCD == 0)
+			{
+				// 冷却五分钟
+				UndeadCD = 18000;
+				return false;
+			}
+			return true;
 		}
 
 	}

@@ -69,7 +69,7 @@ namespace TemplateMod.Projectiles.Blaster
 					factor++;
 				}
 				Vector2 rotVel = (Vector2.UnitX * 18f).RotatedBy((double)(projectile.rotation - 1.57079637f), default(Vector2)); ;
-				Vector2 pos = projectile.Center + rotVel;
+				Vector2 pos = projectile.Center;
 				for (int k = 0; k < factor + 1; k++)
 				{
 					int type = 226;
@@ -89,8 +89,9 @@ namespace TemplateMod.Projectiles.Blaster
 			}
 			else
 			{
-				// 如果玩家放弃吟唱就发射弹幕
-				Projectile.NewProjectile(projectile.Center, projectile.velocity * 7f, mod.ProjectileType<BlasterPro>(), (int)(projectile.ai[0] / 200f * 200), 4f, projectile.owner);
+				// 如果玩家放弃吟唱就发射弹幕，弹幕伤害随着吟唱时间增加
+				var proj = Projectile.NewProjectileDirect(projectile.Center, projectile.velocity * 7f, mod.ProjectileType<BlasterPro>(), (int)(projectile.ai[0] / 200f * 200), 4f, projectile.owner);
+				proj.scale = 1.0f + projectile.ai[0] / 200f * 0.1f;
 				return;
 			}
 

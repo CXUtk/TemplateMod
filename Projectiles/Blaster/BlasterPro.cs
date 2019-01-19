@@ -44,6 +44,16 @@ namespace TemplateMod.Projectiles.Blaster
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
 		{
 			visited[target.whoAmI] = true;
+			if (projectile.ai[0] == 0)
+			{
+				float rotation = Main.rand.NextFloat() * MathHelper.Pi;
+				for (int i = 0; i < 3; i++)
+				{
+					Vector2 unit = (rotation + i * MathHelper.TwoPi / 3f).ToRotationVector2();
+					Projectile.NewProjectile(target.Center + unit * 35f, unit * 10f, projectile.type,
+						projectile.damage, projectile.knockBack, projectile.owner, 1); // 注意后面这个1
+				}
+			}
 		}
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
