@@ -24,6 +24,7 @@ namespace TemplateMod
 			set;
 		}
 
+		// CD不需要每帧重置，所以不用ResetEffects
 		private int UndeadCD = 0;
 
 		public override void ResetEffects()
