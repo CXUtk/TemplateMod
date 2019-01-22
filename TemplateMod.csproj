@@ -72,6 +72,7 @@
     <Content Include="Images\Bar.png" />
     <Content Include="Images\Box.png" />
     <Content Include="Images\Box2.png" />
+    <Content Include="Images\Arrow.png" />
     <Content Include="Images\noise1.png" />
     <Content Include="Images\Trans.png" />
     <Content Include="Images\CloseButton.png" />

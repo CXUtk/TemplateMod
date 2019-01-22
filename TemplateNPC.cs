@@ -71,6 +71,16 @@ namespace TemplateMod
 				spriteBatch.End();
 				spriteBatch.Begin();
 			}
+			// 加载图片
+			Texture2D tex = TemplateMod.Instance.GetTexture("Images/Arrow");
+			Vector2 worldPos = new Vector2(npc.Center.X, npc.position.Y - tex.Height);
+
+			spriteBatch.Draw(tex, worldPos - Main.screenPosition, null, Color.White, 0f, tex.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+			string name = npc.FullName;
+			// 测出这一行文字大概要占多大的空间（宽高
+			Vector2 size = Main.fontMouseText.MeasureString(name);
+			Vector2 texPos = worldPos + new Vector2(-size.X * 0.5f, -tex.Height) - Main.screenPosition;
+			Terraria.Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, name, texPos.X, texPos.Y, Color.White, Color.Black, Vector2.Zero);
 		}
 	}
 }
