@@ -70,7 +70,7 @@ namespace TemplateMod.Projectiles
 				// 从弹幕到达鼠标位置的单位向量
 				Vector2 unit2 = Vector2.Normalize(Main.MouseWorld - projectile.Center);
 				// 让弹幕缓慢朝鼠标方向移动
-				if(Vector2.Distance(projectile.Center, Main.MouseWorld) < 5)
+				if (Vector2.Distance(projectile.Center, Main.MouseWorld) < 5)
 				{
 					projectile.velocity *= 0;
 					projectile.Center = Main.MouseWorld;
@@ -89,8 +89,8 @@ namespace TemplateMod.Projectiles
 				return;
 			}
 
-				// 累加帧计时器
-				projectile.frameCounter++;
+			// 累加帧计时器
+			projectile.frameCounter++;
 			// 当计时器经过了7帧
 			if (projectile.frameCounter % 7 == 0)
 			{

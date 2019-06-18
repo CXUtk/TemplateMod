@@ -24,13 +24,22 @@ namespace TemplateMod
 			set;
 		}
 
+		public bool Gliders
+		{
+			get;
+			set;
+		}
+
 		// CD不需要每帧重置，所以不用ResetEffects
 		private int UndeadCD = 0;
+
+
 
 		public override void ResetEffects()
 		{
 			stealth = 1.0f;
 			Undead = false;
+			Gliders = false;
 		}
 
 		public override void PostUpdate()

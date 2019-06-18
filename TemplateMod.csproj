@@ -62,6 +62,7 @@
   <ItemGroup>
     <Content Include="Backgrounds\ExampleBiomeSurfaceClose.png" />
     <Content Include="Backgrounds\ExampleBiomeSurfaceMid0.png" />
+    <Content Include="Buffs\GliderBuff.png" />
     <Content Include="Buffs\GreenLight.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
@@ -85,9 +86,11 @@
     <Content Include="Items\Armors\ExampleLeggings.png" />
     <Content Include="Items\Armors\ExampleLeggings_Legs.png" />
     <Content Include="Items\DXTBlade.png" />
+    <Content Include="Items\ExampleLaserWeapon.png" />
     <Content Include="Items\ExampleWings.png" />
     <Content Include="Items\ExampleWings_Wings.png" />
     <Content Include="Items\BlasterCannon2.png" />
+    <Content Include="Items\GliderStaff.png" />
     <Content Include="Items\MagicMissile.png" />
     <Content Include="Items\PoisonousPotion.png" />
     <Content Include="Items\PurpleStone.png" />
@@ -107,8 +110,12 @@
     <Content Include="Projectiles\Explosion\Explode1.png" />
     <Content Include="Projectiles\FalseBeam.png" />
     <Content Include="Projectiles\Gravitational\GravitationalBeam.png" />
+    <Content Include="Projectiles\ExampleLaser.png" />
     <Content Include="Projectiles\RedMagnetControllable.png" />
     <Content Include="Projectiles\RedMagnet.png" />
+    <Content Include="Projectiles\Summoner\BlazeBallSmall.png" />
+    <Content Include="Projectiles\Summoner\Explode1Immune.png" />
+    <Content Include="Projectiles\Summoner\GliderPro.png" />
     <Content Include="Projectiles\Transform.png" />
     <Content Include="Projectiles\Generator.png" />
     <Content Include="Projectiles\ChasePro.png" />
@@ -117,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backgrounds\TestBackGround.cs" />
+    <Compile Include="Buffs\GliderBuff.cs" />
     <Compile Include="Buffs\GreenLight.cs" />
     <Compile Include="Dusts\Spark.cs" />
     <Compile Include="Dusts\TestDust.cs" />
@@ -124,7 +132,9 @@
     <Compile Include="Items\Armors\ExampleHelmet.cs" />
     <Compile Include="Items\Armors\ExampleLeggings.cs" />
     <Compile Include="Items\BlasterCannon2.cs" />
+    <Compile Include="Items\ExampleLaserWeapon.cs" />
     <Compile Include="Items\ExampleWings.cs" />
+    <Compile Include="Items\GliderStaff.cs" />
     <Compile Include="Items\PoisonousPotion.cs" />
     <Compile Include="Items\PurpleStone.cs" />
     <Compile Include="Items\MagicMissile.cs" />
@@ -138,12 +148,16 @@
     <Compile Include="Projectiles\Blaster\ChargingBlaster.cs" />
     <Compile Include="Projectiles\Blaster\BlasterPro.cs" />
     <Compile Include="Projectiles\ElectricPro.cs" />
+    <Compile Include="Projectiles\ExampleLaser.cs" />
     <Compile Include="Projectiles\Explosion\Explode1.cs" />
     <Compile Include="Projectiles\Explosion\ExplodingBullet.cs" />
     <Compile Include="Projectiles\Gravitational\GravitationalBeam.cs" />
     <Compile Include="Projectiles\RedMagnetControllable.cs" />
     <Compile Include="Projectiles\RedMagnet.cs" />
     <Compile Include="Projectiles\FalseBeam.cs" />
+    <Compile Include="Projectiles\Summoner\BlazeBallSmall.cs" />
+    <Compile Include="Projectiles\Summoner\Explode1Immune.cs" />
+    <Compile Include="Projectiles\Summoner\GliderPro.cs" />
     <Compile Include="Projectiles\Transform.cs" />
     <Compile Include="Projectiles\Generator.cs" />
     <Compile Include="Projectiles\ChasePro.cs" />
