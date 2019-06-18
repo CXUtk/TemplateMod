@@ -183,30 +183,27 @@ namespace TemplateMod.Projectiles.Summoner
 		/// <param name="player"></param>
 		private void MoveAroundPlayer(Player player)
 		{
-			Vector2 diff =  player.Center + ((float)Main.time *0.06f + projectile.whoAmI * 0.7f).ToRotationVector2() * 40f - projectile.Center;
+			Vector2 diff = projectile.Center - player.Center;
 			diff.Normalize();
-			projectile.velocity = (projectile.velocity * 20f + diff * 5) / 21f;
-			//Vector2 diff = projectile.Center - player.Center;
-			//diff.Normalize();
-			////diff = diff.RotatedBy(MathHelper.PiOver2);
-			//projectile.velocity -= diff * 0.2f;
+			//diff = diff.RotatedBy(MathHelper.PiOver2);
+			projectile.velocity -= diff * 0.2f;
 
-			//if (projectile.Center.X < player.Center.X)
-			//{
-			//	projectile.velocity.X += _nearPlayerSpeed;
-			//}
-			//if (projectile.Center.X > player.Center.X)
-			//{
-			//	projectile.velocity.X -= _nearPlayerSpeed;
-			//}
-			//if (projectile.Center.Y < player.Center.Y)
-			//{
-			//	projectile.velocity.Y += _nearPlayerSpeed;
-			//}
-			//if (projectile.Center.Y > player.Center.Y)
-			//{
-			//	projectile.velocity.Y -= _nearPlayerSpeed;
-			//}
+			if (projectile.Center.X < player.Center.X)
+			{
+				projectile.velocity.X += _nearPlayerSpeed;
+			}
+			if (projectile.Center.X > player.Center.X)
+			{
+				projectile.velocity.X -= _nearPlayerSpeed;
+			}
+			if (projectile.Center.Y < player.Center.Y)
+			{
+				projectile.velocity.Y += _nearPlayerSpeed;
+			}
+			if (projectile.Center.Y > player.Center.Y)
+			{
+				projectile.velocity.Y -= _nearPlayerSpeed;
+			}
 
 		}
 
