@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TemplateMod.Utils;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TemplateMod
@@ -43,6 +45,18 @@ namespace TemplateMod
 			return !locked;
 		}
 
+		public override void HitEffect(NPC npc, int hitDirection, double damage)
+		{
+			if (npc.netID == NPCID.GreenSlime)
+			{
+				for(int i = 0; i <100; i++)
+				{
+					Dust.NewDust(npc.position, npc.width, npc.height, MyDustId.GoldMaterial, 0, 0, 100);
+				}
+			}
+			base.HitEffect(npc, hitDirection, damage);
+		}
+
 		public override bool StrikeNPC(NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
 		{
 			return base.StrikeNPC(npc, ref damage, defense, ref knockback, hitDirection, ref crit);
@@ -66,6 +80,7 @@ namespace TemplateMod
 
 		public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Color drawColor)
 		{
+
 			if (locked)
 			{
 				spriteBatch.End();

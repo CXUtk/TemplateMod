@@ -95,7 +95,8 @@ namespace TemplateMod.NPCs
 					}
 				case NPCState.ReadyNormal:
 					{
-						if(npc.velocity.Y == 0)
+
+						if (npc.velocity.Y == 0 && npc.collideY)
 						{
 							npc.velocity.X *= 0.9f;
 						}
@@ -106,26 +107,10 @@ namespace TemplateMod.NPCs
 							Timer = 0;
 							float g = -0.04f;
 							Vector2 vel = new Vector2();
-							if (!_isFriendly)
+							if (!_isFriendly && Main.player[npc.target].Distance(npc.Center) < 900f)
 							{
-								Player player = Main.player[npc.target];
-								Vector2 diff = player.Center - npc.Center;
-								float vy = 2;
-								if(diff.Y < 0)
-								{
-									float h = Math.Abs(diff.Y);
-									vy = (float)Math.Max(Math.Sqrt(h), 5.0);
-								}
-								// 解方程
-								vel.Y = vy;
-								float vyf = (float)-Math.Sqrt(Math.Abs(2 * diff.Y * g - vel.Y));
-								float t = (vel.Y + vyf) / (2 * g);
-
-								// 映射到tr坐标系
-								vel.X = diff.X / -t;
-								vel.Y *= -1;
-								// vel.Y * vel.Y - vfy * vfy = 2 * g * diff.Y;
-
+								vel = getShootVectorBinary();
+								Projectile.NewProjectile(npc.Center, vel, mod.ProjectileType("GravPro"), 1, 0, 0);
 							}
 							else
 							{
@@ -192,6 +177,43 @@ namespace TemplateMod.NPCs
 						break;
 					}
 			}
+		}
+
+		private Vector2 getShootVectorBinary()
+		{
+			Player player = Main.player[npc.target];
+			int dir = player.Center.X < npc.Center.X ? -1 : 1;
+			float l = -MathHelper.PiOver2;
+			float r = 0;
+			float shootspeed = 15f;
+			while(Math.Abs(l - r) > 0.01f)
+			{
+				float mid = (l + r) * 0.5f;
+				float real = new Vector2(dir, 0).ToRotation() + mid * dir;
+				Vector2 unit = real.ToRotationVector2() * shootspeed;
+				Vector2 pos = npc.Center;
+				float beyond = 0f;
+				for(int i = 0; i < 1000; i++)
+				{
+					pos += unit;
+					unit.Y += 0.32f;
+					if(unit.Y > 1f && pos.Y > player.Center.Y)
+					{
+						beyond = pos.X - player.Center.X;
+						break;
+					}
+				}
+				beyond *= dir;
+				if(beyond > 0f)
+				{
+					r = mid;
+				}
+				else
+				{
+					l = mid;
+				}
+			}
+			return (new Vector2(dir, 0).ToRotation() + l * dir).ToRotationVector2() * shootspeed;
 		}
 
 		public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)

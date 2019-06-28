@@ -105,6 +105,7 @@
     <Content Include="Libraries\Terraria.exe" />
     <Content Include="Projectiles\Blaster\ChargingBlaster.png" />
     <Content Include="Projectiles\Blaster\BlasterPro.png" />
+    <Content Include="Projectiles\GravPro.png" />
     <Content Include="Projectiles\ElectricPro.png" />
     <Content Include="Projectiles\Explosion\ExplodingBullet.png" />
     <Content Include="Projectiles\Explosion\Explode1.png" />
@@ -147,6 +148,7 @@
     <Compile Include="NPCs\Sarcophagus.cs" />
     <Compile Include="Projectiles\Blaster\ChargingBlaster.cs" />
     <Compile Include="Projectiles\Blaster\BlasterPro.cs" />
+    <Compile Include="Projectiles\GravPro.cs" />
     <Compile Include="Projectiles\ElectricPro.cs" />
     <Compile Include="Projectiles\ExampleLaser.cs" />
     <Compile Include="Projectiles\Explosion\Explode1.cs" />
