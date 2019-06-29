@@ -95,7 +95,6 @@ namespace TemplateMod.NPCs
 					}
 				case NPCState.ReadyNormal:
 					{
-
 						if (npc.velocity.Y == 0 && npc.collideY)
 						{
 							npc.velocity.X *= 0.9f;
@@ -106,7 +105,7 @@ namespace TemplateMod.NPCs
 						{
 							Timer = 0;
 							Vector2 vel = new Vector2();
-							if (!_isFriendly && Main.player[npc.target].Distance(npc.Center) < 900f && getShootVectorBinary(out vel))
+							if (!_isFriendly && Main.player[npc.target].Distance(npc.Center) < 1000f && getShootVectorBinaryByShootSpeed(out vel))
 							{
 								Projectile.NewProjectile(npc.Center, vel, mod.ProjectileType("GravPro"), 1, 0, 0);
 							}
@@ -230,6 +229,65 @@ namespace TemplateMod.NPCs
 				}
 			}
 			result = (new Vector2(dir, 0).ToRotation() + l * dir).ToRotationVector2() * shootspeed;
+			return heightenough && distanceenough;
+		}
+
+		/// <summary>
+		/// 发射力度二分的
+		/// </summary>
+		/// <param name="result"></param>
+		/// <returns></returns>
+		private bool getShootVectorBinaryByShootSpeed(out Vector2 result)
+		{
+			Player player = Main.player[npc.target];
+			int dir = player.Center.X < npc.Center.X ? -1 : 1;
+			// 发射力度限制在0-20，防止鬼畜
+			float l = 0f;
+			float r = 20f;
+			// 固定角度为45度
+			float rad = -MathHelper.PiOver4;
+			// 高度是否足够
+			bool heightenough = false;
+			// 水平距离是否能够达到
+			bool distanceenough = false;
+			while (Math.Abs(l - r) > 0.01f)
+			{
+				float mid = (l + r) * 0.5f;
+				// 获取模拟向量
+				Vector2 unit = Vector2.Normalize(new Vector2(dir, -1)) * mid;
+				// 当前位置，一开始为npc的中心
+				Vector2 pos = npc.Center;
+				// 超过，或者没超过玩家的水平距离，正数是超过，负数是没超过
+				float beyond = 0f;
+				float maxHeight = 99999f;
+				// 这段普通计算机在100000次模拟以下都不会有任何卡顿
+				for (int i = 0; i < 1000; i++)
+				{
+					pos += unit;
+					unit.Y += 0.32f;
+					maxHeight = Math.Min(pos.Y, maxHeight);
+					if (unit.Y > 1f && pos.Y > player.Center.Y)
+					{
+						beyond = pos.X - player.Center.X;
+						break;
+					}
+				}
+				if(maxHeight < player.Center.Y)
+				{
+					heightenough = true;
+				}
+				beyond *= dir;
+				if (beyond > 0f)
+				{
+					distanceenough = true;
+					r = mid;
+				}
+				else
+				{
+					l = mid;
+				}
+			}
+			result = Vector2.Normalize(new Vector2(dir, -1)) * l;
 			return heightenough && distanceenough;
 		}
 
