@@ -105,11 +105,9 @@ namespace TemplateMod.NPCs
 						if(Timer > threashold)
 						{
 							Timer = 0;
-							float g = -0.04f;
 							Vector2 vel = new Vector2();
-							if (!_isFriendly && Main.player[npc.target].Distance(npc.Center) < 900f)
+							if (!_isFriendly && Main.player[npc.target].Distance(npc.Center) < 900f && getShootVectorBinary(out vel))
 							{
-								vel = getShootVectorBinary();
 								Projectile.NewProjectile(npc.Center, vel, mod.ProjectileType("GravPro"), 1, 0, 0);
 							}
 							else
@@ -179,13 +177,18 @@ namespace TemplateMod.NPCs
 			}
 		}
 
-		private Vector2 getShootVectorBinary()
+		private bool getShootVectorBinary(out Vector2 result)
 		{
 			Player player = Main.player[npc.target];
 			int dir = player.Center.X < npc.Center.X ? -1 : 1;
 			float l = -MathHelper.PiOver2;
-			float r = 0;
+			float r = -MathHelper.PiOver4;
 			float shootspeed = 15f;
+
+			// 高度是否足够
+			bool heightenough = false;
+			// 水平距离是否能够达到
+			bool distanceenough = false;
 			while(Math.Abs(l - r) > 0.01f)
 			{
 				float mid = (l + r) * 0.5f;
@@ -193,19 +196,32 @@ namespace TemplateMod.NPCs
 				Vector2 unit = real.ToRotationVector2() * shootspeed;
 				Vector2 pos = npc.Center;
 				float beyond = 0f;
+				float maxHeight = 99999f;
+				// 这段普通计算机在100000次模拟以下都不会有任何卡顿
 				for(int i = 0; i < 1000; i++)
 				{
 					pos += unit;
 					unit.Y += 0.32f;
-					if(unit.Y > 1f && pos.Y > player.Center.Y)
+					maxHeight = Math.Min(pos.Y, maxHeight);
+					if (unit.Y > 1f && pos.Y > player.Center.Y)
 					{
 						beyond = pos.X - player.Center.X;
 						break;
 					}
 				}
+				if(maxHeight > player.Center.Y)
+				{
+					r = mid;
+					continue;
+				}
+				else
+				{
+					heightenough = true;
+				}
 				beyond *= dir;
 				if(beyond > 0f)
 				{
+					distanceenough = true;
 					r = mid;
 				}
 				else
@@ -213,7 +229,8 @@ namespace TemplateMod.NPCs
 					l = mid;
 				}
 			}
-			return (new Vector2(dir, 0).ToRotation() + l * dir).ToRotationVector2() * shootspeed;
+			result = (new Vector2(dir, 0).ToRotation() + l * dir).ToRotationVector2() * shootspeed;
+			return heightenough && distanceenough;
 		}
 
 		public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)

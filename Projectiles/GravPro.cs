@@ -30,7 +30,7 @@ namespace TemplateMod.Projectiles
 
 		public override void AI()
 		{
-			projectile.velocity.Y += 0.4f;
+			projectile.velocity.Y += 0.32f;
 			Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, MyDustId.OrangeShortFx, 0, 0, 100, Color.White, 2f);
 			d.position = projectile.Center;
 			d.velocity *= 0.0f;
