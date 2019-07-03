@@ -89,23 +89,23 @@ namespace TemplateMod
 			//player.ManageSpecialBiomeVisuals("Template:UltraLight", TemplateMod.TwistedStrength > 0f);
 			//player.ManageSpecialBiomeVisuals("Template:Disort", true);
 		}
-		public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
-		{
-			if (Main.rand.Next(5) == 0)
-			{
-				Projectile.NewProjectileDirect(target.Center + new Vector2(0, -500), new Vector2(0, 5),
-					mod.ProjectileType("TestPro"), 155, 7f, player.whoAmI);
-			}
-		}
+		//public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+		//{
+		//	if (Main.rand.Next(5) == 0)
+		//	{
+		//		Projectile.NewProjectileDirect(target.Center + new Vector2(0, -500), new Vector2(0, 5),
+		//			mod.ProjectileType("TestPro"), 155, 7f, player.whoAmI);
+		//	}
+		//}
 
-		public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
-		{
-			if (Main.rand.Next(4) == 0 && proj.type != mod.ProjectileType("TestPro"))
-			{
-				Projectile.NewProjectileDirect(target.Center + new Vector2(0, -500), new Vector2(0, 5),
-				mod.ProjectileType("TestPro"), 155, 7f, player.whoAmI);
-			}
-		}
+		//public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+		//{
+		//	if (Main.rand.Next(4) == 0 && proj.type != mod.ProjectileType("TestPro"))
+		//	{
+		//		Projectile.NewProjectileDirect(target.Center + new Vector2(0, -500), new Vector2(0, 5),
+		//		mod.ProjectileType("TestPro"), 155, 7f, player.whoAmI);
+		//	}
+		//}
 
 		public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
 		{

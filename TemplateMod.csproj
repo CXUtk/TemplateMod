@@ -120,6 +120,7 @@
     <Content Include="Items\ExampleWings_Wings.png" />
     <Content Include="Items\BlasterCannon2.png" />
     <Content Include="Items\GliderStaff.png" />
+    <Content Include="Items\DarkLance.png" />
     <Content Include="Items\MagicMissile.png" />
     <Content Include="Items\PoisonousPotion.png" />
     <Content Include="Items\PurpleStone.png" />
@@ -141,6 +142,7 @@
     <Content Include="Projectiles\FalseBeam.png" />
     <Content Include="Projectiles\Gravitational\GravitationalBeam.png" />
     <Content Include="Projectiles\ExampleLaser.png" />
+    <Content Include="Projectiles\DarkLancePro.png" />
     <Content Include="Projectiles\RedMagnetControllable.png" />
     <Content Include="Projectiles\RedMagnet.png" />
     <Content Include="Projectiles\Summoner\BlazeBallSmall.png" />
@@ -162,6 +164,7 @@
     <Compile Include="Items\Armors\ExampleHelmet.cs" />
     <Compile Include="Items\Armors\ExampleLeggings.cs" />
     <Compile Include="Items\BlasterCannon2.cs" />
+    <Compile Include="Items\DarkLance.cs" />
     <Compile Include="Items\ExampleLaserWeapon.cs" />
     <Compile Include="Items\ExampleWings.cs" />
     <Compile Include="Items\GliderStaff.cs" />
@@ -177,6 +180,7 @@
     <Compile Include="NPCs\Sarcophagus.cs" />
     <Compile Include="Projectiles\Blaster\ChargingBlaster.cs" />
     <Compile Include="Projectiles\Blaster\BlasterPro.cs" />
+    <Compile Include="Projectiles\DarkLancePro.cs" />
     <Compile Include="Projectiles\GravPro.cs" />
     <Compile Include="Projectiles\ElectricPro.cs" />
     <Compile Include="Projectiles\ExampleLaser.cs" />
