@@ -777,7 +777,7 @@ namespace TemplateMod
 
 		public static void DrawChain(int index, Vector2 to, string chainPath)
 		{
-			Texture2D texture = ModLoader.GetTexture(chainPath);
+			Texture2D texture = ModContent.GetTexture(chainPath); // 之前是 ModLoader.GetTexture(chainPath);
 			Projectile projectile = Main.projectile[index];
 			Vector2 vector = projectile.Center;
 			Vector2 vector2 = new Vector2(texture.Width * 0.5f, texture.Height * 0.5f);

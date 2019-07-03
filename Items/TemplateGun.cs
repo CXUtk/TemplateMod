@@ -45,6 +45,11 @@ namespace TemplateMod.Items
 
 			// 物品的描述，加入换行符 '\n' 可以多行显示哦
 			Tooltip.SetDefault("可以射出子弹，然后呢？");
+
+			foreach(var mod in ModLoader.Mods) // => 之前是ModLoader.LoadedMods
+			{
+
+			}
 		}
 
 		// 最最最重要的物品基本属性部分

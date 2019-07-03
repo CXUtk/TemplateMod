@@ -122,6 +122,7 @@ namespace TemplateMod
 
 		public override void Unload()
 		{
+			Instance = null;
 			Main.OnPostDraw -= Main_OnPostDraw;
 		}
 
