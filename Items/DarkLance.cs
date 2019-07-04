@@ -28,6 +28,9 @@ namespace TemplateMod.Items
 			item.CloneDefaults(ItemID.Spear);
 			item.knockBack = 10f;
 			item.damage = 100;
+			// 静音
+			item.UseSound = null;
+			item.autoReuse = true;
 			item.shoot = mod.ProjectileType("DarkLancePro");
 		}
 
@@ -43,3 +46,4 @@ namespace TemplateMod.Items
 		}
 	}
 }
+

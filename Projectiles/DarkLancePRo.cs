@@ -8,6 +8,8 @@ using Terraria.ID;
 using TemplateMod.Utils;
 using System.Linq;
 
+
+
 namespace TemplateMod.Projectiles
 {
 	public class DarkLancePro : ModProjectile
@@ -27,7 +29,7 @@ namespace TemplateMod.Projectiles
 			projectile.tileCollide = false;
 			projectile.penetrate = -1;
 			projectile.alpha = 255;
-			projectile.extraUpdates = 4;
+			//projectile.extraUpdates = 4;
 			projectile.ownerHitCheck = true;
 		}
 
@@ -47,17 +49,23 @@ namespace TemplateMod.Projectiles
 
 		public override void AI()
 		{
-			// 因为长矛贴图是斜着的所以我们只需要旋转45度（很重要
+			// 因为长矛贴图是反向斜着的所以我们只需要旋转135度（很重要
 			projectile.spriteDirection = projectile.direction;
-
+			
 			//if (projectile.spriteDirection == -1)
 			//{
 			//	projectile.rotation -= 1.57f;
 			//}
 
+			// 声音问题
+			if(Timer == 0)
+			{
+				Main.PlaySound(SoundID.Item1, projectile.Center);
+			}
+
 			// 要点1：长矛在玩家使用完物品后一定要消失
 			var owner = Main.player[projectile.owner];
-			if (Timer >= owner.itemAnimationMax * (projectile.MaxUpdates))
+			if (Timer >= owner.itemAnimationMax /** (projectile.MaxUpdates)*/)
 			{
 				projectile.Kill();
 				return;
@@ -66,33 +74,34 @@ namespace TemplateMod.Projectiles
 			projectile.velocity = unit;
 			
 
-
+			// factor代表当前进度0.0f~1.0f
 			float factor = 0;
-			if (Timer < owner.itemAnimationMax / 2 * (projectile.MaxUpdates))
+			if (Timer < owner.itemAnimationMax / 2)
 			{
+				factor = (Timer + 1) / (float)(owner.itemAnimationMax / 2);
+				projectile.velocity = unit.RotatedBy((float)Math.Sin(factor * 10f * projectile.direction) * 0.4f);
 				var dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, MyDustId.Fire, 0, 0, 100,
-				Color.White, 2f);
+					Color.White, 2f);
 				dust.position = projectile.Center;
 				dust.velocity *= 0f;
 				dust.noGravity = true;
 				dust.fadeIn = 1f;
-				factor = (Timer + 1) / (owner.itemAnimationMax / 2.0f * (projectile.MaxUpdates));
-				projectile.velocity = unit.RotatedBy((float)Math.Sin(factor * 20f * projectile.direction) * 0.8f);
 				projectile.Center = owner.RotatedRelativePoint(owner.MountedCenter, true) + unit * 20 + projectile.velocity * 50f * factor;
 				projectile.rotation = projectile.velocity.ToRotation() + MathHelper.PiOver2 + MathHelper.PiOver4;
 				projectile.velocity = unit;
 			}
-			// 要点2：长矛在一段时间后回退
 			else
 			{
-				factor = (owner.itemAnimationMax * (projectile.MaxUpdates) - Timer) / (owner.itemAnimationMax * (projectile.MaxUpdates) - owner.itemAnimationMax / 2.0f * (projectile.MaxUpdates));
-				projectile.Center = owner.RotatedRelativePoint(owner.MountedCenter, true) + unit * 20 + factor * projectile.velocity * 50f;
+				factor = (owner.itemAnimationMax - Timer) / (float)(owner.itemAnimationMax - owner.itemAnimationMax / 2);
+				projectile.Center = owner.RotatedRelativePoint(owner.MountedCenter, true) + unit * 20 + unit * 50f * factor;
 				projectile.rotation = projectile.velocity.ToRotation() + MathHelper.PiOver2 + MathHelper.PiOver4;
 			}
+			// 从玩家中心向弹幕方向延伸20个单位长度然后50个单位长度用于伸缩
 
 
 			Timer++;
 		}
+
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
 		{
@@ -101,5 +110,8 @@ namespace TemplateMod.Projectiles
 			return false;
 		}
 	}
+
+
+
 }
 
