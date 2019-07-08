@@ -45,7 +45,7 @@ namespace TemplateMod.Projectiles.Blaster
 				
 				// 从玩家到达鼠标位置的单位向量
 				Vector2 unit = Vector2.Normalize(Main.MouseWorld - player.Center);
-				// 随机角度
+				// 速度所代表角度
 				float rotaion = unit.ToRotation();
 				// 调整玩家转向以及手持物品的转动方向
 				player.direction = Main.MouseWorld.X < player.Center.X ? -1 : 1;
@@ -56,8 +56,7 @@ namespace TemplateMod.Projectiles.Blaster
 				projectile.timeLeft = 2;
 
 				// 模仿原版的粒子效果
-				Vector2 unit2 = Vector2.Normalize(Main.MouseWorld - projectile.Center);
-				projectile.velocity = unit2;
+				projectile.velocity = unit;
 				projectile.Center = player.Center + unit * 30f;
 				int factor = 0;
 				if (projectile.ai[0] >= 60f)
@@ -68,7 +67,6 @@ namespace TemplateMod.Projectiles.Blaster
 				{
 					factor++;
 				}
-				Vector2 rotVel = (Vector2.UnitX * 18f).RotatedBy((double)(projectile.rotation - 1.57079637f), default(Vector2)); ;
 				Vector2 pos = projectile.Center;
 				for (int k = 0; k < factor + 1; k++)
 				{
@@ -81,7 +79,7 @@ namespace TemplateMod.Projectiles.Blaster
 					}
 					Vector2 spawnPos = pos + ((float)Main.rand.NextDouble() * 6.28318548f).ToRotationVector2() * (12f - (float)(factor * 2));
 					Dust d = Dust.NewDustDirect(spawnPos - Vector2.One * 8f, 16, 16, type, projectile.velocity.X / 2f, projectile.velocity.Y / 2f, 0, default(Color), 1f);
-					d.velocity = Vector2.Normalize(pos - spawnPos) * 1.5f * (10f - (float)factor * 2f) / 10f;
+					d.velocity = Vector2.Normalize(pos - spawnPos) * 1.5f * (10f - factor * 2f) / 10f;
 					d.noGravity = true;
 					d.scale = size;
 					d.customData = player;
