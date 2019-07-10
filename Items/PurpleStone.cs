@@ -126,13 +126,15 @@ namespace TemplateMod.Items
 			player.statManaMax2 += 100;
 
 			// 玩家近战伤害增加15%，注意这里的值
-			player.meleeDamage += 0.15f;
+			player.meleeDamage += 0.35f;
 
 			// 玩家远程伤害增加15%
-			player.rangedDamage += 0.15f;
+			player.rangedDamage += 0.35f;
 
 			// 玩家魔法伤害增加15%
-			player.magicDamage += 0.15f;
+			player.magicDamage += 0.35f;
+
+			player.minionDamage += 0.35f;
 
 			// 玩家近战暴击率增加20%，注意这是个int
 			player.meleeCrit += 20;

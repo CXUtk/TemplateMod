@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TemplateMod.VecMap;
 using Terraria;
+using Terraria.GameContent.Generation;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.World.Generation;
 
 namespace TemplateMod
 {
@@ -17,6 +21,179 @@ namespace TemplateMod
 			//TemplateMod._effectManager.Update();
 			//TemplateMod._twistEffectManager.Update();
 			base.PostUpdate();
+		}
+
+		private bool valid(int x, int y)
+		{
+			return x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY;
+		}
+
+		private void PlaceCross(int x, int y)
+		{
+			int[] dx = { 1, -1, 0, 0 };
+			int[] dy = { 0, 0, 1, -1 };
+			for (int i = 0; i < 4; i++)
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					if (!valid(x + dx[i] * j, y + dy[i] * j)) continue;
+					Main.tile[x + dx[i] * j, y + dy[i] * j].type = (ushort)mod.TileType("TemplateOre");
+					Main.tile[x + dx[i] * j, y + dy[i] * j].active();
+				}
+			}
+		}
+		private void Swap<T>(ref T a, ref T b)
+		{
+			T c = a;
+			a = b;
+			b = c;
+		}
+
+		private void TileLine(Point start, Point end, int type)
+		{
+			int x1 = start.X, y1 = start.Y;
+			int x2 = end.X, y2 = end.Y;
+
+			bool steep = Math.Abs(y2 - y1) > Math.Abs(x2 - x1);
+			if (steep)
+			{
+				// 反转坐标轴
+				Swap<int>(ref x1, ref y1);
+				Swap<int>(ref x2, ref y2);
+			}
+			if (x1 > x2)
+			{
+				Swap<int>(ref x1, ref x2);
+				Swap<int>(ref y1, ref y2);
+			}
+			int dx = x2 - x1;
+			int dy = Math.Abs(y2 - y1);
+			int error = 0;
+			int ystep = (y1 < y2) ? 1 : -1;
+			int y = y1;
+			for (int x = x1; x <= x2; ++x)
+			{
+				if (steep)
+				{
+					if (valid(y, x))
+					{
+						Main.tile[y, x].type = (ushort)type;
+						Main.tile[y, x].active();
+					}
+				}
+				else
+				{
+					if (valid(x, y))
+					{
+						Main.tile[x, y].type = (ushort)type;
+						Main.tile[x, y].active();
+					}
+				}
+				if (2 * (error + dy) < dx)
+					error += dy;
+				else
+				{
+					y += ystep;
+					error = error + dy - dx;
+				}
+			}
+		}
+
+		private void SetTile(int x, int y, int type)
+		{
+			if (valid(x, y))
+			{
+				Main.tile[x, y].type = (ushort)type;
+				Main.tile[x, y].active();
+			}
+		}
+
+		private void PlaceStar(int x, int y)
+		{
+			Point start = new Point(x, y);
+			var list = LoadVec.GetVecMap(x % 2==0 ? "裙":"小");
+			foreach (var p in list)
+			{
+				SetTile((int)Math.Round(x + p.X * 16), (int)Math.Round(y + p.Y * 16), mod.TileType("TemplateOre"));
+			}
+			//for(int r = 0; r < 8; r++)
+			//{
+			//	rad = r * MathHelper.PiOver4;
+			//	Vector2 endvec = start.ToVector2() + r.ToRotationVector2() * 10;
+			//	TileLine(start, new Point((int)endvec.X, (int)endvec.Y), mod.TileType("TemplateOre"));
+			//}
+		}
+
+		private void GenNormalOres(GenerationProgress progress)
+		{
+			progress.Message = "生成普通矿物中……";
+			// 生成数量是地图总物块数量的0.006%
+			int size = (int)(Main.maxTilesX * Main.maxTilesY * 9E-04);
+			for (int k = 0; k < size; k++)
+			{
+				int x = WorldGen.genRand.Next(0, Main.maxTilesX);
+				int y = WorldGen.genRand.Next((int)WorldGen.worldSurfaceLow, Main.maxTilesY); // WorldGen.worldSurfaceLow is actually the highest surface tile. In practice you might want to use WorldGen.rockLayer or other WorldGen values.
+
+				// 如果在地狱层以上
+				if (y < WorldGen.rockLayer)
+				{
+					// 原版自带矿物生成函数strength代表的是这个生成区域的最大大小，steps代表这个生成区域连接的紧密程度
+					WorldGen.TileRunner(x, y, Main.rand.Next(2, 5), Main.rand.Next(2, 5), mod.TileType("TemplateOre"), false, 0f, 0f, false, true);
+				}
+				else
+				{
+					if (Main.rand.Next(2) == 0)
+					{
+						PlaceCross(x, y);
+					}
+					else
+					{
+						PlaceStar(x, y);
+					}
+				}
+				// Alternately, we could check the tile already present in the coordinate we are interested. Wrapping WorldGen.TileRunner in the following condition would make the ore only generate in Snow.
+				// Tile tile = Framing.GetTileSafely(x, y);
+				// if (tile.active() && tile.type == TileID.SnowBlock)
+				// {
+				// 	WorldGen.TileRunner(.....);
+				// }
+				progress.Value = k / (float)size;
+			}
+		}
+
+		private void ReplaceToIceWorld(GenerationProgress progress)
+		{
+			progress.Message = "正在将泥土块替换为雪块……";
+			// 暴力替换过程（太暴力了(*/ω＼*)
+			for (int i = 50; i < Main.maxTilesX - 50; i++)
+			{
+				for (int j = 0; j < Main.maxTilesY - 250; j++)
+				{
+					Tile tile = Framing.GetTileSafely(i, j);
+					if (tile.type == TileID.Dirt || tile.type == TileID.Grass)
+					{
+						tile.type = TileID.Gold;
+						tile.active();
+					}
+					if (tile.type == TileID.Stone || tile.type == TileID.ClayBlock)
+					{
+						tile.type = TileID.Silver;
+						tile.active();
+					}
+				}
+				progress.Value = i / (float)Main.maxTilesX;
+			}
+		}
+
+		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+		{
+			int genoreLayer = tasks.FindIndex((pass) => pass.Name.Equals("Shinies"));
+			if (genoreLayer != -1)
+			{
+				tasks.Insert(genoreLayer + 1, new PassLegacy("Template:GenNormalOre", GenNormalOres));
+				//tasks.Add(new PassLegacy("Template:IceWorld", ReplaceToIceWorld));
+				//tasks.Insert(genoreLayer + 1, new PassLegacy("Template:GenNormalOre", GenNormalOres));
+			}
 		}
 	}
 }
