@@ -55,6 +55,11 @@ namespace TemplateMod.Files
 			TileBlocks[x, y] = block;
 		}
 
+		public TileFile()
+		{
+
+		}
+
 		public TileFile(int w, int h)
 		{
 			Width = w;
@@ -80,7 +85,9 @@ namespace TemplateMod.Files
 				{
 					throw new FileLoadException("文件格式不合法");
 				}
-				int w = br.ReadInt32(), h = br.ReadInt32();
+				int w = br.ReadInt16(), h = br.ReadInt16();
+				Width = w;
+				Height = h;
 				TileBlocks = new TileBlock[w, h];
 				CreatedTime = new DateTime(br.ReadInt64());
 				LastModifiedTime = new DateTime(br.ReadInt64());
@@ -93,6 +100,7 @@ namespace TemplateMod.Files
 						if (tile.isMod)
 						{
 							tile.name = br.ReadString();
+							tile.type = (ushort)TemplateMod.Instance.TileType(tile.name);
 						}
 						else
 						{

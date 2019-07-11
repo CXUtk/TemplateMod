@@ -196,12 +196,15 @@ namespace TemplateMod
 			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.instance.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
 			if (TemplateMod.SelectMode)
 			{
-				spriteBatch.Draw(Main.magicPixel, TemplateMod.SelectUpperLeft.ToVector2() * 16 - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Purple);
-				spriteBatch.Draw(Main.magicPixel, TemplateMod.SelectLowerRight.ToVector2() * 16 - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Red);
+				spriteBatch.Draw(Main.magicPixel, TemplateMod.SelectUpperLeft.ToVector2() * 16 - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Purple * 0.7f);
+				spriteBatch.Draw(Main.magicPixel, TemplateMod.SelectLowerRight.ToVector2() * 16 - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Red * 0.7f);
 
 				Rectangle targetRect = new Rectangle((int)((int)TemplateMod.SelectUpperLeft.X * 16 - Main.screenPosition.X), (int)((int)TemplateMod.SelectUpperLeft.Y * 16 - Main.screenPosition.Y),
 					(int)(TemplateMod.SelectLowerRight.X - TemplateMod.SelectUpperLeft.X + 1) * 16, (int)(TemplateMod.SelectLowerRight.Y - TemplateMod.SelectUpperLeft.Y + 1) * 16);
-				Drawing.DrawAdvBox(spriteBatch, targetRect, Color.Green * 0.5f, TemplateMod.ModTexturesTable["Box"], new Vector2(8, 8));
+				Drawing.DrawAdvBox(spriteBatch, targetRect, Color.Yellow * 0.5f, TemplateMod.ModTexturesTable["Box"], new Vector2(8, 8));
+			}
+			if (TemplateMod.BuildMode)
+			{
 
 			}
 			spriteBatch.End();

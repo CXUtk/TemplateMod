@@ -13,6 +13,11 @@ namespace TemplateMod.Files
 	{
 		private Dictionary<string, TileFile> tileFiles;
 
+		public IEnumerable<TileFile> GetTileFiles()
+		{
+			return tileFiles.Values;
+		}
+
 		public TileFileManager()
 		{
 			if (!Directory.Exists(SavePath))
@@ -37,15 +42,23 @@ namespace TemplateMod.Files
 			var files = Directory.GetFiles(SavePath);
 			foreach(var f in files)
 			{
-				MessageBox.Show(f);
+				TileFile file = new TileFile();
+				file.ReadFile(f);
+				file.FileName = Path.GetFileNameWithoutExtension(f);
+				Add(file);
 			}
 		}
 
-		public void Add(TileFile file)
+		public void AddAndSave(TileFile file)
 		{
 			file.FileName = "Data_" + tileFiles.Count;
 			tileFiles.Add(file.FileName, file);
 			file.Write(SavePath + file.FileName + ".tf");
+		}
+
+		public void Add(TileFile file)
+		{
+			tileFiles.Add(file.FileName, file);
 		}
 
 		public void SaveAll()

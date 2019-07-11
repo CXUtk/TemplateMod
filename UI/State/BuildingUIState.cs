@@ -13,6 +13,8 @@ using Terraria.GameContent.UI.States;
 using TemplateMod.Utils;
 using System.Security.Cryptography;
 using TemplateMod.Files;
+using System.Threading;
+using TemplateMod.UI.Component.Special;
 //using TemplateMod.UI.Component.Special;
 
 namespace TemplateMod.UI
@@ -22,17 +24,17 @@ namespace TemplateMod.UI
 		public static BuildingUIState Instance;
 		private int _relaxTimer;
 		private float _rotation;
-		private UIAdvList _matchedGameList;
-		private UIButton refreshButton;
+		private UIAdvGrid _tilefilesList;
 		private UIText Label;
 		private UICDButton selectModeButton;
 		private UICDButton buildModeButton;
 		private UICDButton saveButton;
+		private UICDButton refreshButton;
 		private const float WINDOW_WIDTH = 640;
 		private const float WINDOW_HEIGHT = 420;
-		private const float FILE_LIST_WIDTH = 400;
+		private const float FILE_LIST_WIDTH = 420;
 		private const float FILE_LIST_HEIGHT = 320;
-		private const float FILE_LIST_OFFSET_LEFT = -80;
+		private const float FILE_LIST_OFFSET_LEFT = -90;
 		private const float FILELIST_OFFSET_TOP = 25;
 
 		public BuildingUIState()
@@ -57,11 +59,11 @@ namespace TemplateMod.UI
 			fileListPanel.Height.Set(FILE_LIST_HEIGHT, 0f);
 			fileListPanel.SetPadding(10f);
 
-			_matchedGameList = new UIAdvList();
-			_matchedGameList.Width.Set(-25f, 1f);
-			_matchedGameList.Height.Set(0f, 1f);
-			_matchedGameList.ListPadding = 5f;
-			fileListPanel.Append(_matchedGameList);
+			_tilefilesList = new UIAdvGrid();
+			_tilefilesList.Width.Set(-25f, 1f);
+			_tilefilesList.Height.Set(0f, 1f);
+			_tilefilesList.ListPadding = 5f;
+			fileListPanel.Append(_tilefilesList);
 
 			// ScrollBar设定
 			var uiscrollbar = new UIAdvScrollBar();
@@ -69,21 +71,21 @@ namespace TemplateMod.UI
 			uiscrollbar.Height.Set(0f, 1f);
 			uiscrollbar.HAlign = 1f;
 			fileListPanel.Append(uiscrollbar);
-			_matchedGameList.SetScrollbar(uiscrollbar);
+			_tilefilesList.SetScrollbar(uiscrollbar);
 			WindowPanel.Append(fileListPanel);
 
-			refreshButton = new UIButton(TemplateMod.ModTexturesTable["Refresh"], false);
-			refreshButton.Top.Set(55, 0f);
-			refreshButton.Left.Set(-35 / 2 - 65, 1f);
-			refreshButton.Width.Set(35, 0f);
-			refreshButton.Height.Set(35, 0f);
-			refreshButton.OnClick += RefreshButton_OnClick;
-			refreshButton.ButtonDefaultColor = new Color(200, 200, 200);
-			refreshButton.ButtonChangeColor = Color.White;
-			refreshButton.UseRotation = true;
-			refreshButton.TextureScale = 0.2f;
-			refreshButton.Tooltip = "刷新";
-			WindowPanel.Append(refreshButton);
+			//refreshButton = new UIButton(TemplateMod.ModTexturesTable["Refresh"], false);
+			//refreshButton.Top.Set(55, 0f);
+			//refreshButton.Left.Set(-35 / 2 - 65, 1f);
+			//refreshButton.Width.Set(35, 0f);
+			//refreshButton.Height.Set(35, 0f);
+			//refreshButton.OnClick += RefreshButton_OnClick;
+			//refreshButton.ButtonDefaultColor = new Color(200, 200, 200);
+			//refreshButton.ButtonChangeColor = Color.White;
+			//refreshButton.UseRotation = true;
+			//refreshButton.TextureScale = 0.2f;
+			//refreshButton.Tooltip = "刷新";
+			//WindowPanel.Append(refreshButton);
 
 			Label = new UIText("地形选择器", 0.6f, true);
 			Label.Top.Set(-FILE_LIST_HEIGHT / 2 + FILELIST_OFFSET_TOP - 35f, 0.5f);
@@ -128,8 +130,26 @@ namespace TemplateMod.UI
 			saveButton.ButtonChangeColor = Color.White;
 			saveButton.CornerSize = new Vector2(12, 12);
 			saveButton.ButtonText = "保存已选择";
-			saveButton.OnClick += SaveButton_OnClick; ;
+			saveButton.OnClick += SaveButton_OnClick; 
 			WindowPanel.Append(saveButton);
+
+			refreshButton = new UICDButton(null, true);
+			refreshButton.Top.Set(175, 0f);
+			refreshButton.Left.Set(-175, 1f);
+			refreshButton.Width.Set(150, 0f);
+			refreshButton.Height.Set(50, 0f);
+			refreshButton.BoxTexture = TemplateMod.ModTexturesTable["AdvInvBack2"];
+			refreshButton.ButtonDefaultColor = new Color(200, 200, 200);
+			refreshButton.ButtonChangeColor = Color.White;
+			refreshButton.CornerSize = new Vector2(12, 12);
+			refreshButton.ButtonText = "刷新";
+			refreshButton.OnClick += RefreshButton_OnClick1;
+			WindowPanel.Append(refreshButton);
+		}
+
+		private void RefreshButton_OnClick1(UIMouseEvent evt, UIElement listeningElement)
+		{
+			RefreshFiles();
 		}
 
 		private void SaveButton_OnClick(UIMouseEvent evt, UIElement listeningElement)
@@ -144,7 +164,7 @@ namespace TemplateMod.UI
 					file.SetTile(i - TemplateMod.SelectUpperLeft.X, j - TemplateMod.SelectUpperLeft.Y, Main.tile[i, j]);
 				}
 			}
-			TemplateMod.Instance.TileFileManager.Add(file);
+			TemplateMod.Instance.TileFileManager.AddAndSave(file);
 			
 		}
 
@@ -180,19 +200,21 @@ namespace TemplateMod.UI
 			}
 		}
 
-		private void RefreshButton_OnClick(UIMouseEvent evt, UIElement listeningElement)
-		{
-			RefreshFiles();
-		}
-
-		//private void RefreshButton_OnClick(UIMouseEvent evt, UIElement listeningElement)
-		//{
-		//	RefreshFriends();
-		//}
-
-
 		public void RefreshFiles()
 		{
+			var thread = new Thread(() =>
+			{
+				// 锁住这个对象防止刷新频率过快导致错位
+				lock (this)
+				{
+					_tilefilesList.Clear();
+					foreach (var file in TemplateMod.Instance.TileFileManager.GetTileFiles())
+					{
+						_tilefilesList.Add(new UITileFileItem(file));
+					}
+				}
+			});
+			thread.Start();
 		}
 
 		public bool MouseInside
@@ -228,7 +250,7 @@ namespace TemplateMod.UI
 
 		public void ClearMatches()
 		{
-			_matchedGameList.Clear();
+			_tilefilesList.Clear();
 		}
 
 		protected override void OnClose(UIMouseEvent evt, UIElement listeningElement)
