@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using TemplateMod.UI;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -48,6 +49,17 @@ namespace TemplateMod
 			{
 				UndeadCD--;
 			}
+			if (TemplateMod.SelectMode && !BuildingUIState.Instance.MouseInside)
+			{
+				if(Main.mouseLeft && Main.mouseLeftRelease)
+				{
+					TemplateMod.SelectUpperLeft = new Point((int)(Main.MouseWorld.X / 16), (int)(Main.MouseWorld.Y / 16));
+				}
+				if (Main.mouseRight && Main.mouseRightRelease)
+				{
+					TemplateMod.SelectLowerRight = new Point((int)(Main.MouseWorld.X / 16), (int)(Main.MouseWorld.Y / 16));
+				}
+			}
 		}
 
 		public override void ModifyDrawInfo(ref PlayerDrawInfo drawInfo)
@@ -82,6 +94,7 @@ namespace TemplateMod
 		{
 			base.ProcessTriggers(triggersSet);
 		}
+
 
 
 		public override void UpdateBiomeVisuals()

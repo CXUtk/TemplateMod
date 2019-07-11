@@ -180,10 +180,6 @@ namespace TemplateMod.Items
 		}
 
 
-		public override void PickAmmo(Player player, ref int type, ref float speed, ref int damage, ref float knockback)
-		{
-			base.PickAmmo(player, ref type, ref speed, ref damage, ref knockback);
-		}
 	
 
 

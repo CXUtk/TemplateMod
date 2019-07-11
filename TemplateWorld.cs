@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using TemplateMod.UI.Component;
 using TemplateMod.VecMap;
 using Terraria;
 using Terraria.GameContent.Generation;
@@ -11,6 +13,8 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.World.Generation;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace TemplateMod
 {
@@ -49,7 +53,7 @@ namespace TemplateMod
 			b = c;
 		}
 
-		private void TileLine(Point start, Point end, int type)
+		private void TileLine(Microsoft.Xna.Framework.Point start, Microsoft.Xna.Framework.Point end, int type)
 		{
 			int x1 = start.X, y1 = start.Y;
 			int x2 = end.X, y2 = end.Y;
@@ -110,18 +114,18 @@ namespace TemplateMod
 
 		private void PlaceStar(int x, int y)
 		{
-			Point start = new Point(x, y);
-			var list = LoadVec.GetVecMap(x % 2==0 ? "裙":"小");
-			foreach (var p in list)
-			{
-				SetTile((int)Math.Round(x + p.X * 16), (int)Math.Round(y + p.Y * 16), mod.TileType("TemplateOre"));
-			}
-			//for(int r = 0; r < 8; r++)
+			//Microsoft.Xna.Framework.Point start = new Microsoft.Xna.Framework.Point(x, y);
+			//var list = LoadVec.GetVecMap(x % 2==0 ? "裙":"小");
+			//foreach (var p in list)
 			//{
-			//	rad = r * MathHelper.PiOver4;
-			//	Vector2 endvec = start.ToVector2() + r.ToRotationVector2() * 10;
-			//	TileLine(start, new Point((int)endvec.X, (int)endvec.Y), mod.TileType("TemplateOre"));
+			//	SetTile((int)Math.Round(x + p.X * 16), (int)Math.Round(y + p.Y * 16), mod.TileType("TemplateOre"));
 			//}
+			////for(int r = 0; r < 8; r++)
+			////{
+			////	rad = r * MathHelper.PiOver4;
+			////	Vector2 endvec = start.ToVector2() + r.ToRotationVector2() * 10;
+			////	TileLine(start, new Point((int)endvec.X, (int)endvec.Y), mod.TileType("TemplateOre"));
+			////}
 		}
 
 		private void GenNormalOres(GenerationProgress progress)
@@ -183,6 +187,24 @@ namespace TemplateMod
 				}
 				progress.Value = i / (float)Main.maxTilesX;
 			}
+		}
+
+		public override void PostDrawTiles()
+		{
+		
+			var spriteBatch = Main.spriteBatch;
+			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.instance.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+			if (TemplateMod.SelectMode)
+			{
+				spriteBatch.Draw(Main.magicPixel, TemplateMod.SelectUpperLeft.ToVector2() * 16 - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Purple);
+				spriteBatch.Draw(Main.magicPixel, TemplateMod.SelectLowerRight.ToVector2() * 16 - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Red);
+
+				Rectangle targetRect = new Rectangle((int)((int)TemplateMod.SelectUpperLeft.X * 16 - Main.screenPosition.X), (int)((int)TemplateMod.SelectUpperLeft.Y * 16 - Main.screenPosition.Y),
+					(int)(TemplateMod.SelectLowerRight.X - TemplateMod.SelectUpperLeft.X + 1) * 16, (int)(TemplateMod.SelectLowerRight.Y - TemplateMod.SelectUpperLeft.Y + 1) * 16);
+				Drawing.DrawAdvBox(spriteBatch, targetRect, Color.Green * 0.5f, TemplateMod.ModTexturesTable["Box"], new Vector2(8, 8));
+
+			}
+			spriteBatch.End();
 		}
 
 		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)

@@ -22,10 +22,10 @@ using Terraria.ModLoader;
 using ReLogic.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TemplateMod.UICollection;
 using TemplateMod.UI;
 using TemplateMod.VecMap;
 using TemplateMod.Sky;
+using TemplateMod.Files;
 
 // 用两个斜杠开头的句子都是注释QAQ，对程序运行没有任何影响，读我就行了，不用删
 
@@ -54,9 +54,16 @@ namespace TemplateMod
 		public static float TwistedStrength;
 
 		private static List<ConditionalInterface> _userInterfaces;
+		internal static Dictionary<string, Texture2D> ModTexturesTable = new Dictionary<string, Texture2D>();
 
-
-
+		public GUIManager GUIManager { get; private set; }
+		public static ToolBarServiceManager ToolBarServiceManager { get; internal set; }
+		public static string ShowTooltip { get; internal set; }
+		public static bool SelectMode { get; internal set; }
+		public static bool BuildMode { get; internal set; }
+		public static Point SelectUpperLeft { get; internal set; }
+		public static Point SelectLowerRight { get; internal set; }
+		public TileFileManager TileFileManager { get; internal set; }
 
 		public TemplateMod()
 		{
@@ -85,9 +92,9 @@ namespace TemplateMod
 			Instance = this;
 			if (!Main.dedServ)
 			{
+				ResourcesLoader.LoadAllTextures();
 				DustTestKey = RegisterHotKey("呼出Dust测试界面", "K");
 				_userInterfaces = new List<ConditionalInterface>();
-				AddUI(new DustTestUI());
 				MODEffectTable = new Dictionary<string, Effect>();
 				MODEffectTable["Comic"] = GetEffect("Effects/Comic");
 				MODEffectTable["Comic2"] = GetEffect("Effects/comic2");
@@ -109,20 +116,24 @@ namespace TemplateMod
 					new ScreenShaderData(effect2, "Pass1")/*.UseImage(GetTexture("Images/noise1"), 0, SamplerState.AnisotropicClamp)*/,
 					EffectPriority.VeryHigh);
 				SkyManager.Instance["Template:Disort"] = new DisortSky();
-
-
-				LoadVec.LoadVectors();
+				ToolBarServiceManager = new ToolBarServiceManager();
+				// GUI管理器
+				TileFileManager = new TileFileManager();
+				GUIManager = new GUIManager(this);
+				//LoadVec.LoadVectors();
 				//_effectManager = new EffectManager();
 				//_twistEffectManager = new EffectManager2("Disorder", 10);
 				TwistedStrength = 0;
 				Filters.Scene.OnPostDraw += Scene_OnPostDraw;
 				Main.OnPostDraw += Main_OnPostDraw;
+
 			}
 		}
 
 		public override void Unload()
 		{
 			Instance = null;
+			ResourcesLoader.Unload();
 			Main.OnPostDraw -= Main_OnPostDraw;
 		}
 
@@ -177,26 +188,29 @@ namespace TemplateMod
 			_userInterfaces.Add(tmpUI);
 		}
 
-		public override void PostDrawInterface(SpriteBatch spriteBatch)
+		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
-			foreach (var ui in _userInterfaces)
+			var cursorIndex = Math.Max(0, layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Cursor"));
+			var MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+			if (MouseTextIndex != -1)
 			{
-				if (ui.CanShow())
-				{
-					ui.Draw(spriteBatch, Main._drawInterfaceGameTime);
-				}
+				// 插入在鼠标信息之前
+				layers.Insert(MouseTextIndex, new UILayer(GUIManager));
 			}
-			//if (_effectManager.CanDraw)
-			//{
-			//	_effectManager.Draw(spriteBatch);
-			//}
-
-			//Main.NewText(Main.instance.GraphicsDevice.Textures[0].ToString());
-			
-			// Main.NewText(Main.screenTarget.ToString());
-
-
+			else
+			{
+				throw new Exception("无法将UI层插入绘制列表");
+			}
 		}
+
+
+		public override void UpdateUI(GameTime gameTime)
+		{
+			GUIManager.UpdateUI(gameTime);
+			base.UpdateUI(gameTime);
+		}
+
+
 		//private void DrawSuperEffectString(SpriteBatch sb, string str, Vector2 position)
 		//{
 		//	try
