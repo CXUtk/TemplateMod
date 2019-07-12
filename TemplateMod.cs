@@ -106,6 +106,7 @@ namespace TemplateMod
 			Instance = null;
 			TileFileManager = null;
 			ToolBarServiceManager = null;
+			GUIManager.Unload();
 			GUIManager = null;
 			ResourcesLoader.Unload();
 
