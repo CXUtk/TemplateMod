@@ -70,10 +70,10 @@ namespace TemplateMod
 				//TemplateMod.MODEffectTable["Swirl"].Parameters["uIntensity"].SetValue((float)Math.Sin(Main.time * 0.03));
 				////TemplateMod.MODEffectTable["Comic2"].Parameters["uOpacity"].SetValue(0.3f);
 				//TemplateMod.MODEffectTable["Swirl"].CurrentTechnique.Passes["Pass1"].Apply();
-				TemplateMod.MODEffectTable["Edge"].Parameters["uColor"].SetValue(Color.Orange.ToVector3());
-				TemplateMod.MODEffectTable["Edge"].Parameters["uImageSize0"].SetValue(new Vector2(Main.npcTexture[npc.type].Width,
-					Main.npcTexture[npc.type].Height / Main.npcFrameCount[npc.type]));
-				TemplateMod.MODEffectTable["Edge"].CurrentTechnique.Passes["Pass1"].Apply();
+				//TemplateMod.MODEffectTable["Edge"].Parameters["uColor"].SetValue(Color.Orange.ToVector3());
+				//TemplateMod.MODEffectTable["Edge"].Parameters["uImageSize0"].SetValue(new Vector2(Main.npcTexture[npc.type].Width,
+				//	Main.npcTexture[npc.type].Height / Main.npcFrameCount[npc.type]));
+				//TemplateMod.MODEffectTable["Edge"].CurrentTechnique.Passes["Pass1"].Apply();
 			}
 			return true;
 		}

@@ -20,7 +20,7 @@ namespace TemplateMod
 	}
 	public class GUIManager
 	{
-		private readonly TemplateMod _mod;
+		private static TemplateMod _mod;
 
 		private BuildingUIState buildingUIState;
 
@@ -47,6 +47,11 @@ namespace TemplateMod
 
 			_cdInterface = new CDInterfaceManager();
 			SetWindows();
+		}
+
+		public void Unload()
+		{
+			_mod = null;
 		}
 
 		internal void SetWindows()

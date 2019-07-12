@@ -15,6 +15,23 @@ namespace TemplateMod.Items
 			Tooltip.SetDefault("？？？");
 		}
 
+		// 自己写的合法性检测函数
+		private bool valid(int x, int y)
+		{
+			return x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY;
+		}
+
+		public override void UseStyle(Player player)
+		{
+			if (valid(Player.tileTargetX, Player.tileTargetY))
+			{
+				var tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
+				tile.type = TileID.Dirt;
+				tile.active(true);
+				WorldGen.SquareTileFrame(Player.tileTargetX, Player.tileTargetY);
+			}
+		}
+
 		public override void SetDefaults()
 		{
 			item.useStyle = 1;
@@ -44,3 +61,4 @@ namespace TemplateMod.Items
 		}
 	}
 }
+

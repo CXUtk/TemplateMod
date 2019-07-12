@@ -41,9 +41,6 @@ namespace TemplateMod
 
 		public static TemplateMod Instance;
 
-		public static ModHotKey DustTestKey;
-
-		public static Dictionary<string, Effect> MODEffectTable;
 
 		// public static EffectManager _effectManager;
 
@@ -53,8 +50,7 @@ namespace TemplateMod
 
 		public static float TwistedStrength;
 
-		private static List<ConditionalInterface> _userInterfaces;
-		internal static Dictionary<string, Texture2D> ModTexturesTable = new Dictionary<string, Texture2D>();
+		internal static Dictionary<string, Texture2D> ModTexturesTable;
 
 		public GUIManager GUIManager { get; private set; }
 		public static ToolBarServiceManager ToolBarServiceManager { get; internal set; }
@@ -67,6 +63,7 @@ namespace TemplateMod
 
 		public TemplateMod()
 		{
+			Instance = this;
 			// MOD的初始化函数，用来设置一些属性
 			// 注意，这跟Load() 函数不一样
 			Properties = new ModProperties()
@@ -89,43 +86,17 @@ namespace TemplateMod
 
 		public override void Load()
 		{
-			Instance = this;
+
 			if (!Main.dedServ)
 			{
 				ResourcesLoader.LoadAllTextures();
-				DustTestKey = RegisterHotKey("呼出Dust测试界面", "K");
-				_userInterfaces = new List<ConditionalInterface>();
-				MODEffectTable = new Dictionary<string, Effect>();
-				MODEffectTable["Comic"] = GetEffect("Effects/Comic");
-				MODEffectTable["Comic2"] = GetEffect("Effects/comic2");
-				MODEffectTable["Swirl"] = GetEffect("Effects/Swirl");
-				MODEffectTable["Disorder"] = GetEffect("Effects/Disorder");
-				MODEffectTable["Bloom"] = GetEffect("Effects/Bloom");
-				MODEffectTable["DisortScreen"] = GetEffect("Effects/DisortScreen");
-				MODEffectTable["Color"] = GetEffect("Effects/Color");
-				MODEffectTable["Edge"] = GetEffect("Effects/Edge");
-				//MODEffectTable["DisortScreen"] = GetEffect("Effects/DisortScreen");
-				var effect = new Ref<Effect>(MODEffectTable["Disorder"]);
-				var effect2 = new Ref<Effect>(MODEffectTable["Bloom"]);
-				Filters.Scene["Template:UltraLight"] = new Filter(
-					new TestScreenShaderData(effect, "Pass1"),
-					EffectPriority.High);
-				SkyManager.Instance["Template:UltraLight"] = new TestSky();
 
-				Filters.Scene["Template:Disort"] = new Filter(
-					new ScreenShaderData(effect2, "Pass1")/*.UseImage(GetTexture("Images/noise1"), 0, SamplerState.AnisotropicClamp)*/,
-					EffectPriority.VeryHigh);
-				SkyManager.Instance["Template:Disort"] = new DisortSky();
+				
 				ToolBarServiceManager = new ToolBarServiceManager();
 				// GUI管理器
 				TileFileManager = new TileFileManager();
 				GUIManager = new GUIManager(this);
-				//LoadVec.LoadVectors();
-				//_effectManager = new EffectManager();
-				//_twistEffectManager = new EffectManager2("Disorder", 10);
 				TwistedStrength = 0;
-				Filters.Scene.OnPostDraw += Scene_OnPostDraw;
-				Main.OnPostDraw += Main_OnPostDraw;
 
 			}
 		}
@@ -133,8 +104,11 @@ namespace TemplateMod
 		public override void Unload()
 		{
 			Instance = null;
+			TileFileManager = null;
+			ToolBarServiceManager = null;
+			GUIManager = null;
 			ResourcesLoader.Unload();
-			Main.OnPostDraw -= Main_OnPostDraw;
+
 		}
 
 		private void Main_OnPostDraw(GameTime obj)
@@ -180,13 +154,6 @@ namespace TemplateMod
 			//}
 		}
 		
-
-		private static void AddUI(UIState state)
-		{
-			ConditionalInterface tmpUI = new ConditionalInterface(() => ShowDustTestUI);
-			tmpUI.SetState(state);
-			_userInterfaces.Add(tmpUI);
-		}
 
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{

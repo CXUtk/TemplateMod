@@ -19,6 +19,7 @@ namespace TemplateMod
 		{
 			try
 			{
+				TemplateMod.ModTexturesTable = new Dictionary<string, Texture2D>();
 				TemplateMod.ModTexturesTable.Clear();
 				LoadTextures();
 			}
@@ -30,7 +31,12 @@ namespace TemplateMod
 
 		public static void Unload()
 		{
+			foreach(var t in TemplateMod.ModTexturesTable)
+			{
+				t.Value.Dispose();
+			}
 			TemplateMod.ModTexturesTable.Clear();
+			TemplateMod.ModTexturesTable = null;
 		}
 		private static void LoadTexture(string name)
 		{

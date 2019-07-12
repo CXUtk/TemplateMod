@@ -42,7 +42,8 @@ namespace TemplateMod
 				{
 					if (!valid(x + dx[i] * j, y + dy[i] * j)) continue;
 					Main.tile[x + dx[i] * j, y + dy[i] * j].type = (ushort)mod.TileType("TemplateOre");
-					Main.tile[x + dx[i] * j, y + dy[i] * j].active();
+					// 注意，这里active(true)会让物块凭空生成
+					Main.tile[x + dx[i] * j, y + dy[i] * j].active(true);
 				}
 			}
 		}
@@ -146,14 +147,9 @@ namespace TemplateMod
 				}
 				else
 				{
-					if (Main.rand.Next(2) == 0)
-					{
+
 						PlaceCross(x, y);
-					}
-					else
-					{
-						PlaceStar(x, y);
-					}
+
 				}
 				// Alternately, we could check the tile already present in the coordinate we are interested. Wrapping WorldGen.TileRunner in the following condition would make the ore only generate in Snow.
 				// Tile tile = Framing.GetTileSafely(x, y);
@@ -222,3 +218,4 @@ namespace TemplateMod
 		}
 	}
 }
+

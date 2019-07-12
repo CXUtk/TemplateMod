@@ -38,9 +38,9 @@ namespace TemplateMod.Utils
 		}
 		static Drawing()
 		{
-			Box1 = TemplateMod.Instance.GetTexture("Images/Box");
-			Box2 = TemplateMod.Instance.GetTexture("Images/Box2");
-			Bar1 = TemplateMod.Instance.GetTexture("Images/Bar");
+			//Box1 = TemplateMod.Instance.GetTexture("Images/Box");
+			//Box2 = TemplateMod.Instance.GetTexture("Images/Box2");
+			//Bar1 = TemplateMod.Instance.GetTexture("Images/Bar");
 			int[][] numArray = new int[4][];
 			int[] numArray2 = new int[2];
 			numArray2[0] = -1;

@@ -34,7 +34,6 @@ namespace TemplateMod.Sky
 
 		public EffectEntity(string effectName, Vector2 pos)
 		{
-			Effect = TemplateMod.MODEffectTable[effectName];
 			Rect = new Rectangle((int)pos.X - 300, (int)pos.Y - 300, 600, 600);
 			TimeLeft = 40;
 		}

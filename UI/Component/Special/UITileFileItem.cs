@@ -58,7 +58,6 @@ namespace TemplateMod.UI.Component.Special
 			//spriteBatch.Draw(Main.magicPixel, new Rectangle((int)(upperleft2.X ), (int)(upperleft2.Y), 16, 16),
 			//			null, Color.White);
 			Vector2 upperleft = tilePanel.GetDimensions().ToRectangle().TopLeft();
-			Main.NewText(file.Width);
 			for (int i = 0; i < Math.Min(file.Width, 7); i++)
 			{
 				for (int j = 0; j < Math.Min(file.Height, 7); j++)
