@@ -36,12 +36,40 @@ namespace TemplateMod.UI
 		private const float FILE_LIST_HEIGHT = 320;
 		private const float FILE_LIST_OFFSET_LEFT = -90;
 		private const float FILELIST_OFFSET_TOP = 25;
+		public int selectedItem = -1;
 
 		public BuildingUIState()
 		{
 			Instance = this;
 		}
 
+
+		public void DrawSelected()
+		{
+			var selected = _tilefilesList._items.First((u) => ((UITileFileItem)u).Index == selectedItem);
+			if (selected == null) return;
+			var thisitem = (UITileFileItem)selected;
+			var drawPos =  new Vector2((int)(Main.MouseScreen.X / 16) * 16, (int)(Main.MouseScreen.Y / 16) * 16) - new Vector2(thisitem.file.Width * 8, thisitem.file.Height * 8);
+			UITileFileItem.DrawPreview(Main.spriteBatch, thisitem.file.TileBlocks, drawPos, 1f);
+		}
+
+		public void PlaceSelected()
+		{
+			var selected = _tilefilesList._items.First((u) => ((UITileFileItem)u).Index == selectedItem);
+			if (selected == null) return;
+			var thisitem = (UITileFileItem)selected;
+			var drawPos = new Point((int)((Main.MouseWorld.X - thisitem.file.Width * 8) / 16) , (int)((Main.MouseWorld.Y - thisitem.file.Height * 8) / 16) );
+			int w = thisitem.file.Width;
+			int h = thisitem.file.Height;
+			for(int i = 0; i < w; i++)
+			{
+				for(int j = 0; j < h; j++)
+				{
+					Tile t = TileFile.TileBlock.ToTile(thisitem.file.TileBlocks[i, j]);
+					Main.tile[drawPos.X + i, drawPos.Y + j] = t;
+				}
+			}
+		}
 
 		protected override void Initialize(UIAdvPanel WindowPanel)
 		{
@@ -87,6 +115,16 @@ namespace TemplateMod.UI
 			//refreshButton.Tooltip = "刷新";
 			//WindowPanel.Append(refreshButton);
 
+			var announcement = new UIMessageBox("打开选择模式以后，左键可以选择左上角的点，右键选择右下角的点，然后点击保存即可。");
+			announcement.Top.Set(-FILE_LIST_HEIGHT / 2 + FILELIST_OFFSET_TOP - 45, 0.5f);
+			announcement.Left.Set(-200, 1f);
+			announcement.Width.Set(200, 0f);
+			announcement.Height.Set(165, 0f);
+			announcement.BackgroundColor = Color.Transparent;
+			announcement.BorderColor = Color.Transparent;
+			WindowPanel.Append(announcement);
+
+
 			Label = new UIText("地形选择器", 0.6f, true);
 			Label.Top.Set(-FILE_LIST_HEIGHT / 2 + FILELIST_OFFSET_TOP - 35f, 0.5f);
 			var texSize = Main.fontMouseText.MeasureString(Label.Text);
@@ -94,10 +132,10 @@ namespace TemplateMod.UI
 			WindowPanel.Append(Label);
 
 			selectModeButton = new UICDButton(null, true);
-			selectModeButton.Top.Set(340, 0f);
+			selectModeButton.Top.Set(350, 0f);
 			selectModeButton.Left.Set(-175, 1f);
 			selectModeButton.Width.Set(150, 0f);
-			selectModeButton.Height.Set(50, 0f);
+			selectModeButton.Height.Set(40, 0f);
 			selectModeButton.BoxTexture = TemplateMod.ModTexturesTable["AdvInvBack2"];
 			selectModeButton.ButtonDefaultColor = new Color(200, 200, 200);
 			selectModeButton.ButtonChangeColor = Color.White;
@@ -108,10 +146,10 @@ namespace TemplateMod.UI
 
 
 			buildModeButton = new UICDButton(null, true);
-			buildModeButton.Top.Set(285, 0f);
+			buildModeButton.Top.Set(305, 0f);
 			buildModeButton.Left.Set(-175, 1f);
 			buildModeButton.Width.Set(150, 0f);
-			buildModeButton.Height.Set(50, 0f);
+			buildModeButton.Height.Set(40, 0f);
 			buildModeButton.BoxTexture = TemplateMod.ModTexturesTable["AdvInvBack2"];
 			buildModeButton.ButtonDefaultColor = new Color(200, 200, 200);
 			buildModeButton.ButtonChangeColor = Color.White;
@@ -121,10 +159,10 @@ namespace TemplateMod.UI
 			WindowPanel.Append(buildModeButton);
 
 			saveButton = new UICDButton(null, true);
-			saveButton.Top.Set(230, 0f);
+			saveButton.Top.Set(260, 0f);
 			saveButton.Left.Set(-175, 1f);
 			saveButton.Width.Set(150, 0f);
-			saveButton.Height.Set(50, 0f);
+			saveButton.Height.Set(40, 0f);
 			saveButton.BoxTexture = TemplateMod.ModTexturesTable["AdvInvBack2"];
 			saveButton.ButtonDefaultColor = new Color(200, 200, 200);
 			saveButton.ButtonChangeColor = Color.White;
@@ -134,10 +172,10 @@ namespace TemplateMod.UI
 			WindowPanel.Append(saveButton);
 
 			refreshButton = new UICDButton(null, true);
-			refreshButton.Top.Set(175, 0f);
+			refreshButton.Top.Set(215, 0f);
 			refreshButton.Left.Set(-175, 1f);
 			refreshButton.Width.Set(150, 0f);
-			refreshButton.Height.Set(50, 0f);
+			refreshButton.Height.Set(40, 0f);
 			refreshButton.BoxTexture = TemplateMod.ModTexturesTable["AdvInvBack2"];
 			refreshButton.ButtonDefaultColor = new Color(200, 200, 200);
 			refreshButton.ButtonChangeColor = Color.White;
@@ -156,6 +194,17 @@ namespace TemplateMod.UI
 		{
 			int w = TemplateMod.SelectLowerRight.X - TemplateMod.SelectUpperLeft.X + 1;
 			int h = TemplateMod.SelectLowerRight.Y - TemplateMod.SelectUpperLeft.Y + 1;
+			if (!TemplateMod.SelectMode || w <= 0 || h <= 0)
+			{
+				Main.NewText("错误：你没有选择任何有效的区域");
+				return;
+			}
+			// 设置区域上限为百万面积
+			if(w > 2000 || h > 2000 || w * h > 10e6)
+			{
+				Main.NewText("错误：选择的区域过大");
+				return;
+			}
 			TileFile file = new TileFile(w, h);
 			for (int i = TemplateMod.SelectUpperLeft.X; i <= TemplateMod.SelectLowerRight.X; i++)
 			{
@@ -165,6 +214,7 @@ namespace TemplateMod.UI
 				}
 			}
 			TemplateMod.Instance.TileFileManager.AddAndSave(file);
+			RefreshFiles();
 			
 		}
 
@@ -172,9 +222,15 @@ namespace TemplateMod.UI
 		{
 			TemplateMod.BuildMode ^= true;
 			TemplateMod.SelectMode = false;
+			UpdateBuildButton();
+			UpdateSelectButton();
+			
+		}
 
+		private void UpdateBuildButton()
+		{
 			buildModeButton.ButtonText = (TemplateMod.SelectMode ? "关闭" : "开启") + "建筑模式";
-			if (TemplateMod.SelectMode)
+			if (TemplateMod.BuildMode)
 			{
 				buildModeButton.BoxTexture = TemplateMod.ModTexturesTable["AdvInvBackRej"];
 			}
@@ -184,11 +240,8 @@ namespace TemplateMod.UI
 			}
 		}
 
-		private void SelectButtonClick(UIMouseEvent evt, UIElement listeningElement)
+		private void UpdateSelectButton()
 		{
-			TemplateMod.SelectMode ^= true;
-			TemplateMod.BuildMode = false;
-
 			selectModeButton.ButtonText = (TemplateMod.SelectMode ? "关闭" : "开启") + "选择模式";
 			if (TemplateMod.SelectMode)
 			{
@@ -200,28 +253,54 @@ namespace TemplateMod.UI
 			}
 		}
 
+		private void SelectButtonClick(UIMouseEvent evt, UIElement listeningElement)
+		{
+			TemplateMod.SelectMode ^= true;
+			TemplateMod.BuildMode = false;
+			UpdateSelectButton();
+			UpdateBuildButton();
+		}
+
 		public void RefreshFiles()
 		{
-			var thread = new Thread(() =>
+			//var thread = new Thread(() =>
+			//{
+			//	// 锁住这个对象防止刷新频率过快导致错位
+			//	lock (this)
+			//	{
+			selectedItem = -1;
+			_tilefilesList.Clear();
+			int i = 0;
+			foreach (var file in TemplateMod.Instance.TileFileManager.GetTileFiles())
 			{
-				// 锁住这个对象防止刷新频率过快导致错位
-				lock (this)
-				{
-					_tilefilesList.Clear();
-					foreach (var file in TemplateMod.Instance.TileFileManager.GetTileFiles())
-					{
-						_tilefilesList.Add(new UITileFileItem(file));
-					}
-				}
-			});
-			thread.Start();
+				var f = new UITileFileItem(file, i);
+				f.OnClick += F_OnClick;
+				_tilefilesList.Add(f);
+				i++;
+			}
+			//	}
+			//});
+			//thread.Start();
+		}
+
+		private void F_OnClick(UIMouseEvent evt, UIElement listeningElement)
+		{
+			foreach(var item in _tilefilesList._items)
+			{
+				var fileitem = (UITileFileItem)item;
+				fileitem.MainTexture = TemplateMod.ModTexturesTable["AdvInvBack1"];
+			}
+			var thisitem = (UITileFileItem)listeningElement;
+			thisitem.MainTexture = TemplateMod.ModTexturesTable["AdvInvBack3"];
+			selectedItem = thisitem.Index;
 		}
 
 		public bool MouseInside
 		{
 			get
 			{
-				return WindowPanel.GetDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint());
+				return TemplateMod.Instance.GUIManager.IsActive(TemplateUIState.BuildingSelectWindow)
+					&& WindowPanel.GetDimensions().ToRectangle().Contains(Main.MouseScreen.ToPoint());
 			}
 		}
 
@@ -230,21 +309,6 @@ namespace TemplateMod.UI
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
-			lock (this)
-			{
-				if (_relaxTimer > 0)
-				{
-					_relaxTimer--;
-					_rotation += 0.1f;
-					refreshButton.Enabled = false;
-				}
-				else
-				{
-					_rotation = 0f;
-					refreshButton.Enabled = true;
-				}
-				refreshButton.Rotation = _rotation;
-			}
 		}
 
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Default;
 
 namespace TemplateMod.Files
 {
@@ -17,6 +18,7 @@ namespace TemplateMod.Files
 			public bool isMod;
 			public ushort type;
 			public string name;
+			public string modname;
 			public ushort wall;
 			public byte liquid;
 			public ushort sTileHeader;
@@ -25,6 +27,21 @@ namespace TemplateMod.Files
 			public byte bTileHeader3;
 			public short frameX;
 			public short frameY;
+
+			public static Tile ToTile(TileBlock block)
+			{
+				Tile t = new Tile();
+				t.type = block.type;
+				t.wall = block.wall;
+				t.liquid = block.liquid;
+				t.sTileHeader = block.sTileHeader;
+				t.bTileHeader = block.bTileHeader;
+				t.bTileHeader2 = block.bTileHeader2;
+				t.bTileHeader3 = block.bTileHeader3;
+				t.frameX = block.frameX;
+				t.frameY = block.frameY;
+				return t;
+			}
 		}
 		public string FileName { get; set; }
 		public int Width { get; private set; }
@@ -42,6 +59,7 @@ namespace TemplateMod.Files
 			if(block.isMod)
 			{
 				block.name = TileLoader.GetTile(tile.type).Name;
+				block.modname = TileLoader.GetTile(tile.type).mod.Name;
 			}
 			block.type = tile.type;
 			block.wall = tile.wall;
@@ -85,7 +103,7 @@ namespace TemplateMod.Files
 				{
 					throw new FileLoadException("文件格式不合法");
 				}
-				int w = br.ReadInt16(), h = br.ReadInt16();
+				int w = br.ReadUInt16(), h = br.ReadUInt16();
 				Width = w;
 				Height = h;
 				TileBlocks = new TileBlock[w, h];
@@ -100,7 +118,16 @@ namespace TemplateMod.Files
 						if (tile.isMod)
 						{
 							tile.name = br.ReadString();
-							tile.type = (ushort)TemplateMod.Instance.TileType(tile.name);
+							tile.modname = br.ReadString();
+							var reqmod = ModLoader.GetMod(tile.modname);
+							if (reqmod != null)
+							{
+								tile.type = (ushort)reqmod.TileType(tile.name);
+							}
+							else
+							{
+								tile.type = (ushort)ModLoader.GetMod("ModLoader").TileType<MysteryTile>();
+							}
 						}
 						else
 						{
@@ -142,7 +169,10 @@ namespace TemplateMod.Files
 						var tile = TileBlocks[i, j];
 						bw.Write(tile.isMod);
 						if (tile.isMod)
+						{
 							bw.Write(tile.name);
+							bw.Write(tile.modname);
+						}
 						else
 							bw.Write(tile.type);
 						bw.Write(tile.wall);

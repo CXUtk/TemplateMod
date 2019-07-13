@@ -51,7 +51,7 @@ namespace TemplateMod.Files
 
 		public void AddAndSave(TileFile file)
 		{
-			file.FileName = "Data_" + tileFiles.Count;
+			file.FileName = "Tile" + DateTime.Now.Ticks.ToString();
 			tileFiles.Add(file.FileName, file);
 			file.Write(SavePath + file.FileName + ".tf");
 		}

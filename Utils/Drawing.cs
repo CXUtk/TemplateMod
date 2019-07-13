@@ -11,7 +11,7 @@ using Terraria;
 
 namespace TemplateMod.Utils
 {
-	public class Drawing
+	public static class Drawing
 	{
 		public static Texture2D Box1;
 		public static Texture2D Box2;
@@ -29,6 +29,14 @@ namespace TemplateMod.Utils
 		public const string RegexReset = "#;";
 		public const string RegexScale = "#%([0-9]{1,3});";
 		public static readonly int[][] ShadowOffset;
+		public static Texture2D Offset(this Texture2D texture, int x, int y, int width, int height)
+		{
+			Texture2D result = new Texture2D(Main.graphics.GraphicsDevice, width, height);
+			Color[] data = new Color[height * width];
+			texture.GetData<Color>(0, new Rectangle?(new Rectangle(x, y, width, height)), data, 0, data.Length);
+			result.SetData<Color>(data);
+			return result;
+		}
 		public static Color DefaultBoxColor
 		{
 			get

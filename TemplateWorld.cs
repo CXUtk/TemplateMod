@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using TemplateMod.UI;
 using TemplateMod.UI.Component;
 using TemplateMod.VecMap;
 using Terraria;
@@ -201,7 +202,10 @@ namespace TemplateMod
 			}
 			if (TemplateMod.BuildMode)
 			{
-
+				if (BuildingUIState.Instance.selectedItem != -1)
+				{
+					BuildingUIState.Instance.DrawSelected();
+				}
 			}
 			spriteBatch.End();
 		}

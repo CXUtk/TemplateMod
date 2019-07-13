@@ -26,6 +26,7 @@ using TemplateMod.UI;
 using TemplateMod.VecMap;
 using TemplateMod.Sky;
 using TemplateMod.Files;
+using System.Linq;
 
 // 用两个斜杠开头的句子都是注释QAQ，对程序运行没有任何影响，读我就行了，不用删
 
@@ -97,7 +98,6 @@ namespace TemplateMod
 				TileFileManager = new TileFileManager();
 				GUIManager = new GUIManager(this);
 				TwistedStrength = 0;
-
 			}
 		}
 

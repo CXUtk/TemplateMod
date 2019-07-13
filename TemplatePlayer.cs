@@ -60,6 +60,17 @@ namespace TemplateMod
 					TemplateMod.SelectLowerRight = new Point((int)(Main.MouseWorld.X / 16), (int)(Main.MouseWorld.Y / 16));
 				}
 			}
+			if (TemplateMod.BuildMode && !BuildingUIState.Instance.MouseInside)
+			{
+				if (Main.mouseLeft && Main.mouseLeftRelease)
+				{
+					if (BuildingUIState.Instance.selectedItem != -1)
+					{
+						BuildingUIState.Instance.PlaceSelected();
+					}
+				}
+				
+			}
 		}
 
 		public override void ModifyDrawInfo(ref PlayerDrawInfo drawInfo)
