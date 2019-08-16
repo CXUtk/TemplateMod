@@ -174,12 +174,12 @@ namespace TemplateMod
 					if (tile.type == TileID.Dirt || tile.type == TileID.Grass)
 					{
 						tile.type = TileID.Gold;
-						tile.active();
+						tile.active(true);
 					}
 					if (tile.type == TileID.Stone || tile.type == TileID.ClayBlock)
 					{
 						tile.type = TileID.Silver;
-						tile.active();
+						tile.active(true);
 					}
 				}
 				progress.Value = i / (float)Main.maxTilesX;

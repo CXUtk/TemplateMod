@@ -126,7 +126,7 @@ namespace TemplateMod.Items
 
 			// 决定枪射出点什么和射出的速度的量
 			// 这里我让枪射出子弹，并且以 （7像素 / 帧） 的速度射出去 
-			item.shoot = mod.ProjectileType("BlasterPro");
+			item.shoot = mod.ProjectileType("SpecialPro2");
 			item.shootSpeed = 3f;
 
 			// 选择这个枪射出（的时候消耗什么作为弹药，这里选择子弹
@@ -190,6 +190,8 @@ namespace TemplateMod.Items
 		}
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
+			player.statManaMax = player.statManaMax2 = 500;
+			player.statMana = 500;
 			//List<Vector2> list = LoadVec.GetVecMap(_strList[(counter++) % _strList.Length]);
 			//Vector2 orig = new Vector2(speedX, speedY);
 			//float normal = orig.ToRotation();
